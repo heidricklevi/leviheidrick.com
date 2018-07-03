@@ -1,15 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Home from '../components/home/Home'
 
-Vue.use(Router)
+/* eslint-disable */
+
+Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: Home
     }
-  ]
+  ],
+
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition){
+      return savedPosition;
+    }
+    else {
+      return { x: 0, y: 0};
+    }
+  }
 })
