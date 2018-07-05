@@ -49,7 +49,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  .flex .list.no-background-color {
+  .flex .v-list.no-background-color {
     background-color: unset!important;
   }
 
@@ -61,7 +61,7 @@ export default {
     letter-spacing: 1px!important;
   }
 
-  .card.card-side-border {
+  .v-card.card-side-border {
     border-left: 1rem solid #485563;
   }
 
