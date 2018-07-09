@@ -3,7 +3,8 @@ node {
     stage('Clone Repository') {
         // Get some code from a GitHub repository
         sh 'cd ~/leviheidrick.com'
-        sh "git pull https://github.com/heidricklevi/leviheidrick.com.git"
+        sh "git reset --all"
+        sh "git reset --hard origin/dev"
 
     }
     stage('run npm') {
