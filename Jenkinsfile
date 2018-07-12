@@ -2,21 +2,22 @@ node {
 
     stage('Clone Repository') {
         // Get some code from a GitHub repository
-        sh 'cd ~/leviheidrick.com'
-        sh "git pull https://github.com/heidricklevi/leviheidrick.com.git"
-
+        dir ('leviheidrick.com'){
+        //sh 'pwd; la -l;'
+            sh "git fetch --all"
+            sh "git reset --hard origin/dev"
+        }
     }
-    stage('run npm') {
 
-        sh 'cd frontend'
-        sh 'npm install'
-        sh 'npm run build'
-        sh 'cd ..'
+
+    stage('run npm') {
+        dir ("leviheidrick.com") {
+            sh 'cd frontend && npm install && npm run build'
+        }
     }
 
     stage('Maven Clean') {
-
-        sh 'mvn clean install'
+        sh 'cd leviheidrick.com && mvn clean install'
     }
 
 }
