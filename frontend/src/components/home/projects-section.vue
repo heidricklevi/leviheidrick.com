@@ -9,7 +9,7 @@
           <v-flex xs12>
             <h3 class="headline pb-3">
               <v-avatar size="56" tile class="pr-3">
-                <img src="/static/innovation.svg">
+                <img src="/static/innovation.svg" alt="">
               </v-avatar>
               Projects
             </h3>

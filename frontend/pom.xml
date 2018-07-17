@@ -7,6 +7,7 @@
     <groupId>com.leviheidrick</groupId>
     <artifactId>leviheidrick.com</artifactId>
     <version>0.0.2-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
   </parent>
 
   <properties>
