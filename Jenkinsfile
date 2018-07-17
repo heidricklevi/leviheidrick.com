@@ -1,23 +1,25 @@
 node {
 
-    stage('Clone Repository') {
+    stage('Build') {
         // Get some code from a GitHub repository
-        dir ('leviheidrick.com'){
+        dir ('com.leviheidrick'){
         //sh 'pwd; la -l;'
             sh "git fetch --all"
             sh "git reset --hard origin/dev"
-        }
-    }
-
-
-    stage('run npm') {
-        dir ("leviheidrick.com") {
             sh 'cd frontend && npm install && npm run build'
         }
     }
 
-    stage('Maven Clean') {
-        sh 'cd leviheidrick.com && mvn clean install'
+
+    stage('Test') {
+        dir ("com.leviheidrick") {
+            sh 'mvn install'
+
+        }
+    }
+
+    stage('Deploy') {
+        sh 'mvn -e --projects backend spring-boot:run'
     }
 
 }
