@@ -20,11 +20,11 @@ node {
 
     stage('Deploy') {
         dir ("../com.leviheidrick") {
+            sh 'systemctl daemon-reload'
+            sh 'service comleviheidrick restart'
 
-            sh 'mvn -e --projects backend spring-boot:run'
 
-
-            }
         }
+    }
 
 }
