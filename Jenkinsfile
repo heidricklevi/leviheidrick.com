@@ -19,11 +19,12 @@ node {
     }
 
     stage('Deploy') {
-    dir ("../com.leviheidrick") {
+        dir ("../com.leviheidrick") {
 
-        sh 'mvn -e --projects backend spring-boot:run'
+            sh 'mvn -e --projects backend spring-boot:run'
 
 
-    }
+            }
+        }
 
 }
