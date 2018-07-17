@@ -2,7 +2,7 @@ node {
 
     stage('Build') {
         // Get some code from a GitHub repository
-        dir ('com.leviheidrick'){
+        dir ('../com.leviheidrick'){
         //sh 'pwd; la -l;'
             sh "git fetch --all"
             sh "git reset --hard origin/dev"
@@ -12,14 +12,18 @@ node {
 
 
     stage('Test') {
-        dir ("com.leviheidrick") {
+        dir ("../com.leviheidrick") {
             sh 'mvn install'
 
         }
     }
 
     stage('Deploy') {
+    dir ("../com.leviheidrick") {
+
         sh 'mvn -e --projects backend spring-boot:run'
+
+
     }
 
 }
