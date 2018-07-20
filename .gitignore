@@ -1,6 +1,6 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
-backend/src/main/resources/public/
+backend/src/main/resources
 backend/target
 frontend/dist/
 frontend/node/
@@ -14,6 +14,7 @@ security/target/
 selenium-debug.log
 node_modules
 static/
+root@leviheidrick.
 
 ### STS ###
 .apt_generated
