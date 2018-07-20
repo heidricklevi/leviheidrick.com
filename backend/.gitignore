@@ -1,6 +1,6 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
-backend/src/main/resources/public/
+backend/src/main/resources
 backend/target
 frontend/dist/
 frontend/node/
@@ -12,6 +12,7 @@ frontend/test/e2e/reports
 frontend/test/unit/coverage
 security/target/
 selenium-debug.log
+application.properties
 
 
 ### STS ###
