@@ -20,10 +20,8 @@ node {
 
     stage('Deploy') {
         dir ("../com.leviheidrick") {
-            sh 'systemctl daemon-reload'
-            sh 'service comleviheidrick restart'
-
-
+            sh 'sudo systemctl daemon-reload'
+            sh 'sudo service comleviheidrick restart'
         }
     }
 
