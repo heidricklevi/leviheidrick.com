@@ -1,7 +1,7 @@
 package com.ljheidrick.backend.controller;
 
-import com.ljheidrick.backend.User;
-import com.ljheidrick.backend.UserRepository;
+import com.ljheidrick.backend.model.User;
+import com.ljheidrick.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
