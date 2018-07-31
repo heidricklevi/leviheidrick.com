@@ -1,40 +1,19 @@
 <template>
   <v-content>
-    <v-jumbotron
-      dark
-      gradient="to top, #29323c, #485563"
-      style="min-height: 400px;">
-      <v-container fill-height>
-        <v-layout align-center>
-          <v-flex text-xs-center>
-            <h2 class="title letter_spacing">Hello,</h2>
-            <transition
-              appear
-              name="bounce"
-              enter-active-class="bounceInLeft"
-              leave-active-class="bounceOutRight"
-            >
-              <h3 class="headline letter_spacing" >My name is Levi.</h3>
-            </transition>
-            <h4 class="title letter_spacing">I am Passionate about technology and software development.</h4>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-jumbotron>
-    <skills-section></skills-section>
-    <projects-section></projects-section>
-
+    <router-view></router-view>
   </v-content>
 </template>
 
 <script>
   import SkillsSection from "./skills-section.vue";
   import ProjectsSection from "./projects-section.vue";
+  import HomeIntro from "./home-intro";
 
 
 export default {
   name: 'Home',
   components: {
+    HomeIntro,
     SkillsSection,
     ProjectsSection,
   },

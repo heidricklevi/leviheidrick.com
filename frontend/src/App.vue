@@ -5,8 +5,8 @@
       <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn outline>About</v-btn>
-      <v-btn flat outline>Projects</v-btn>
       <v-btn flat outline>Login</v-btn>
+      <v-btn to="/projects" flat outline>Projects</v-btn>
 
     </v-toolbar>
     <!--<v-navigation-drawer-->
