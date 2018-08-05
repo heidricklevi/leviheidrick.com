@@ -34,14 +34,14 @@ public class Projects {
         @JsonIgnore
         private User user;
 
+        public Projects() {
+
+        }
 
         public Projects(String title, String url, String content) {
             this.content = content;
-            this.finish = finish;
-            this.started = started;
             this.url = url;
             this.title = title;
-            this.user = user;
         }
 
         public Long getId() {

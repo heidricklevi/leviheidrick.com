@@ -7,7 +7,6 @@ import com.ljheidrick.backend.model.User;
 import java.util.List;
 import java.util.Optional;
 
-// @bean userRepository
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);

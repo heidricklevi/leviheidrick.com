@@ -15,10 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -34,7 +31,7 @@ public class ProjectsController {
 
     @Autowired
     RoleRepository roleRepository;
-    
+
     private static final Logger logger = LoggerFactory.getLogger(ProjectsController.class);
 
 
@@ -51,8 +48,13 @@ public class ProjectsController {
 
         projectsRepository.save(projects);
 
-        return ResponseEntity.ok().body(new ApiResponse(true, "Poll Created Successfully"));
+        return ResponseEntity.ok().body(new ApiResponse(true, "Created Project"));
 
+    }
+
+    @GetMapping("/projects")
+    public @ResponseBody Iterable<Projects> getProjects() {
+        return projectsRepository.findAll();
     }
 
 
