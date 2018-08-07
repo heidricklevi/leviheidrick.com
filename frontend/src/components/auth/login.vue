@@ -7,7 +7,7 @@
           Login to manage content as administrator
         </v-card-title>
         <v-divider dark></v-divider>
-        <v-form dark>
+        <v-form dark class="py-3">
           <v-flex xs10 md8 offset-md1>
             <v-text-field prepend-icon="person" dark label="Username/Email" type="text" v-model="usernameOrEmail"></v-text-field>
           </v-flex>
@@ -39,11 +39,8 @@
           credentials.usernameOrEmail = this.usernameOrEmail;
           credentials.password = this.password;
 
-          this.isLoading = true;
           this.isDisabled = true;
-          this.$store.dispatch('auth/login', credentials).then(() =>{
-            console.log("success");
-            this.isLoading = false;
+          this.$store.dispatch('auth/login', credentials).then(() => {
             this.isDisabled = false;
           });
         }

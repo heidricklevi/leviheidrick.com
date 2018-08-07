@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class UsersController {
@@ -25,10 +27,17 @@ public class UsersController {
     private static final Logger logger = LoggerFactory.getLogger(ProjectsController.class);
 
 
-    @GetMapping("/users/{username}")
+    @GetMapping("/users/me")
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
-    public @ResponseBody User getUserByUsername(@CurrentUser UserPrincipal userPrincipal, @PathVariable(value = "username") String username) {
+    public @ResponseBody User getUserByUsername(@CurrentUser UserPrincipal userPrincipal) {
+        String username = userPrincipal.getUsername();
         return userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+    }
+
+    @GetMapping("/users/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    public @ResponseBody User getUserById(@Valid @RequestParam Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
     }
 
 }
