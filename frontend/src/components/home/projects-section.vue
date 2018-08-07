@@ -1,7 +1,7 @@
 <template>
     <v-jumbotron
       id="projects-section"
-      height="auto"
+      height="100%"
       gradient="to bottom, #29323c, #485563"
       >
       <v-container fluid>

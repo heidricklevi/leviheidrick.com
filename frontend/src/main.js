@@ -6,8 +6,6 @@ import router from './router'
 import Vuetify from 'vuetify'
 import store from './store/index'
 
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
-import 'vuetify/dist/vuetify.min.css'
 
 require('vue2-animate/dist/vue2-animate.min.css');
 
