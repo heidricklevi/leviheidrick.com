@@ -14,8 +14,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>07/18/2018</span>
-            <span>v0.0.2</span>
+            <span>08/07/2018</span>
+            <span>v0.0.5</span>
           </div>
         </v-flex>
         <v-flex xs12 md6 lg3 offset-lg9 offset-md6 text-xs-center>
