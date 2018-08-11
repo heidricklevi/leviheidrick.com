@@ -4,7 +4,11 @@
       <v-avatar to="/" size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
       <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-if="$store.getters['auth/auth'].isAuthenticated" @click.prevent="$store.dispatch('auth/logout')" flat color="error" dark>Logout</v-btn>
+      <div v-if="auth.user" >
+        <h4 class="subheading">Hello, {{auth.user.name}}</h4>
+      </div>
+      <v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>
+      <div id="warn-super-admin"><v-btn icon v-if="auth.isSuperAdmin" flat color="error" dark small><v-icon small class="pr-1">warning </v-icon>Super Admin</v-btn></div>
     </v-toolbar>
     <router-view></router-view>
     <v-footer app height="auto" class="footer-color">
@@ -45,12 +49,23 @@ export default {
   created() {
     this.$store.dispatch('auth/checkAuth');
   },
+  computed: {
+    auth() {
+      return this.$store.getters['auth/auth'];
+    }
+  },
   data () {
     return {
       drawer: false,
 
     }
   },
+
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout');
+    }
+  }
 }
 </script>
 
@@ -72,4 +87,9 @@ export default {
     border-left: 1rem solid #485563;
   }
 
+  #warn-super-admin {
+    position: absolute;
+    top: 45px;
+    right: 60px;
+  }
 </style>

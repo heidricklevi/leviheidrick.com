@@ -51,14 +51,19 @@ const actions = {
     })
   },
   logout({commit, getters, dispatch}) {
+    let k;
+    let auth = getters.auth;
+    for (k in auth) {
+      auth[k] = false;
+    }
 
+    sessionStorage.removeItem('Bearer');
+    commit('authUpdate', false);
   },
 
   checkAuth({commit, getters, dispatch}) {
     let auth = getters.auth;
     let token = sessionStorage.getItem("Bearer")? sessionStorage.getItem("Bearer"): false;
-    console.log('checkAuth');
-
     if (token) {
       let decodedToken = jwt_decode(token);
       let isExpired = !(decodedToken.exp > (Date.now() / 1000));

@@ -13,10 +13,12 @@
               </v-avatar>
               Projects
             </h3>
+            <v-spacer></v-spacer>
+            <v-btn v-if="auth.isAuthenticated && auth.isSuperAdmin" @click.prevent="onDialogClick" icon dark><v-icon>add</v-icon>Create</v-btn>
           </v-flex>
         </v-layout>
         <v-layout row wrap>
-          <v-flex xs12 sm6 md3 lg2>
+          <v-flex xs12 sm6 md3 lg3>
             <v-card
               raised
               ripple
@@ -52,17 +54,39 @@
             </v-card>
           </v-flex>
         </v-layout>
+        <create-project @on-save-project="saveProject" @on-dialog-click="onDialogClick" :dialog="dialog"></create-project>
       </v-container>
     </v-jumbotron>
 </template>
 
 <script>
+  import CreateProject from './create-project.vue';
     export default {
         name: "ProjectsSection",
+        components: { CreateProject, },
         data() {
           return {
             viewDescription: false,
+            dialog: false,
           }
+        },
+        computed: {
+          auth() {
+            return this.$store.getters['auth/auth'];
+          }
+        },
+        methods: {
+          onDialogClick(e) {
+            this.dialog = !this.dialog;
+          },
+          saveProject() {
+
+
+            this.onDialogClick();
+          }
+        },
+        mounted() {
+
         }
     }
 </script>
