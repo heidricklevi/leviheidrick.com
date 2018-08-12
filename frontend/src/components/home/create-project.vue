@@ -8,7 +8,7 @@
         <v-toolbar-title>Create a Project</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn dark flat @click.prevent="$emit('on-save-project', $event.target.id)" id="save">Save</v-btn>
+          <v-btn dark flat @click.prevent="onProjectSave" id="save">Save</v-btn>
         </v-toolbar-items>
       </v-toolbar>
 
@@ -16,16 +16,16 @@
         <v-layout row wrap>
               <v-flex xs12><v-text-field
                 label="Title"
-                v-model="title"
+                v-model="project.title"
                 dark
               ></v-text-field></v-flex>
           <v-flex xs12><v-text-field
               label="Project web address"
-              v-model="url"
+              v-model="project.url"
               dark
           ></v-text-field></v-flex>
             <v-textarea
-              v-model="content"
+              v-model="project.content"
               auto-grow
               box
               color="deep-purple"
@@ -45,9 +45,18 @@
       data() {
         return {
           valid: false,
-          title: '',
-          url: '',
-          content: '',
+          project: {
+            title: '',
+            url: '',
+            content: '',
+          },
+        }
+      },
+      methods: {
+        onProjectSave() {
+          let project = Object.assign({}, this.project);
+          this.$store.commit('projects/projectUpdate', project);
+          this.$emit('on-save-project');
         }
       }
     }

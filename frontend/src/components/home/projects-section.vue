@@ -64,6 +64,9 @@
     export default {
         name: "ProjectsSection",
         components: { CreateProject, },
+        created() {
+          this.$store.dispatch('projects/fetchProjects');
+        },
         data() {
           return {
             viewDescription: false,
@@ -73,6 +76,10 @@
         computed: {
           auth() {
             return this.$store.getters['auth/auth'];
+          },
+
+          projects() {
+            return this.$store.getters['projects/projects'];
           }
         },
         methods: {
@@ -80,14 +87,11 @@
             this.dialog = !this.dialog;
           },
           saveProject() {
-
-
             this.onDialogClick();
+
           }
         },
-        mounted() {
 
-        }
     }
 </script>
 
