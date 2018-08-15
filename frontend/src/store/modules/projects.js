@@ -28,6 +28,9 @@ const actions = {
     }).catch((err) => {
       console.trace(err);
     })
+  },
+  submitProject({getters, commit}) {
+    return axios.post('/api/projects/submit', getters.project);
   }
 };
 

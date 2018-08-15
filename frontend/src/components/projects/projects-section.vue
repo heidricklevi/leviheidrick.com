@@ -18,7 +18,8 @@
           </v-flex>
         </v-layout>
         <v-layout row wrap>
-          <v-flex xs12 sm6 md3 lg3>
+          <template v-for="project in projects">
+          <v-flex :key="project.id" xs12 sm6 md3 lg2 class="ma-2">
             <v-card
               raised
               ripple
@@ -30,7 +31,7 @@
                 <v-container fluid fill-height>
                   <v-layout fill-height>
                     <v-flex xs12 align-center text-xs-center>
-                      <a href="https://dev.whatsmyworkout.co" class="light-blue--text text--darken-2"> <h3 class="headline font-weight-medium font-italic" >What's My Workout?</h3></a>
+                      <a :href="project.url" class="light-blue--text text--darken-2"> <h3 class="headline font-weight-medium" >{{project.title}}</h3></a>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -44,15 +45,17 @@
               <v-divider></v-divider>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn icon dark primary @click="viewDescription = !viewDescription">
-                  <v-icon class="white--text" v-if="viewDescription">keyboard_arrow_down</v-icon>
-                  <v-icon class="white--text" v-else>keyboard_arrow_up</v-icon>
+                <v-btn icon
+                       dark
+                       primary
+                       @click.prevent="expandDetails(project)"
+                       :to="{ name: 'project-details', params: { name: project.title, project }}">
+                  <v-icon class="white--text">arrow_right</v-icon>
                 </v-btn>
               </v-card-actions>
-              <v-card-text v-if="viewDescription">
-              </v-card-text>
             </v-card>
           </v-flex>
+          </template>
         </v-layout>
         <create-project @on-save-project="saveProject" @on-dialog-click="onDialogClick" :dialog="dialog"></create-project>
       </v-container>
@@ -71,6 +74,8 @@
           return {
             viewDescription: false,
             dialog: false,
+            isSaveDisabled: false,
+            submissionStatus: '',
           }
         },
         computed: {
@@ -87,8 +92,17 @@
             this.dialog = !this.dialog;
           },
           saveProject() {
-            this.onDialogClick();
+            //this.onDialogClick();
+            //this.isSaveDisabled = true;sadasd
 
+            this.$store.dispatch('projects/submitProject').then((response) => {
+              console.log('response', response);
+            })
+          },
+          expandDetails(project) {
+            //this.$router.push({name: 'project-details', params: { project }});
+            console.log("cardClicked");
+            console.log("cardClicked");
           }
         },
 

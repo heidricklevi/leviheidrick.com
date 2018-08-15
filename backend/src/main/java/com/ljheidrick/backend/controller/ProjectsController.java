@@ -49,7 +49,11 @@ public class ProjectsController {
         projectsRepository.save(projects);
 
         return ResponseEntity.ok().body(new ApiResponse(true, "Created Project"));
+    }
 
+    @GetMapping("/projects/{id}")
+    public @ResponseBody Projects getProjectById(@Valid @RequestParam Long id) {
+       return projectsRepository.getOne(id);
     }
 
     @GetMapping("/projects")

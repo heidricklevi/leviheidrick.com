@@ -35,7 +35,7 @@
 
 <script>
   import SkillsSection from "./skills-section.vue";
-  import ProjectsSection from "./projects-section.vue";
+  import ProjectsSection from "../projects/projects-section.vue";
   import HomeIntro from "./home-intro";
 
 

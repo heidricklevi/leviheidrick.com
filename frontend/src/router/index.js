@@ -1,10 +1,12 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '../components/home/Home'
-import Projects from '../components/home/projects-section'
-import Skills from '../components/home/skills-section'
-import HomeIntro from '../components/home/home-intro'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from '../components/home/Home';
+import Projects from '../components/projects/projects-section';
+import Skills from '../components/home/skills-section';
+import HomeIntro from '../components/home/home-intro';
 import Login from '../components/auth/login';
+import ProjectDetail from '../components/projects/project-detail';
+
 
 
 /* eslint-disable */
@@ -33,10 +35,19 @@ export default new Router({
     },
 
     {
+      name: 'project-details',
+      path: '/projects/:name',
+      component: ProjectDetail,
+      props: { dialog: true }
+    },
+
+    {
       path: '/skills',
       name: 'skills',
       component: Skills
     },
+
+
 
 
   ],
