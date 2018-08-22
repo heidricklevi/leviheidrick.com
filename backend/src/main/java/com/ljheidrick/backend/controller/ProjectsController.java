@@ -51,9 +51,9 @@ public class ProjectsController {
         return ResponseEntity.ok().body(new ApiResponse(true, "Created Project"));
     }
 
-    @GetMapping("/projects/{id}")
-    public @ResponseBody Projects getProjectById(@Valid @RequestParam Long id) {
-       return projectsRepository.getOne(id);
+    @GetMapping("/projects/{title}")
+    public @ResponseBody Projects getProjectById(@Valid @PathVariable String title) {
+       return projectsRepository.findByTitle(title);
     }
 
     @GetMapping("/projects")
@@ -61,6 +61,11 @@ public class ProjectsController {
         return projectsRepository.findAll();
     }
 
-
+    @DeleteMapping("/projects/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    public @ResponseBody Iterable<Projects> deleteProjectById(@PathVariable Long id) {
+        projectsRepository.deleteById(id);
+        return projectsRepository.findAll();
+    }
 
 }

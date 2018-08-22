@@ -1,49 +1,70 @@
 <template>
   <v-app dark>
-
-    <!--<v-navigation-drawer-->
-      <!--v-model="drawer"-->
-      <!--clipped-->
-      <!--fixed-->
-      <!--app-->
-    <!--&gt;-->
-      <!--<v-list dense>-->
-        <!--<v-list-tile @click="">-->
-          <!--<v-list-tile-action>-->
-            <!--<v-icon>dashboard</v-icon>-->
-          <!--</v-list-tile-action>-->
-          <!--<v-list-tile-content>-->
-            <!--<v-list-tile-title>Dashboard</v-list-tile-title>-->
-          <!--</v-list-tile-content>-->
-        <!--</v-list-tile>-->
-        <!--<v-list-tile @click="">-->
-          <!--<v-list-tile-action>-->
-            <!--<v-icon>settings</v-icon>-->
-          <!--</v-list-tile-action>-->
-          <!--<v-list-tile-content>-->
-            <!--<v-list-tile-title>Settings</v-list-tile-title>-->
-          <!--</v-list-tile-content>-->
-        <!--</v-list-tile>-->
-      <!--</v-list>-->
-    <!--</v-navigation-drawer>-->
-      <home/>
-
+    <loading v-if="$store.getters['loading/isLoading']"></loading>
+    <v-toolbar app fixed clipped-left class="elevation-0" color="primary">
+      <v-avatar to="/" size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
+      <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <div v-if="auth.user">
+        <h4 class="subheading">Hello, {{auth.user.name}}</h4>
+      </div>
+      <v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>
+      <div id="warn-super-admin"><v-btn icon v-if="auth.isSuperAdmin" flat color="error" dark small><v-icon small class="pr-1">warning </v-icon>Super Admin</v-btn></div>
+    </v-toolbar>
+    <home/>
+    <v-footer app height="auto" class="footer-color">
+      <v-layout row wrap justify-center align-center class="pa-2">
+        <v-flex xs12 text-xs-center>
+          <span>&copy; 2018 Levi Heidrick</span>
+        </v-flex>
+        <v-flex xs12 text-xs-center>
+          <div class="caption">
+            <span>08/22/2018</span>
+            <span>v0.0.6</span>
+          </div>
+        </v-flex>
+        <v-flex xs12 md6 lg3 offset-lg9 offset-md6 text-xs-center>
+          <div class="caption">Some icons made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a> from
+            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
+            <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
 
 import Home from "../src/components/home/Home.vue"
+import Loading from "../src/components/global/loading.vue"
+
 
 export default {
   name: 'App',
-  components: { Home },
+  components: { Home, Loading },
+  created() {
+    this.$store.dispatch('auth/checkAuth');
+  },
+
   data () {
     return {
       drawer: false,
       show: false,
     }
   },
+
+  computed: {
+    auth() {
+      return this.$store.getters['auth/auth'];
+    },
+
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout');
+    }
+  }
 }
 </script>
 

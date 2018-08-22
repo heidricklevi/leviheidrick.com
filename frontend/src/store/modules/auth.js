@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 const state = {
   isAuthenticated: false,
   isSuperAdmin: false,
-  user: false
+  user: false,
 };
 
 const getters = {

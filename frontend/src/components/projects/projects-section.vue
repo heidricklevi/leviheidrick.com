@@ -4,7 +4,7 @@
       height="100%"
       gradient="to bottom, #29323c, #485563"
       >
-      <v-container fluid>
+      <v-container fluid v-if="!isLoading">
         <v-layout row wrap>
           <v-flex xs12>
             <h3 class="headline pb-3">
@@ -19,7 +19,7 @@
         </v-layout>
         <v-layout row wrap>
           <template v-for="project in projects">
-          <v-flex :key="project.id" xs12 sm6 md3 lg2 class="ma-2">
+          <v-flex :key="project.id" xs12 sm4 md3 lg2 class="ml-2">
             <v-card
               raised
               ripple
@@ -49,7 +49,7 @@
                        dark
                        primary
                        @click.prevent="expandDetails(project)"
-                       :to="{ name: 'project-details', params: { name: project.title, project }}">
+                       :to="{ name: 'project-details', params: { name: project.title }}">
                   <v-icon class="white--text">arrow_right</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -64,7 +64,9 @@
 
 <script>
   import CreateProject from './create-project.vue';
-    export default {
+  import { mapActions, mapGetters } from 'vuex';
+
+  export default {
         name: "ProjectsSection",
         components: { CreateProject, },
         created() {
@@ -79,6 +81,9 @@
           }
         },
         computed: {
+          ...mapGetters('loading/', [
+            'isLoading'
+          ]),
           auth() {
             return this.$store.getters['auth/auth'];
           },
@@ -90,6 +95,7 @@
         methods: {
           onDialogClick(e) {
             this.dialog = !this.dialog;
+
           },
           saveProject() {
             //this.onDialogClick();
@@ -100,9 +106,7 @@
             })
           },
           expandDetails(project) {
-            //this.$router.push({name: 'project-details', params: { project }});
-            console.log("cardClicked");
-            console.log("cardClicked");
+            this.$store.commit('projects/projectUpdate', project)
           }
         },
 

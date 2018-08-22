@@ -39,7 +39,8 @@
 </template>
 
 <script>
-    export default {
+  import Utils from "../../lib/utils";
+  export default {
       props: ['dialog'],
       name: "create-project",
       data() {
@@ -54,7 +55,7 @@
       },
       methods: {
         onProjectSave() {
-          let project = Object.assign({}, this.project);
+          let project = Utils.getCopyOf(this.project);
           this.$store.commit('projects/projectUpdate', project);
           this.$emit('on-save-project');
         }
