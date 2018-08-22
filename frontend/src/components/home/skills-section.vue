@@ -67,7 +67,9 @@
 </template>
 
 <script>
-    export default {
+  import { mapActions, mapGetters } from 'vuex';
+
+  export default {
         name: "skills-section",
         data() {
           return {
@@ -146,7 +148,14 @@
 
             ]
           }
-        }
+        },
+
+        beforeRouteEnter(to, from, next) {
+          next(self => {
+
+
+          })
+        },
     }
 </script>
 

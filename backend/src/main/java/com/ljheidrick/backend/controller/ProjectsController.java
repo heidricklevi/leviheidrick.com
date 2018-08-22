@@ -49,7 +49,11 @@ public class ProjectsController {
         projectsRepository.save(projects);
 
         return ResponseEntity.ok().body(new ApiResponse(true, "Created Project"));
+    }
 
+    @GetMapping("/projects/{title}")
+    public @ResponseBody Projects getProjectById(@Valid @PathVariable String title) {
+       return projectsRepository.findByTitle(title);
     }
 
     @GetMapping("/projects")
@@ -57,6 +61,11 @@ public class ProjectsController {
         return projectsRepository.findAll();
     }
 
-
+    @DeleteMapping("/projects/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    public @ResponseBody Iterable<Projects> deleteProjectById(@PathVariable Long id) {
+        projectsRepository.deleteById(id);
+        return projectsRepository.findAll();
+    }
 
 }
