@@ -5,8 +5,6 @@ import Vuex from 'vuex'
 import auth from './modules/auth'
 import projects from './modules/projects'
 import loading from './modules/loading'
-import breadcrumbs from './modules/breadcrumbs'
-
 
 Vue.use(Vuex);
 
@@ -17,7 +15,7 @@ export default new Vuex.Store({
     auth,
     projects,
     loading,
-    breadcrumbs
+
   },
   strict: debug,
 })

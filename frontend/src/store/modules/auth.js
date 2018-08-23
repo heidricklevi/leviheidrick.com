@@ -10,6 +10,9 @@ const state = {
 
 const getters = {
   auth: state => state,
+  hasHighestCredentials: state => {
+    return state.isAuthenticated && state.isSuperAdmin;
+  }
 };
 
 const mutations = {

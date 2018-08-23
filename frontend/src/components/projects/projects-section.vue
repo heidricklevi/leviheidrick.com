@@ -14,16 +14,17 @@
               Projects
             </h3>
             <v-spacer></v-spacer>
-            <v-btn v-if="auth.isAuthenticated && auth.isSuperAdmin" @click.prevent="onDialogClick" icon dark><v-icon>add</v-icon>Create</v-btn>
+            <v-btn v-if="hasHighestCredentials" @click.prevent="onDialogClick" icon dark><v-icon>add</v-icon>Create</v-btn>
           </v-flex>
         </v-layout>
         <v-layout row wrap>
           <template v-for="project in projects">
-          <v-flex :key="project.id" xs12 sm4 md3 lg2 class="ml-2">
+          <v-flex :key="project.id" xs12 sm4 md3 lg3 class="ml-2">
             <v-card
               raised
               ripple
-              dark>
+              dark
+            >
               <v-card-media
                 src="/static/WMW2.png"
                 class="background-shift-y"
@@ -31,7 +32,14 @@
                 <v-container fluid fill-height>
                   <v-layout fill-height>
                     <v-flex xs12 align-center text-xs-center>
-                      <a :href="project.url" class="light-blue--text text--darken-2"> <h3 class="headline font-weight-medium" >{{project.title}}</h3></a>
+                      <a :href="project.url" class="light-blue--text text--darken-2">
+                        <h3 class="headline font-weight-medium" >{{project.title}}</h3>
+                      </a>
+                      <v-flex v-if="hasHighestCredentials" text-xs-right xs12 class="force-top-right">
+                        <v-btn @click.prevent="deleteProject(project)" icon flat color="error">
+                          <v-icon>remove</v-icon>
+                        </v-btn>
+                      </v-flex>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -48,8 +56,9 @@
                 <v-btn icon
                        dark
                        primary
-                       @click.prevent="expandDetails(project)"
-                       :to="{ name: 'project-details', params: { name: project.title }}">
+                       @click.prevent="viewDetails(project)"
+                       :to="{name: 'project-details', params: { name: project.title }}"
+                >
                   <v-icon class="white--text">arrow_right</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -58,6 +67,24 @@
           </template>
         </v-layout>
         <create-project @on-save-project="saveProject" @on-dialog-click="onDialogClick" :dialog="dialog"></create-project>
+        <v-dialog
+          v-model="alertDelete"
+          width="500"
+        >
+          <v-card
+            dark
+            class="text-xs-center"
+          >
+            <v-card-title>
+              <h5 class="headline">Are you sure you want to delete this project <span class="blue-grey--text">{{projectToDelete.title}}</span></h5>
+            </v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn flat outline color="error" @click.prevent="deleteProject(projectToDelete)">Yes</v-btn>
+              <v-btn flat outline color="warning" @click.prevent="alertDelete = false">No</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-container>
     </v-jumbotron>
 </template>
@@ -78,15 +105,18 @@
             dialog: false,
             isSaveDisabled: false,
             submissionStatus: '',
+            alertDelete: false,
+            projectToDelete: false
+
           }
         },
         computed: {
           ...mapGetters('loading/', [
             'isLoading'
           ]),
-          auth() {
-            return this.$store.getters['auth/auth'];
-          },
+          ...mapGetters('auth/', [
+            'hasHighestCredentials'
+          ]),
 
           projects() {
             return this.$store.getters['projects/projects'];
@@ -98,16 +128,28 @@
 
           },
           saveProject() {
-            //this.onDialogClick();
-            //this.isSaveDisabled = true;sadasd
-
             this.$store.dispatch('projects/submitProject').then((response) => {
               console.log('response', response);
             })
           },
-          expandDetails(project) {
+
+          viewDetails(project) {
             this.$store.commit('projects/projectUpdate', project)
+          },
+
+          deleteProject(project) {
+            if (!this.alertDelete) {
+              this.alertDelete = true;
+              this.projectToDelete = project;
+            }
+            else if (this.alertDelete) {
+              this.$store.dispatch("projects/deleteProjectById", project.id);
+              this.alertDelete = false;
+            }
+
+
           }
+
         },
 
     }
@@ -118,7 +160,7 @@
   .v-card {
     .v-card__media {
       >>> .v-card__media__background {
-        background-position-y: 30px !important;
+        background-position-y: 40px !important;
       }
     }
   }
@@ -131,6 +173,11 @@
     color: #64B5F6!important;
   }
 
+  .force-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
 
 </style>
