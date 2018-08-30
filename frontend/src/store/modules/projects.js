@@ -16,16 +16,9 @@ const mutations = {
   projectUpdate(state, project) {
     state.project = project;
   },
+
   projectsUpdate(state, projects) {
     state.projects = projects;
-  },
-
-  deleteProjectUpdate(state, project) {
-    let indxToRemove = state.projects.map(p => {
-      return p.id
-    }).indexOf(project.id);
-
-    state.projects.splice(indxToRemove, 1);
   },
 
   responseStatusUpdate(state, mesg) {
@@ -88,6 +81,20 @@ const actions = {
       commit('responseStatusUpdate', err.response.data)
     });
   },
+
+  updateProjectById({getters, commit}, project) {
+    commit('loading/loadingUpdate', null, { root: true });
+    commit('responseStatusUpdate', false);
+
+    return axios.put(`/api/projects/edit/${project.id}`, project).then((response) => {
+      commit('projectsUpdate', response.data);
+      commit('loading/loadingUpdate', null, { root: true });
+    }).catch((err) => {
+      commit('loading/loadingUpdate', null, { root: true });
+      console.log(err.response.data.error);
+      commit('responseStatusUpdate', err.response.data)
+    });
+  }
 
 };
 

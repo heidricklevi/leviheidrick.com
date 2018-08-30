@@ -1,4 +1,6 @@
 <template>
+  <v-layout justify-center>
+    <v-flex xl8 lg10 sm12>
     <v-card v-if="!isLoading" class="elevation-5" :class="{'ma-4': $vuetify.breakpoint.smAndUp}">
 
       <v-layout row wrap>
@@ -22,6 +24,8 @@
       </v-card-actions>
       </v-layout>
     </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
