@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import auth from './modules/auth'
 import projects from './modules/projects'
 import loading from './modules/loading'
+import admin from './modules/admin';
 
 Vue.use(Vuex);
 
@@ -15,7 +16,7 @@ export default new Vuex.Store({
     auth,
     projects,
     loading,
-
+    admin,
   },
   strict: debug,
 })

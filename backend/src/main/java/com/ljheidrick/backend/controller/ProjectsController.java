@@ -68,4 +68,18 @@ public class ProjectsController {
         return projectsRepository.findAll();
     }
 
+    @PutMapping("/projects/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    public @ResponseBody Iterable<Projects> editProjectById(@Valid @PathVariable Long id, @Valid @RequestBody ProjectsRequest project) {
+        System.out.println(project);
+        System.out.println("Project");
+        Projects projects = projectsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Projects", "project", project));
+
+        projects.setTitle(project.getTitle());
+        projects.setContent(project.getContent());
+        projects.setUrl(project.getUrl());
+        projectsRepository.save(projects);
+        return projectsRepository.findAll();
+    }
+
 }

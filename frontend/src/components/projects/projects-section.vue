@@ -19,7 +19,7 @@
         </v-layout>
         <v-layout row wrap>
           <template v-for="project in projects">
-          <v-flex :key="project.id" xs12 sm4 md3 lg3 class="ml-2">
+          <v-flex :key="project.id" xs12 sm6 md3 lg3 class="ml-2 mt-2">
             <v-card
               raised
               ripple
@@ -39,6 +39,7 @@
                         <v-btn @click.prevent="deleteProject(project)" icon flat color="error">
                           <v-icon>remove</v-icon>
                         </v-btn>
+                        <v-btn @click.prevent="editProject(project)" small icon flat color="primary"><v-icon small>edit</v-icon></v-btn>
                       </v-flex>
                     </v-flex>
                   </v-layout>
@@ -52,6 +53,9 @@
               </v-card-title>
               <v-divider></v-divider>
               <v-card-actions>
+                <h5>
+                  View Details
+                </h5>
                 <v-spacer></v-spacer>
                 <v-btn icon
                        dark
@@ -67,6 +71,7 @@
           </template>
         </v-layout>
         <create-project @on-save-project="saveProject" @on-dialog-click="onDialogClick" :dialog="dialog"></create-project>
+        <edit-project @on-edit-dialog-click="editDialogClick" :edit-dialog="editDialog"></edit-project>
         <v-dialog
           v-model="alertDelete"
           width="500"
@@ -91,11 +96,12 @@
 
 <script>
   import CreateProject from './create-project.vue';
+  import EditProject from './edit-project.vue';
   import { mapActions, mapGetters } from 'vuex';
 
   export default {
         name: "ProjectsSection",
-        components: { CreateProject, },
+        components: {EditProject, CreateProject, },
         created() {
           this.$store.dispatch('projects/fetchProjects');
         },
@@ -106,7 +112,8 @@
             isSaveDisabled: false,
             submissionStatus: '',
             alertDelete: false,
-            projectToDelete: false
+            projectToDelete: false,
+            editDialog: false,
 
           }
         },
@@ -146,12 +153,16 @@
               this.$store.dispatch("projects/deleteProjectById", project.id);
               this.alertDelete = false;
             }
+          },
 
+          editProject(project) {
+            this.editDialogClick();
+          },
 
+          editDialogClick() {
+            this.editDialog = !this.editDialog;
           }
-
         },
-
     }
 </script>
 
@@ -160,7 +171,7 @@
   .v-card {
     .v-card__media {
       >>> .v-card__media__background {
-        background-position-y: 40px !important;
+        background-position-y: 0 !important;
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <loading v-if="$store.getters['loading/isLoading']"></loading>
-    <v-toolbar app fixed clipped-left class="elevation-0" color="primary">
+    <v-toolbar v-if="!$route.path.includes('admin')" app fixed clipped-left class="elevation-0" color="primary">
       <v-avatar to="/" size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
       <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -9,7 +9,7 @@
         <h4 class="subheading">Hello, {{auth.user.name}}</h4>
       </div>
       <v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>
-      <div id="warn-super-admin"><v-btn icon v-if="auth.isSuperAdmin" flat color="error" dark small><v-icon small class="pr-1">warning </v-icon>Super Admin</v-btn></div>
+      <v-btn v-if="hasHighestCredentials" :to="{ path: 'admin/' }" color="warning">admin</v-btn>
     </v-toolbar>
     <home/>
     <v-footer app height="auto" class="footer-color">
@@ -19,8 +19,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>08/23/2018</span>
-            <span>v0.0.7</span>
+            <span>08/30/2018</span>
+            <span>v0.1.0</span>
           </div>
         </v-flex>
         <v-flex xs12 md6 lg3 offset-lg9 offset-md6 text-xs-center>
@@ -38,6 +38,7 @@
 
 import Home from "../src/components/home/Home.vue"
 import Loading from "../src/components/global/loading.vue"
+import { mapGetters } from "vuex";
 
 
 export default {
@@ -55,6 +56,11 @@ export default {
   },
 
   computed: {
+
+    ...mapGetters('auth/',[
+      'hasHighestCredentials'
+    ]),
+
     auth() {
       return this.$store.getters['auth/auth'];
     },
