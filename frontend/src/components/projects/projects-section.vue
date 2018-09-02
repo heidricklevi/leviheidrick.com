@@ -19,7 +19,7 @@
         </v-layout>
         <v-layout row wrap>
           <template v-for="project in projects">
-          <v-flex :key="project.id" xs12 sm6 md3 lg3 class="ml-2 mt-2">
+          <v-flex :key="project.id" xs12 sm6 md4 lg3 class="ml-2 mt-2">
             <v-card
               raised
               ripple
@@ -169,9 +169,9 @@
 <style scoped lang="stylus">
 
   .v-card {
-    .v-card__media {
-      >>> .v-card__media__background {
-        background-position-y: 0 !important;
+    .v-image {
+      >>> .v-image__image {
+        background-position-y: 21px !important;
       }
     }
   }
