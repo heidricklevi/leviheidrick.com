@@ -47,7 +47,7 @@
         return {
           drawer: false,
           items: [
-            { icon: 'people', text: 'Users' },
+            { icon: 'attachment', text: 'Resume', url: '/admin/resume' },
             { icon: 'folder', text: 'Projects', url: '/admin/projects' },
             { icon: 'history', text: 'History' },
             { icon: 'featured_play_list', text: 'Playlists' },
