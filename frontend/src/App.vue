@@ -1,10 +1,43 @@
 <template>
   <v-app dark>
     <loading v-if="$store.getters['loading/isLoading']"></loading>
+    <v-navigation-drawer
+      v-if="$vuetify.breakpoint.smAndDown"
+      v-model="drawer"
+      fixed
+      clipped-right
+      app
+    >
+      <v-list>
+        <v-list-tile v-for="item in navItems" :key="item.text" :to="item.url">
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              {{ item.text }}
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <!--<v-list-tile class="mt-3" @click="">-->
+        <!--<v-list-tile-action>-->
+        <!--<v-icon color="grey darken-1">add_circle_outline</v-icon>-->
+        <!--</v-list-tile-action>-->
+        <!--<v-list-tile-title class="grey&#45;&#45;text text&#45;&#45;darken-1">Browse Channels</v-list-tile-title>-->
+        <!--</v-list-tile>-->
+        <!--<v-list-tile @click="">-->
+        <!--<v-list-tile-action>-->
+        <!--<v-icon color="grey darken-1">settings</v-icon>-->
+        <!--</v-list-tile-action>-->
+        <!--<v-list-tile-title class="grey&#45;&#45;text text&#45;&#45;darken-1">Manage Subscriptions</v-list-tile-title>-->
+        <!--</v-list-tile>-->
+      </v-list>
+    </v-navigation-drawer>
     <v-toolbar v-if="!$route.path.includes('admin')" app fixed clipped-left class="elevation-0" color="primary">
       <v-avatar to="/" size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
       <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>
       <div v-if="auth.user">
         <h4 class="subheading">Hello, {{auth.user.name}}</h4>
       </div>
@@ -19,8 +52,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>08/30/2018</span>
-            <span>v0.1.0</span>
+            <span>09/13/2018</span>
+            <span>v0.2.0</span>
           </div>
         </v-flex>
         <v-flex xs12 md6 lg3 offset-lg9 offset-md6 text-xs-center>
@@ -52,6 +85,13 @@ export default {
     return {
       drawer: false,
       show: false,
+
+      navItems: [
+        { text: 'Projects', icon: '', url: '/projects'},
+        { text: 'Skills', icon: '', url: '/skills'},
+        // { text: 'About', icon: '', url: '/skills'},
+        // { text: 'Resume', icon: '', url: '/projects'}
+      ]
     }
   },
 

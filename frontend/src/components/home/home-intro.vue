@@ -2,11 +2,13 @@
   <v-jumbotron
     dark
     gradient="to top, #29323c, #485563"
-    height="100%">
+    height="100%"
+
+  >
     <v-container fill-height>
       <v-layout row wrap align-center>
         <v-flex xs12 text-xs-center>
-          <div class="mb-5 text-xs-right">
+          <div class="mb-5 text-xs-right hidden-sm-and-down">
             <transition
               appear
               name="bounce"
@@ -37,7 +39,7 @@
           </transition>
           <h4 class="title letter_spacing">I am Passionate about technology and software development.</h4>
 
-          <div class="mt-5 text-xs-left">
+          <div class="mt-5 text-xs-left hidden-sm-and-down">
             <transition
               appear
               name="bounce"
