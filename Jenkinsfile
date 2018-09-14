@@ -4,16 +4,16 @@ node {
         // Get some code from a GitHub repository
         dir ('../com.leviheidrick'){
         //sh 'pwd; la -l;'
-            sh "git fetch --all"
-            sh "git reset --hard origin/dev"
-            sh 'cd frontend && npm install && npm run build'
+            sh "sudo git fetch --all"
+            sh "sudo git reset --hard origin/dev"
+            sh 'cd frontend && sudo npm install && sudo npm run build'
         }
     }
 
 
     stage('Test') {
         dir ("../com.leviheidrick") {
-            sh 'mvn install'
+            sh 'sudo mvn install'
 
         }
     }

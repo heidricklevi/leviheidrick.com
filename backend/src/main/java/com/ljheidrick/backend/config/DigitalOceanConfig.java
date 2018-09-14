@@ -21,6 +21,7 @@ public class DigitalOceanConfig {
     @Value("${amazonProperties.secretKey}")
     private String secretKey;
 
+
     private String DO_SPACES_REGION = "nyc3";
 
     @Bean
