@@ -54,8 +54,9 @@
               name="bounce"
               enter-active-class="bounceInLeft"
               leave-active-class="bounceOutRight"
+              v-if="resume"
             >
-              <v-btn class="mt-4 ml-4" to="/skills" dark flat outline>Resume</v-btn>
+              <v-btn class="mt-4 ml-4" :href="resume.url" dark flat outline target="_blank">Resume.pdf <v-icon right >cloud_download</v-icon></v-btn>
             </transition>
           </div>
         </v-flex>
@@ -65,8 +66,17 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     export default {
-        name: "home-intro"
+        name: "home-intro",
+        data() {
+          return {
+
+          }
+        },
+      computed: {
+        ...mapGetters('resume/', ['resume'])
+      }
     }
 </script>
 

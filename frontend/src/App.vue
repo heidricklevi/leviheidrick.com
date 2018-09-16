@@ -9,28 +9,28 @@
       app
     >
       <v-list>
-        <v-list-tile v-for="item in navItems" :key="item.text" :to="item.url">
+        <template v-for="item in navItems">
+          <v-list-tile  :key="item.text" :to="item.url">
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                {{ item.text }}
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </template>
+        <v-list-tile v-if="resumeItem && resumeItem.url" :href="resumeItem.url" target="_blank">
           <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>{{ resumeItem.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              {{ item.text }}
+              {{ resumeItem.text }}
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <!--<v-list-tile class="mt-3" @click="">-->
-        <!--<v-list-tile-action>-->
-        <!--<v-icon color="grey darken-1">add_circle_outline</v-icon>-->
-        <!--</v-list-tile-action>-->
-        <!--<v-list-tile-title class="grey&#45;&#45;text text&#45;&#45;darken-1">Browse Channels</v-list-tile-title>-->
-        <!--</v-list-tile>-->
-        <!--<v-list-tile @click="">-->
-        <!--<v-list-tile-action>-->
-        <!--<v-icon color="grey darken-1">settings</v-icon>-->
-        <!--</v-list-tile-action>-->
-        <!--<v-list-tile-title class="grey&#45;&#45;text text&#45;&#45;darken-1">Manage Subscriptions</v-list-tile-title>-->
-        <!--</v-list-tile>-->
       </v-list>
     </v-navigation-drawer>
     <v-toolbar v-if="!$route.path.includes('admin')" app fixed clipped-left class="elevation-0" color="primary">
@@ -79,19 +79,26 @@ export default {
   components: { Home, Loading },
   created() {
     this.$store.dispatch('auth/checkAuth');
+    this.$store.dispatch('resume/fetchResume').then(() => {
+      this.resumeItem.url = this.resume.url;
+    });
   },
 
   data () {
     return {
       drawer: false,
       show: false,
-
       navItems: [
         { text: 'Projects', icon: '', url: '/projects'},
         { text: 'Skills', icon: '', url: '/skills'},
         // { text: 'About', icon: '', url: '/skills'},
-        // { text: 'Resume', icon: '', url: '/projects'}
-      ]
+      ],
+
+      resumeItem: {
+        text: 'Resume.pdf',
+        icon: 'cloud_download',
+        url: false
+      }
     }
   },
 
@@ -100,6 +107,8 @@ export default {
     ...mapGetters('auth/',[
       'hasHighestCredentials'
     ]),
+
+    ...mapGetters('resume/', ['resume']),
 
     auth() {
       return this.$store.getters['auth/auth'];

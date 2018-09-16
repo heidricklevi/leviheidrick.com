@@ -19,7 +19,7 @@ const actions = {
   fetchResume({state, getters, commit}) {
     commit('loading/loadingUpdate', null, { root: true });
     axios.get("/api/resume").then((res) => {
-      commit('resumeUpdate', res.data);
+      commit('resumeUpdate', res.data[0]);
       commit('loading/loadingUpdate', null, { root: true });
     }).catch((err) => {
       commit('loading/loadingUpdate', null, { root: true });
