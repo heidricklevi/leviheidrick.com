@@ -1,31 +1,34 @@
 import axios from 'axios';
 import router from '../../router/index.js';
 import jwt_decode from 'jwt-decode';
+import Utils from '../../lib/utils';
 
 const state = {
-  isAuthenticated: false,
-  isSuperAdmin: false,
-  user: false,
+  auth: {
+    isSuperAdmin: false,
+    user: false,
+    isAuthenticated: false
+  }
 };
 
 const getters = {
-  auth: state => state,
+  auth: state => state.auth,
   hasHighestCredentials: state => {
-    return state.isAuthenticated && state.isSuperAdmin;
+    return state.auth.isAuthenticated && state.auth.isSuperAdmin;
   }
 };
 
 const mutations = {
   authUpdate(state, auth) {
-    state = auth;
+    state.auth = auth;
   }
 };
 
 const actions = {
-  fetchUserMe({commit, state, getters}) {
-   return axios.get('/api/users/me').then((response) => {
-      let auth = state;
-
+  async fetchUserMe({commit, state, getters}) {
+    await axios.get('/api/users/me').then((response) => {
+      let auth = Utils.getCopyOf(getters.auth);
+      auth.isAuthenticated = true;
       response.data.roles.forEach(role => {
         if (role.id === 4 && role.name === "ROLE_SUPER_ADMIN" ) {
           auth.isSuperAdmin = true;
@@ -38,9 +41,9 @@ const actions = {
    })
   },
   async login({commit, getters, dispatch}, credentials) {
-    let auth = getters.auth;
+    let auth = Utils.getCopyOf(getters.auth);
     return axios.post('/api/auth/signin', credentials).then((response) => {
-      console.log(response);
+
       sessionStorage.setItem('Bearer', response.data.accessToken);
       axios.defaults.headers.common['Authorization'] = `${response.data.tokenType} ${response.data.accessToken}`;
 
@@ -55,7 +58,7 @@ const actions = {
   },
   logout({commit, getters, dispatch}) {
     let k;
-    let auth = getters.auth;
+    let auth = Utils.getCopyOf(getters.auth);
     for (k in auth) {
       auth[k] = false;
     }
@@ -64,8 +67,7 @@ const actions = {
     commit('authUpdate', false);
   },
 
-  checkAuth({commit, getters, dispatch}) {
-    let auth = getters.auth;
+  async checkAuth({commit, getters, dispatch}) {
     let token = sessionStorage.getItem("Bearer")? sessionStorage.getItem("Bearer"): false;
     if (token) {
       let decodedToken = jwt_decode(token);
@@ -76,9 +78,7 @@ const actions = {
       }
       else if (!isExpired) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        auth.isAuthenticated = true;
-        commit("authUpdate", auth);
-        dispatch('fetchUserMe');
+        await dispatch('fetchUserMe');
       }
 
     }

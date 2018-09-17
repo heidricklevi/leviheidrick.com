@@ -77,8 +77,8 @@ import { mapGetters } from "vuex";
 export default {
   name: 'App',
   components: { Home, Loading },
-  created() {
-    this.$store.dispatch('auth/checkAuth');
+  async created() {
+    await this.$store.dispatch('auth/checkAuth');
     this.$store.dispatch('resume/fetchResume').then(() => {
       this.resumeItem.url = this.resume.url;
     });

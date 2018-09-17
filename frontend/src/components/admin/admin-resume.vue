@@ -21,11 +21,11 @@
                     <v-list-tile-content class="blue-grey--text darken-3">ID</v-list-tile-content>
                     <v-list-tile-content class="align-end">{{ resume.id }}</v-list-tile-content>
                   </v-list-tile>
-                  <v-list-tile >
+                  <v-list-tile>
                     <v-list-tile-content class="blue-grey--text darken-3">URL</v-list-tile-content>
                     <v-list-tile-content class="align-end">{{ resume.url.split('/').slice(-1)[0] }}</v-list-tile-content>
                   </v-list-tile>
-                  <v-list-tile >
+                  <v-list-tile>
                     <v-list-tile-content class="blue-grey--text darken-3">Updated</v-list-tile-content>
                     <v-list-tile-content class="align-end">{{ resume.updated | dateAndTime }}</v-list-tile-content>
                   </v-list-tile>
@@ -81,8 +81,18 @@
             const folderName = "leviheidrick.com";
             const urlFileName = resumeFile.name.split('.')[0];
             const id = this.resume.id;
+            const formData = new FormData();
+            formData.append('file', resumeFile);
+            formData.append('folderName', folderName);
 
-            
+            const params = {
+              urlFileName: urlFileName,
+              id: id
+            };
+
+            this.$store.dispatch('resume/updateResume', {data: formData, params: params});
+
+
           }
         }
       }
