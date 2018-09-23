@@ -21,13 +21,13 @@
             </v-list-tile-content>
           </v-list-tile>
         </template>
-        <v-list-tile v-if="resumeItem && resumeItem.url" :href="resumeItem.url" target="_blank">
+        <v-list-tile v-if="resume && resume.url" :href="resume.url" target="_blank">
           <v-list-tile-action>
-            <v-icon>{{ resumeItem.icon }}</v-icon>
+            <v-icon>cloud_download</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              {{ resumeItem.text }}
+              Resume.pdf
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -52,14 +52,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>09/13/2018</span>
-            <span>v0.2.0</span>
-          </div>
-        </v-flex>
-        <v-flex xs12 md6 lg3 offset-lg9 offset-md6 text-xs-center>
-          <div class="caption">Some icons made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a> from
-            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
-            <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+            <span>09/23/2018</span>
+            <span>v0.2.1</span>
           </div>
         </v-flex>
       </v-layout>
@@ -79,9 +73,7 @@ export default {
   components: { Home, Loading },
   async created() {
     await this.$store.dispatch('auth/checkAuth');
-    this.$store.dispatch('resume/fetchResume').then(() => {
-      this.resumeItem.url = this.resume.url;
-    });
+    this.$store.dispatch('resume/fetchResume').then(() => {});
   },
 
   data () {
@@ -91,7 +83,7 @@ export default {
       navItems: [
         { text: 'Projects', icon: '', url: '/projects'},
         { text: 'Skills', icon: '', url: '/skills'},
-        // { text: 'About', icon: '', url: '/skills'},
+        { text: 'About', icon: 'fa fa-question', url: '/about'},
       ],
 
       resumeItem: {

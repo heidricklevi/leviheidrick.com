@@ -46,7 +46,7 @@
               enter-active-class="bounceInLeft"
               leave-active-class="bounceOutRight"
             >
-              <v-btn to="/projects" dark flat outline>About</v-btn>
+              <v-btn to="/about" dark flat outline>About<v-icon right small>fa fa-question</v-icon></v-btn>
             </transition>
 
             <transition

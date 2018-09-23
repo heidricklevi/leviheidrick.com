@@ -114,9 +114,6 @@
 
       },
 
-      onProjectSave(project) {
-
-      },
       editProject(project) {
         this.editDialogClick();
       },

@@ -25,10 +25,8 @@
               ripple
               dark
             >
-              <v-card-media
-                src="/static/WMW2.png"
-                class="background-shift-y"
-                height="200">
+              <div
+                >
                 <v-container fluid fill-height>
                   <v-layout fill-height>
                     <v-flex xs12 align-center text-xs-center>
@@ -36,15 +34,16 @@
                         <h3 class="headline font-weight-medium" >{{project.title}}</h3>
                       </a>
                       <v-flex v-if="hasHighestCredentials" text-xs-right xs12 class="force-top-right">
-                        <v-btn @click.prevent="deleteProject(project)" icon flat color="error">
-                          <v-icon>remove</v-icon>
-                        </v-btn>
-                        <v-btn @click.prevent="editProject(project)" small icon flat color="primary"><v-icon small>edit</v-icon></v-btn>
+                        <v-btn to="/admin/projects" small icon flat color="primary"><v-icon small color="error">remove_red_eye</v-icon></v-btn>
                       </v-flex>
                     </v-flex>
                   </v-layout>
                 </v-container>
-              </v-card-media>
+                <v-img
+                  src="/static/WMW2.png"
+                  aspect-ratio="2.33"
+                  ></v-img>
+              </div>
               <v-card-title class="pb-0">
                 <div>
                   <p class="caption pb-0 mb-0 mt-2">Initial concept: Spr 2017.</p>
@@ -168,13 +167,7 @@
 
 <style scoped lang="stylus">
 
-  .v-card {
-    .v-image {
-      >>> .v-image__image {
-        background-position-y: 21px !important;
-      }
-    }
-  }
+
 
   a {
     text-decoration none!important;
