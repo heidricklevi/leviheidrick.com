@@ -115,7 +115,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+
   .footer-color {
     background-color: #29323c!important;
   }
