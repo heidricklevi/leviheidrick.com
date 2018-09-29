@@ -38,9 +38,6 @@
       <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>
-      <div v-if="auth.user">
-        <h4 class="subheading">Hello, {{auth.user.name}}</h4>
-      </div>
       <v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>
       <v-btn v-if="hasHighestCredentials" :to="{ path: 'admin/' }" color="warning">admin</v-btn>
     </v-toolbar>
@@ -52,8 +49,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>09/23/2018</span>
-            <span>v0.2.1</span>
+            <span>09/29/2018</span>
+            <span>v0.2.2</span>
           </div>
         </v-flex>
       </v-layout>

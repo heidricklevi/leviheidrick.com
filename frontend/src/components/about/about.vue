@@ -1,51 +1,134 @@
 <template>
-  <v-container
-    fill-height
-    fluid
+  <div
+    style="height: 100%;"
     class="background__gradient--deepspace"
   >
+    <v-container
+      fluid
+
+    >
+        <v-layout
+          class="py-3"
+          row
+          wrap
+          justify-center
+        >
+          <v-flex
+            xs12
+            md4
+            lg4
+            layout
+            justify-space-around
+          >
+            <v-avatar
+              size="200"
+              class="elevation-15"
+            >
+              <v-img
+                src="/static/levi-heidrick1.png"
+              >
+              </v-img>
+            </v-avatar>
+          </v-flex>
+
+          <v-flex
+            xs12
+            lg8
+            layout
+            :class="{ 'justify-start': $vuetify.breakpoint.mdAndUp, 'justify-space-around': $vuetify.breakpoint.smAndDown }"
+          >
+            <div class="text-xs-center text-md-center">
+              <h5 class="display-3 playfair-font text-uppercase blue-grey--text text--lighten-3">Personal Profile</h5>
+              <p class="text-xs-center title playfair-font font-italic blue-grey--text text--lighten-1">Web Developer</p>
+              <p class="text-xs-center caption playfair-font font-italic blue-grey--text text--lighten-1">Levi Heidrick</p>
+            </div>
+          </v-flex>
+          <v-flex
+            xs12
+            class="my-3"
+          >
+            <v-divider dark></v-divider>
+          </v-flex>
+        </v-layout>
+
       <v-layout
-        class="py-3"
         row
         wrap
-        justify-center
+        align-center
+        align-content-center
       >
+
         <v-flex
           xs12
-          md4
-          lg4
-          layout
-          justify-space-around
+          lg6
+          offset-lg3
+
         >
-          <v-avatar
-            size="256"
-            class="elevation-15"
+          <v-card
+            class="border--left__dark"
           >
-            <v-img
-              src="/static/levi-heidrick1.png"
-            >
-            </v-img>
-          </v-avatar>
-        </v-flex>
+            <v-card-text class="">
+              <p>Hey there, I am Levi. I am a full stack web developer here in the Kansas City Metro.
+                I recently graduated from the University of Kansas' Engineering School with a Bachelors of Science in Information Technology (2018).</p>
 
+              <p>I am passionate about technology. I love to learn about how things work and think differently on how improvements can be made. Prior to graduating from school,
+                 I recognized this as a field I wanted to get into. The lectures on Stacks, Queues and BSTs weren't doing it for me. At that point,
+                I recognized I needed to do extra learning on my own if I wanted to find out more about web development and really software development in general.
+              </p>
+
+              <p>
+                Over the course of a few years, I garnished exposure to several different technologies.
+              </p>
+            </v-card-text>
+          </v-card>
+        </v-flex>
         <v-flex
+          class="pt-4"
           xs12
-          lg8
-          layout
-          :class="{ 'justify-start': $vuetify.breakpoint.mdAndUp, 'justify-space-around': $vuetify.breakpoint.smAndDown }"
+          offset-lg3
+          lg6
         >
-
-          <div class="text-xs-center text-md-center">
-            <h5 class="display-3 playfair-font text-uppercase blue-grey--text text--lighten-3">Personal Profile</h5>
-            <p class="text-xs-center title playfair-font font-italic blue-grey--text text--lighten-1">Software Developer</p>
-            <p class="text-xs-center caption playfair-font font-italic blue-grey--text text--lighten-1">Levi Heidrick</p>
-          </div>
-        </v-flex>
-        <v-flex xs12>
-          <v-divider dark></v-divider>
+          <v-card class="border--left__dark">
+            <v-card-text>
+              <v-list dense>
+                <v-subheader>The technologies I mainly reach for today whether it be for work, personal projects or that I am learning include:</v-subheader>
+                <v-list-tile>
+                  <v-list-tile-content>
+                    <v-list-tile-title>VueJS</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile>
+                  <v-list-tile-content>
+                    <v-list-tile-title>JavaScript</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile>
+                  <v-list-tile-content>
+                    <v-list-tile-title>Python</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile>
+                  <v-list-tile-content>
+                    <v-list-tile-title>Django</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile>
+                  <v-list-tile-content>
+                    <v-list-tile-title>Java (Spring)</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile>
+                  <v-list-tile-content>
+                    <v-list-tile-title>SASS</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </v-list>
+            </v-card-text>
+          </v-card>
         </v-flex>
       </v-layout>
-  </v-container>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -71,10 +154,8 @@
     border-right: #7f7f7f 2px solid;
   }
 
-  .about--me__heading {
-    text-transform: uppercase;
-    font-weight: 300;
-    font-size: 3.5rem;
+  .border--left__dark {
+    border-left: #183c7f 4px solid;
   }
 
   .playfair-font {
