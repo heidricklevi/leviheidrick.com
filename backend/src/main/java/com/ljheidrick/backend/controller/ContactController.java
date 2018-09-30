@@ -1,0 +1,55 @@
+package com.ljheidrick.backend.controller;
+
+import com.ljheidrick.backend.model.Contact;
+import com.ljheidrick.backend.payload.ContactRequest;
+import com.ljheidrick.backend.repository.ContactRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.validation.Valid;
+
+@RestController
+@RequestMapping("/api")
+public class ContactController {
+
+    @Autowired
+    private JavaMailSender sender;
+
+    @Autowired
+    private ContactRepository contactRepository;
+
+    @Value("${contact.toEmail}")
+    private String toEmail;
+
+
+    @PostMapping(value = "/contact/send")
+    @ResponseBody String home(@Valid @RequestBody ContactRequest contactRequest) {
+        try {
+            Contact contact = new Contact(contactRequest.getFromEmail(), contactRequest.getSenderName(), contactRequest.getMessage());
+
+            contactRepository.save(contact);
+            sendEmail(contactRequest);
+            return "Success!";
+        } catch (Exception e) {
+            return "Error sending email " + e;
+        }
+    }
+
+    private void sendEmail(ContactRequest contactRequest) throws MessagingException {
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message);
+
+        mimeMessageHelper.setFrom(contactRequest.getFromEmail());
+        mimeMessageHelper.setTo(toEmail);
+        mimeMessageHelper.setText(contactRequest.getMessage());
+        mimeMessageHelper.setSubject(contactRequest.getSenderName());
+
+        sender.send(message);
+    }
+
+}

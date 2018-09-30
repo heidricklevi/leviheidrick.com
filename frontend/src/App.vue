@@ -43,7 +43,13 @@
     </v-toolbar>
     <home/>
     <v-footer app height="auto" class="footer-color">
-      <v-layout row wrap justify-center align-center class="pa-2">
+      <v-layout
+        row
+        wrap
+        justify-center
+        align-center
+        class="pa-2"
+      >
         <v-flex xs12 text-xs-center>
           <span>&copy; 2018 Levi Heidrick</span>
         </v-flex>
