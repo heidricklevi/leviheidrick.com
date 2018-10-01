@@ -34,12 +34,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar v-if="!$route.path.includes('admin')" app fixed clipped-left class="elevation-0" color="primary">
-      <v-avatar to="/" size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
+      <v-avatar size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
       <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>
       <v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>
       <v-btn v-if="hasHighestCredentials" :to="{ path: 'admin/' }" color="warning">admin</v-btn>
+      <v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat outline class="blue darken-3">Contact</v-btn>
     </v-toolbar>
     <home/>
     <v-footer app height="auto" class="footer-color">
@@ -87,6 +88,7 @@ export default {
         { text: 'Projects', icon: '', url: '/projects'},
         { text: 'Skills', icon: '', url: '/skills'},
         { text: 'About', icon: 'fa fa-question', url: '/about'},
+        { text: 'Contact', icon: 'info', url: '/contact'},
       ],
 
       resumeItem: {
