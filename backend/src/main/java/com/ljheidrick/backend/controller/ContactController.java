@@ -39,7 +39,7 @@ public class ContactController {
 
             contactRepository.save(contact);
             sendEmail(contactRequest);
-            return ResponseEntity.ok("Successfully sent email");
+            return ResponseEntity.ok("Your submission was a success.");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error " + e);
         }
