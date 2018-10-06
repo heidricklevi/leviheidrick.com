@@ -21,45 +21,43 @@
             </v-list-tile-content>
           </v-list-tile>
         </template>
-        <v-list-tile v-if="resumeItem && resumeItem.url" :href="resumeItem.url" target="_blank">
+        <v-list-tile v-if="resume && resume.url" :href="resume.url" target="_blank">
           <v-list-tile-action>
-            <v-icon>{{ resumeItem.icon }}</v-icon>
+            <v-icon>cloud_download</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              {{ resumeItem.text }}
+              Resume.pdf
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar v-if="!$route.path.includes('admin')" app fixed clipped-left class="elevation-0" color="primary">
-      <v-avatar to="/" size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
+      <v-avatar size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
       <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>
-      <div v-if="auth.user">
-        <h4 class="subheading">Hello, {{auth.user.name}}</h4>
-      </div>
       <v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>
       <v-btn v-if="hasHighestCredentials" :to="{ path: 'admin/' }" color="warning">admin</v-btn>
+      <v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat outline class="blue darken-3">Contact</v-btn>
     </v-toolbar>
     <home/>
     <v-footer app height="auto" class="footer-color">
-      <v-layout row wrap justify-center align-center class="pa-2">
+      <v-layout
+        row
+        wrap
+        justify-center
+        align-center
+        class="pa-2"
+      >
         <v-flex xs12 text-xs-center>
           <span>&copy; 2018 Levi Heidrick</span>
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>09/13/2018</span>
-            <span>v0.2.0</span>
-          </div>
-        </v-flex>
-        <v-flex xs12 md6 lg3 offset-lg9 offset-md6 text-xs-center>
-          <div class="caption">Some icons made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a> from
-            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
-            <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+            <span>09/29/2018</span>
+            <span>v0.2.2</span>
           </div>
         </v-flex>
       </v-layout>
@@ -79,9 +77,7 @@ export default {
   components: { Home, Loading },
   async created() {
     await this.$store.dispatch('auth/checkAuth');
-    this.$store.dispatch('resume/fetchResume').then(() => {
-      this.resumeItem.url = this.resume.url;
-    });
+    this.$store.dispatch('resume/fetchResume').then(() => {});
   },
 
   data () {
@@ -91,7 +87,8 @@ export default {
       navItems: [
         { text: 'Projects', icon: '', url: '/projects'},
         { text: 'Skills', icon: '', url: '/skills'},
-        // { text: 'About', icon: '', url: '/skills'},
+        { text: 'About', icon: 'fa fa-question', url: '/about'},
+        { text: 'Contact', icon: 'info', url: '/contact'},
       ],
 
       resumeItem: {
@@ -123,7 +120,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+
   .footer-color {
     background-color: #29323c!important;
   }

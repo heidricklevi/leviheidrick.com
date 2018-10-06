@@ -7,9 +7,6 @@
       <v-flex xs12 lg3>
         <h5 class="ma-3"><v-icon small>details</v-icon>Project details</h5>
         <v-card-title class="headline">{{project.title}}</v-card-title>
-        <v-card-media>
-          <!--<v-avatar tile size="280"><img src="/static/WMW2.png"></v-avatar>-->
-        </v-card-media>
       </v-flex>
       <v-flex xs12><v-divider dark></v-divider></v-flex>
       <v-flex xs12>

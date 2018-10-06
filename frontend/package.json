@@ -23,6 +23,7 @@
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.17",
     "vue-pdf": "^3.3.1",
+    "vue-recaptcha": "^1.1.1",
     "vue-router": "^3.0.1",
     "vue2-animate": "^2.0.0",
     "vuetify": "^1.2.1",

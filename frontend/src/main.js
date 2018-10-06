@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import store from './store/index'
-
+import './stylus/main.styl'
 
 require('vue2-animate/dist/vue2-animate.min.css');
 

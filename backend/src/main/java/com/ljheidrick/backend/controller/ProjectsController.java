@@ -36,7 +36,6 @@ public class ProjectsController {
 
 
     @PostMapping("/projects/submit")
-
     public ResponseEntity<?> createProject(@CurrentUser UserPrincipal userPrincipal, @Valid @RequestBody ProjectsRequest project) {
         Date date = new Date();
         String username = userPrincipal.getUsername();
@@ -71,8 +70,6 @@ public class ProjectsController {
     @PutMapping("/projects/edit/{id}")
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
     public @ResponseBody Iterable<Projects> editProjectById(@Valid @PathVariable Long id, @Valid @RequestBody ProjectsRequest project) {
-        System.out.println(project);
-        System.out.println("Project");
         Projects projects = projectsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Projects", "project", project));
 
         projects.setTitle(project.getTitle());

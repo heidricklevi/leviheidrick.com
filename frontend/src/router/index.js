@@ -9,6 +9,8 @@ import ProjectDetail from '../components/projects/project-detail';
 import Admin from '../components/admin/admin';
 import AdminProjects from '../components/admin/admin-projects'
 import AdminResume from '../components/admin/admin-resume';
+import About from '../components/about/about';
+import Contact from '../components/contact/contact';
 
 /* eslint-disable */
 
@@ -176,9 +178,49 @@ export default new Router({
           },
         ]
       }
-
     },
 
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
+      meta: {
+        breadcrumb: [
+          {
+            text: "Home",
+            url: "/",
+            disabled: false,
+          },
+
+          {
+            text: "About Levi",
+            url: "/about",
+            disabled: true,
+          }
+        ]
+      }
+    },
+
+    {
+      path: '/contact',
+      name: 'contact',
+      component: Contact,
+      meta: {
+        breadcrumb: [
+          {
+            text: "Home",
+            url: "/",
+            disabled: false,
+          },
+
+          {
+            text: "Contact",
+            url: "/contact",
+            disabled: true,
+          }
+        ]
+      }
+    },
 
 
 
