@@ -19,7 +19,7 @@
           :class="{'pa-4': $vuetify.breakpoint.mdAndUp}"
         >
           <v-card-title>
-            <h5 class="playfair-font headline">Need to get in touch?</h5>
+            <h5 class="playfair-font display-1">Need to get in touch?</h5>
           </v-card-title>
           <v-divider dark></v-divider>
           <v-card-text>
@@ -183,8 +183,5 @@
 </script>
 
 <style scoped>
-  .playfair-font {
-    font-family: 'Playfair Display', serif!important;
-  }
 
 </style>

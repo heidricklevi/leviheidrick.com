@@ -31,7 +31,7 @@
                   <v-layout fill-height>
                     <v-flex xs12 align-center text-xs-center>
                       <a :href="project.url" class="light-blue--text text--darken-2">
-                        <h3 class="headline font-weight-medium" >{{project.title}}</h3>
+                        <h3 class="display-1 font-weight-medium" >{{project.title}}</h3>
                       </a>
                       <v-flex v-if="hasHighestCredentials" text-xs-right xs12 class="force-top-right">
                         <v-btn to="/admin/projects" small icon flat color="primary"><v-icon small color="error">remove_red_eye</v-icon></v-btn>

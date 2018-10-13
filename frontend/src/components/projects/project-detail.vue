@@ -5,16 +5,15 @@
 
       <v-layout row wrap>
       <v-flex xs12 lg3>
-        <h5 class="ma-3"><v-icon small>details</v-icon>Project details</h5>
-        <v-card-title class="headline">{{project.title}}</v-card-title>
+        <v-card-title class="display-1 playfair-font">{{project.title}}</v-card-title>
       </v-flex>
       <v-flex xs12><v-divider dark></v-divider></v-flex>
       <v-flex xs12>
         <v-spacer></v-spacer>
 
-        <v-card-text>
+        <v-card-text v-html="project.content" class="body-1">
             {{project.content}}
-          </v-card-text>
+        </v-card-text>
       </v-flex>
       <v-card-actions>
 
