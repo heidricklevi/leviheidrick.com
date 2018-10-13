@@ -15,6 +15,7 @@
           </v-breadcrumbs-item>
         </v-breadcrumbs>
       </div>
+      <v-divider></v-divider>
     </div>
 </template>
 

@@ -38,8 +38,8 @@
             :class="{ 'justify-start': $vuetify.breakpoint.mdAndUp, 'justify-space-around': $vuetify.breakpoint.smAndDown }"
           >
             <div class="text-xs-center text-md-center">
-              <h5 class="display-3 playfair-font text-uppercase blue-grey--text text--lighten-3">Personal Profile</h5>
-              <p class="text-xs-center title playfair-font font-italic blue-grey--text text--lighten-1">Web Developer</p>
+              <h5 class="display-3 playfair-font text-uppercase blue-grey--text text--lighten-3">Professional Profile</h5>
+              <p class="text-xs-center title playfair-font font-italic blue-grey--text text--lighten-1">Software Developer</p>
               <p class="text-xs-center caption playfair-font font-italic blue-grey--text text--lighten-1">Levi Heidrick</p>
             </div>
           </v-flex>
@@ -83,48 +83,65 @@
           </v-card>
         </v-flex>
         <v-flex
+          v-if="tools"
           class="pt-4"
           xs12
           offset-lg3
           lg6
         >
-          <v-card class="border--left__dark">
-            <v-card-text>
-              <v-list dense>
-                <v-subheader>The technologies I mainly reach for today whether it be for work, personal projects or that I am learning include:</v-subheader>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    <v-list-tile-title>VueJS</v-list-tile-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    <v-list-tile-title>JavaScript</v-list-tile-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    <v-list-tile-title>Python</v-list-tile-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    <v-list-tile-title>Django</v-list-tile-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    <v-list-tile-title>Java (Spring)</v-list-tile-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    <v-list-tile-title>SASS</v-list-tile-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-              </v-list>
-            </v-card-text>
-          </v-card>
+          <h5 class="py-2 text-xs-center text-md-left headline text-uppercase extra-letter-spacing font-weight-medium grey--text text--lighten-2"
+          >
+            Some Tool favorites
+          </h5>
+          <template v-for="(tool, index) in tools">
+            <v-chip
+              :key="index"
+              :color="tool.color"
+              :text-color="tool.textColor"
+            >
+              <v-avatar>
+                <v-icon>build</v-icon>
+              </v-avatar>
+              {{ tool.text }}
+            </v-chip>
+          </template>
+          <!--<v-card class="border&#45;&#45;left__dark">-->
+            <!--<v-card-text>-->
+              <!--<v-list dense>-->
+                <!--<v-subheader>The technologies I mainly reach for today whether it be for work, personal projects or that I am learning include:</v-subheader>-->
+                <!--<v-list-tile>-->
+                  <!--<v-list-tile-content>-->
+                    <!--<v-list-tile-title>VueJS</v-list-tile-title>-->
+                  <!--</v-list-tile-content>-->
+                <!--</v-list-tile>-->
+                <!--<v-list-tile>-->
+                  <!--<v-list-tile-content>-->
+                    <!--<v-list-tile-title>JavaScript</v-list-tile-title>-->
+                  <!--</v-list-tile-content>-->
+                <!--</v-list-tile>-->
+                <!--<v-list-tile>-->
+                  <!--<v-list-tile-content>-->
+                    <!--<v-list-tile-title>Python</v-list-tile-title>-->
+                  <!--</v-list-tile-content>-->
+                <!--</v-list-tile>-->
+                <!--<v-list-tile>-->
+                  <!--<v-list-tile-content>-->
+                    <!--<v-list-tile-title>Django</v-list-tile-title>-->
+                  <!--</v-list-tile-content>-->
+                <!--</v-list-tile>-->
+                <!--<v-list-tile>-->
+                  <!--<v-list-tile-content>-->
+                    <!--<v-list-tile-title>Java (Spring)</v-list-tile-title>-->
+                  <!--</v-list-tile-content>-->
+                <!--</v-list-tile>-->
+                <!--<v-list-tile>-->
+                  <!--<v-list-tile-content>-->
+                    <!--<v-list-tile-title>SASS</v-list-tile-title>-->
+                  <!--</v-list-tile-content>-->
+                <!--</v-list-tile>-->
+              <!--</v-list>-->
+            <!--</v-card-text>-->
+          <!--</v-card>-->
         </v-flex>
       </v-layout>
     </v-container>
@@ -136,7 +153,48 @@
       name: "about",
       data () {
         return {
-
+          tools: [
+            {
+              color: 'blue',
+              textColor: 'white',
+              text: 'VueJS'
+            },
+            {
+              color: 'indigo',
+              textColor: 'white',
+              text: 'NodeJS'
+            },
+            {
+              color: 'orange',
+              textColor: 'white',
+              text: 'JavaScript'
+            },
+            {
+              color: 'indigo',
+              textColor: 'white',
+              text: 'Python'
+            },
+            {
+              color: 'blue',
+              textColor: 'white',
+              text: 'Django'
+            },
+            {
+              color: 'orange',
+              textColor: 'white',
+              text: 'Java'
+            },
+            {
+              color: 'blue',
+              textColor: 'white',
+              text: 'Spring'
+            },
+            {
+              color: 'indigo',
+              textColor: 'white',
+              text: 'Jenkins'
+            },
+          ]
         }
       },
 

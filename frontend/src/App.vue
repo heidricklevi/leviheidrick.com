@@ -39,11 +39,11 @@
       <v-spacer></v-spacer>
       <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>
       <v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>
-      <v-btn v-if="hasHighestCredentials" :to="{ path: 'admin/' }" color="warning">admin</v-btn>
+      <v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>
       <v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat outline class="blue darken-3">Contact</v-btn>
     </v-toolbar>
     <home/>
-    <v-footer app height="auto" class="footer-color">
+    <v-footer app height="auto" class="footer-color" absolute>
       <v-layout
         row
         wrap
@@ -57,7 +57,7 @@
         <v-flex xs12 text-xs-center>
           <div class="caption">
             <span>09/29/2018</span>
-            <span>v0.2.2</span>
+            <span>v0.2.3</span>
           </div>
         </v-flex>
       </v-layout>
