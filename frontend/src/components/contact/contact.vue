@@ -114,6 +114,13 @@
           </v-card-text>
         </v-card>
       </v-flex>
+      <v-snackbar
+        v-model="snackbar"
+        top
+        :color="snackColor"
+      >
+        {{ snackMessage }}
+      </v-snackbar>
     </v-layout>
   </v-container>
     
@@ -144,6 +151,11 @@
           gResponse: false,
 
           contactFormSubmitted: false,
+
+          snackbar: false,
+          snackMessage: '',
+          snackColor: 'success',
+
         }
       },
 
@@ -166,7 +178,11 @@
               gResponse: this.gResponse
             };
 
-            this.$store.dispatch('contact/sendEmail', payload);
+            this.$store.dispatch('contact/sendEmail', payload).then(() => {
+              this.snackbar = true;
+              this.snackMessage = this.responseStatus.message;
+              this.snackColor = this.responseStatus.success? 'success': 'error';
+            });
           }
         },
 
