@@ -33,17 +33,27 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar v-if="!$route.path.includes('admin')" app fixed clipped-left class="elevation-0" color="primary">
+    <v-toolbar v-if="!$route.path.includes('admin')" app fixed clipped-left color="#253448">
       <v-avatar size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
       <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>
       <v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>
       <v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>
-      <v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat outline class="blue darken-3">Contact</v-btn>
+      <v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat dark>Contact</v-btn>
+      <v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/about" dark flat>About</v-btn>
+      <v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/skills" dark flat>Skills</v-btn>
+      <v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/projects" dark flat>Projects</v-btn>
+      <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :href="resume.url" dark flat target="_blank">Resume.pdf</v-btn>-->
+
     </v-toolbar>
     <home/>
-    <v-footer app height="auto" class="footer-color" absolute>
+    <v-footer
+      app
+      height="auto"
+      color="#253448"
+      absolute
+    >
       <v-layout
         row
         wrap
@@ -56,8 +66,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>09/29/2018</span>
-            <span>v0.2.3</span>
+            <span>10/23/2018</span>
+            <span>v0.3.0</span>
           </div>
         </v-flex>
       </v-layout>
@@ -121,10 +131,6 @@ export default {
 </script>
 
 <style lang="stylus">
-
-  .footer-color {
-    background-color: #29323c!important;
-  }
 
   .uppercase {
     text-transform: uppercase!important;

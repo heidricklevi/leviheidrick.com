@@ -1,10 +1,12 @@
 package com.ljheidrick.backend.controller;
 
 import com.ljheidrick.backend.model.Contact;
+import com.ljheidrick.backend.payload.ApiResponse;
 import com.ljheidrick.backend.payload.ContactRequest;
 import com.ljheidrick.backend.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -39,9 +41,10 @@ public class ContactController {
 
             contactRepository.save(contact);
             sendEmail(contactRequest);
-            return ResponseEntity.ok("Your submission was a success.");
+
+            return new ResponseEntity(new ApiResponse(true, "Your submission was a success."), HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error " + e);
+            return new ResponseEntity(new ApiResponse(false, "The request could not be submitted. "), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -53,7 +56,7 @@ public class ContactController {
         mimeMessageHelper.setFrom(fromEmail);
         mimeMessageHelper.setTo(toEmail);
         mimeMessageHelper.setText(formatEmailContent(contactRequest), true);
-        mimeMessageHelper.setSubject("A message from"+contactRequest.getSenderName());
+        mimeMessageHelper.setSubject("A message from "+contactRequest.getSenderName());
 
         sender.send(message);
     }

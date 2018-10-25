@@ -5,60 +5,44 @@
     height="100%"
 
   >
-    <v-container fill-height>
-      <v-layout row wrap align-center>
-        <v-flex xs12 text-xs-center>
-          <div class="mb-5 text-xs-right hidden-sm-and-down">
-            <transition
-              appear
-              name="bounce"
-              enter-active-class="bounceInLeft"
-              leave-active-class="bounceOutRight"
-            >
-              <v-btn to="/projects" dark flat outline>Projects</v-btn>
-            </transition>
+    <v-container
+      fill-height
+    >
+      <v-layout
+        row
+        wrap
+        align-center
+      >
+        <v-flex
+          xs12
+          text-xs-center
+        >
+          <div>
 
-            <transition
-              appear
-              name="bounce"
-              enter-active-class="bounceInLeft"
-              leave-active-class="bounceOutRight"
-            >
-              <v-btn class="mt-4 ml-4" to="/skills" dark flat outline>Skills</v-btn>
-            </transition>
-          </div>
+              <h1 class="playfair-font-bold
+                         grey--text text--lighten-2
+                         display-3
+                         extra-letter-spacing-intro
+                         py-2
+                         d-inline-block
+                         text-uppercase"
+              >
 
-          <h2 class="title letter_spacing">Hello,</h2>
-          <transition
-            appear
-            name="bounce"
-            enter-active-class="bounceInLeft"
-            leave-active-class="bounceOutRight"
-          >
-            <h3 class="headline letter_spacing" >My name is Levi.</h3>
-          </transition>
-          <h4 class="title letter_spacing">I am Passionate about technology and software development.</h4>
-
-          <div class="mt-5 text-xs-left hidden-sm-and-down">
-            <transition
-              appear
-              name="bounce"
-              enter-active-class="bounceInLeft"
-              leave-active-class="bounceOutRight"
-            >
-              <v-btn to="/about" dark flat outline>About<v-icon right small>fa fa-question</v-icon></v-btn>
-            </transition>
-
-            <transition
-              appear
-              name="bounce"
-              enter-active-class="bounceInLeft"
-              leave-active-class="bounceOutRight"
-              v-if="resume"
-            >
-              <v-btn class="mt-4 ml-4" :href="resume.url" dark flat outline target="_blank">Resume.pdf <v-icon right >cloud_download</v-icon></v-btn>
-            </transition>
-          </div>
+                software Developer.
+              </h1>
+            </div>
+            <div class="py-3">
+              <v-btn
+                :to="{ path: '/contact' }"
+                dark
+                flat
+                large
+                outline
+                color="grey"
+              >
+                Get in touch
+              </v-btn>
+            </div>
         </v-flex>
       </v-layout>
     </v-container>
@@ -80,6 +64,12 @@
     }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
+  .home__intro {
+    &-border {
+      border-bottom: 10px solid;
+      border-image: linear-gradient(to bottom, #30cfd0 0%, #330867 100%) 100;
 
+     }
+  }
 </style>
