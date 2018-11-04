@@ -1,4 +1,5 @@
 package com.ljheidrick.backend.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -6,6 +7,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "projects")
@@ -33,6 +36,10 @@ public class Projects {
         @OnDelete(action = OnDeleteAction.CASCADE)
         @JsonIgnore
         private User user;
+
+        @OneToMany
+        @JoinColumn(name = "files_id")
+        private List<Files> files;
 
         public Projects() {
 
@@ -80,8 +87,16 @@ public class Projects {
             return user;
         }
 
+        public Optional<List<Files>> getFiles() {
+            return Optional.ofNullable(files);
+        }
+
+        public void setFiles(List<Files> files) {
+            this.files = files;
+        }
+
         public void setContent(String content) {
-            this.content = content;
+                this.content = content;
         }
 
         public void setFinish(Date finish) {

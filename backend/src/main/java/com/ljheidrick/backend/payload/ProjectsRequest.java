@@ -1,9 +1,14 @@
 package com.ljheidrick.backend.payload;
 
+import com.ljheidrick.backend.model.Files;
+
+import java.util.List;
+
 public class ProjectsRequest {
     private String url;
     private String title;
     private String content;
+    private List<Files> files;
 
     public String getUrl() {
         return url;
@@ -27,5 +32,13 @@ public class ProjectsRequest {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Files> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<Files> files) {
+        this.files = files;
     }
 }
