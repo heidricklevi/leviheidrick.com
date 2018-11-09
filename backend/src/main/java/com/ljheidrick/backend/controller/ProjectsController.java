@@ -96,6 +96,5 @@ public class ProjectsController {
 
         projectsRepository.save(projects);
         return projects;
-
     }
 }
