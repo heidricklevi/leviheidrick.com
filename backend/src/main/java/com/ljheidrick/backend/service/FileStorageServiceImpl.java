@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class FileStorageServiceImpl implements FileStorageService {
@@ -50,12 +51,18 @@ public class FileStorageServiceImpl implements FileStorageService {
     @Override
     public Projects saveFiles(MultipartFile[] multipartFiles, String folderName, Projects projects) throws IOException {
         List<Files> imageUrls = new ArrayList<>();
+        Optional<List<Files>> existingFiles = projects.getFiles();
+
         for (MultipartFile multipartFile : multipartFiles) {
             String url = this.saveFile(multipartFile, multipartFile.getOriginalFilename().split("\\.")[0], folderName);
             Files files = new Files(url);
             filesRepository.save(files);
 
             imageUrls.add(files);
+        }
+
+        if (existingFiles.isPresent()) {
+            imageUrls.addAll(existingFiles.get());
         }
 
         projects.setFiles(imageUrls);

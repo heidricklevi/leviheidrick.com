@@ -4,11 +4,12 @@
     wrap
     justify-center>
     <v-flex
-      xl8
+      xl7
       lg10
       sm12
       v-if="project.files && project.files.length > 0">
       <v-carousel
+        height="500"
         :class="{'mt-4': $vuetify.breakpoint.smAndUp}"
       >
         <v-carousel-item

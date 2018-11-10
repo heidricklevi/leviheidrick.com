@@ -87,8 +87,7 @@ public class ProjectsController {
 
     @PostMapping("/projects/upload")
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
-    public @ResponseBody
-    Projects saveImagesToProject(@RequestParam(value = "files") MultipartFile[] files,
+    public @ResponseBody Projects saveImagesToProject(@RequestParam(value = "files") MultipartFile[] files,
                                  @RequestParam(value = "folderName") String folderName,
                                  @RequestParam(value = "projectId") Long id) throws IOException {
         Projects projects = projectsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Projects", "project", id));

@@ -20,7 +20,11 @@
           </span>
         </v-tooltip>
       </template>
-      <template slot="items" slot-scope="props">
+      <template
+        style="max-height: 200px;"
+        slot="items"
+        slot-scope="props"
+      >
         <td>
           <v-checkbox
             v-model="props.selected"
