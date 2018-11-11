@@ -1,5 +1,14 @@
 <template>
   <div>
+    <v-btn v-if="hasHighestCredentials"
+           @click.prevent="createDialogClick"
+           icon
+           dark
+    >
+      <v-icon>add</v-icon>
+      Create
+    </v-btn>
+
     <v-data-table
       :headers="headers"
       :items="projects"
@@ -10,6 +19,7 @@
       class="elevation-1"
       dark
     >
+
       <template slot="headerCell" slot-scope="props">
         <v-tooltip bottom>
           <span slot="activator">
@@ -33,8 +43,8 @@
           ></v-checkbox>
         </td>
         <td>{{ props.item.title }}</td>
-        <td class="text-xs-center">{{ props.item.url }}</td>
-        <td class="text-xs-left overflow-hidden">{{ props.item.content }}</td>
+        <td class="text-xs-left">{{ props.item.url }}</td>
+        <td class="text-xs-left admin__projects__td--content overflow-hidden">{{ props.item.content }}</td>
         <td class="text-xs-left overflow-hidden">{{ props.item.files }}</td>
         <td>
 
@@ -57,7 +67,7 @@
                 </v-list-tile-action>
               </v-list-tile>
               <v-divider></v-divider>
-              <v-list-tile @click="onDeleteClick">
+              <v-list-tile @click="deleteProject(props.item)">
                 <v-list-tile-content>
                   <v-list-tile-title>Delete</v-list-tile-title>
                 </v-list-tile-content>
@@ -71,16 +81,36 @@
 
       </template>
       </v-data-table>
+    <create-project @on-save-project="saveProject" @on-dialog-click="createDialogClick" :dialog="createDialog"></create-project>
     <edit-project @on-dialog-click="editDialogClick" :project="project" :edit-dialog="editDialog"></edit-project>
+    <v-dialog
+      v-model="alertDelete"
+      width="500"
+    >
+      <v-card
+        dark
+        class="text-xs-center"
+      >
+        <v-card-title>
+          <h5 class="headline">Are you sure you want to delete this project <span class="blue-grey--text">{{projectToDelete.title}}</span></h5>
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn flat outline color="error" @click.prevent="deleteProject(projectToDelete)">Yes</v-btn>
+          <v-btn flat outline color="warning" @click.prevent="alertDelete = false">No</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
   import { mapGetters } from 'vuex';
   import EditProject from '../projects/edit-project.vue';
+  import CreateProject from '../projects/create-project.vue';
 
   export default {
     name: 'admin-projects',
-    components: { EditProject },
+    components: { EditProject, CreateProject },
     mounted() {
       this.$store.dispatch('projects/fetchProjects');
     },
@@ -101,23 +131,31 @@
           { text: 'Actions', value: 'Actions'}
         ],
 
+        createDialog: false,
         editDialog: false,
         project: {
           title: '',
           url: '',
           content: '',
         },
+
+        projectToDelete: false,
+        alertDelete: false,
       }
     },
     computed: {
       ...mapGetters('projects/', [
           'projects'
-        ])
+        ]),
+
+      ...mapGetters('auth/', [
+        'hasHighestCredentials'
+      ]),
     },
 
     methods: {
-      onDeleteClick(project) {
-
+      createDialogClick() {
+        this.createDialog = !this.createDialog;
       },
 
       editProject(project) {
@@ -127,7 +165,23 @@
       editDialogClick(project) {
         this.project = project;
         this.editDialog = !this.editDialog;
-      }
+      },
+
+      saveProject() {
+        this.$store.dispatch('projects/submitProject').then((response) => {
+        })
+      },
+
+      deleteProject(project) {
+        if (!this.alertDelete) {
+          this.alertDelete = true;
+          this.projectToDelete = project;
+        }
+        else if (this.alertDelete) {
+          this.$store.dispatch("projects/deleteProjectById", project.id);
+          this.alertDelete = false;
+        }
+      },
     }
 
 
@@ -135,6 +189,16 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+  .admin__projects {
+    &__td {
+      &--content {
+        flex-basis 100%
+        max-width 30px
+        text-overflow ellipsis
+        white-space nowrap
+      }
+    }
+  }
 
 </style>

@@ -3,21 +3,6 @@
     row
     wrap
     justify-center>
-    <v-flex
-      xl7
-      lg10
-      sm12
-      v-if="project.files && project.files.length > 0">
-      <v-carousel
-        height="500"
-        :class="{'mt-4': $vuetify.breakpoint.smAndUp}"
-      >
-        <v-carousel-item
-          v-for="file in project.files"
-          :src="file.fileUrl">
-        </v-carousel-item>
-      </v-carousel>
-    </v-flex>
     <v-flex xl8 lg10 sm12>
       <v-card v-if="!isLoading" class="elevation-5" :class="{'ma-4': $vuetify.breakpoint.smAndUp}">
         <v-layout row wrap>
@@ -33,6 +18,22 @@
           </v-flex>
         </v-layout>
       </v-card>
+    </v-flex>
+    <v-flex
+      xl7
+      lg10
+      sm10
+      v-if="project.files && project.files.length > 0 && !isLoading">
+      <v-carousel
+        height="500"
+        max-width="768"
+        :class="{'my-4': $vuetify.breakpoint.smAndUp}"
+      >
+        <v-carousel-item
+          v-for="file in project.files"
+          :src="file.fileUrl">
+        </v-carousel-item>
+      </v-carousel>
     </v-flex>
   </v-layout>
 </template>

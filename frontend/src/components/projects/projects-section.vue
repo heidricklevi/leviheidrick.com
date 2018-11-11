@@ -14,7 +14,6 @@
               Projects
             </h3>
             <v-spacer></v-spacer>
-            <v-btn v-if="hasHighestCredentials" @click.prevent="onDialogClick" icon dark><v-icon>add</v-icon>Create</v-btn>
           </v-flex>
         </v-layout>
         <v-layout row wrap>
@@ -69,51 +68,21 @@
           </v-flex>
           </template>
         </v-layout>
-        <create-project @on-save-project="saveProject" @on-dialog-click="onDialogClick" :dialog="dialog"></create-project>
-        <edit-project @on-edit-dialog-click="editDialogClick" :edit-dialog="editDialog"></edit-project>
-        <v-dialog
-          v-model="alertDelete"
-          width="500"
-        >
-          <v-card
-            dark
-            class="text-xs-center"
-          >
-            <v-card-title>
-              <h5 class="headline">Are you sure you want to delete this project <span class="blue-grey--text">{{projectToDelete.title}}</span></h5>
-            </v-card-title>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn flat outline color="error" @click.prevent="deleteProject(projectToDelete)">Yes</v-btn>
-              <v-btn flat outline color="warning" @click.prevent="alertDelete = false">No</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
       </v-container>
     </v-jumbotron>
 </template>
 
 <script>
-  import CreateProject from './create-project.vue';
-  import EditProject from './edit-project.vue';
-  import { mapActions, mapGetters } from 'vuex';
+  import { mapGetters } from 'vuex';
 
   export default {
         name: "ProjectsSection",
-        components: {EditProject, CreateProject, },
         created() {
           this.$store.dispatch('projects/fetchProjects');
         },
         data() {
           return {
             viewDescription: false,
-            dialog: false,
-            isSaveDisabled: false,
-            submissionStatus: '',
-            alertDelete: false,
-            projectToDelete: false,
-            editDialog: false,
-
           }
         },
         computed: {
@@ -129,38 +98,9 @@
           }
         },
         methods: {
-          onDialogClick(e) {
-            this.dialog = !this.dialog;
-
-          },
-          saveProject() {
-            this.$store.dispatch('projects/submitProject').then((response) => {
-              console.log('response', response);
-            })
-          },
-
           viewDetails(project) {
             this.$store.commit('projects/projectUpdate', project)
           },
-
-          deleteProject(project) {
-            if (!this.alertDelete) {
-              this.alertDelete = true;
-              this.projectToDelete = project;
-            }
-            else if (this.alertDelete) {
-              this.$store.dispatch("projects/deleteProjectById", project.id);
-              this.alertDelete = false;
-            }
-          },
-
-          editProject(project) {
-            this.editDialogClick();
-          },
-
-          editDialogClick() {
-            this.editDialog = !this.editDialog;
-          }
         },
     }
 </script>
