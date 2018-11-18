@@ -10,14 +10,17 @@ import com.ljheidrick.backend.repository.RoleRepository;
 import com.ljheidrick.backend.repository.UserRepository;
 import com.ljheidrick.backend.security.CurrentUser;
 import com.ljheidrick.backend.security.UserPrincipal;
+import com.ljheidrick.backend.service.FileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 
 @RestController
@@ -31,6 +34,9 @@ public class ProjectsController {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    FileStorageService service;
 
     private static final Logger logger = LoggerFactory.getLogger(ProjectsController.class);
 
@@ -77,5 +83,17 @@ public class ProjectsController {
         projects.setUrl(project.getUrl());
         projectsRepository.save(projects);
         return projectsRepository.findAll();
+    }
+
+    @PostMapping("/projects/upload")
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    public @ResponseBody Projects saveImagesToProject(@RequestParam(value = "files") MultipartFile[] files,
+                                 @RequestParam(value = "folderName") String folderName,
+                                 @RequestParam(value = "projectId") Long id) throws IOException {
+        Projects projects = projectsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Projects", "project", id));
+        projects = service.saveFiles(files, folderName, projects);
+
+        projectsRepository.save(projects);
+        return projects;
     }
 }

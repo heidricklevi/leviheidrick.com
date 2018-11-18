@@ -5,6 +5,9 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.ljheidrick.backend.model.Files;
+import com.ljheidrick.backend.model.Projects;
+import com.ljheidrick.backend.repository.FilesRepository;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class FileStorageServiceImpl implements FileStorageService {
@@ -27,10 +33,12 @@ public class FileStorageServiceImpl implements FileStorageService {
     @Autowired
     AmazonS3 s3Client;
 
+    @Autowired
+    FilesRepository filesRepository;
+
     @Override
     public String saveFile(MultipartFile multipartFile, String imgName, String folderName) throws IOException {
         String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
-        System.out.println("Folder Name: " + folderName);
         String key = folderName + "/" + imgName + "." + extension;
         File fileToUpload = convertFromMultiPartToFile(multipartFile);
         s3Client.putObject(new PutObjectRequest(S3_BUCKET_NAME, key, fileToUpload)
@@ -38,6 +46,27 @@ public class FileStorageServiceImpl implements FileStorageService {
 
 
         return endpointUrlWithBucketName + "/" + key;
+    }
+
+    @Override
+    public Projects saveFiles(MultipartFile[] multipartFiles, String folderName, Projects projects) throws IOException {
+        List<Files> imageUrls = new ArrayList<>();
+        Optional<List<Files>> existingFiles = projects.getFiles();
+
+        for (MultipartFile multipartFile : multipartFiles) {
+            String url = this.saveFile(multipartFile, multipartFile.getOriginalFilename().split("\\.")[0], folderName);
+            Files files = new Files(url);
+            filesRepository.save(files);
+
+            imageUrls.add(files);
+        }
+
+        if (existingFiles.isPresent()) {
+            imageUrls.addAll(existingFiles.get());
+        }
+
+        projects.setFiles(imageUrls);
+        return projects;
     }
 
     @Override

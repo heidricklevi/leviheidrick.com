@@ -66,8 +66,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>10/23/2018</span>
-            <span>v0.3.0</span>
+            <span>11/18/2018</span>
+            <span>v0.3.2</span>
           </div>
         </v-flex>
       </v-layout>

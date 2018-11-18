@@ -5,7 +5,7 @@
         <v-btn icon dark @click.native="$emit('on-dialog-click')">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Create a Project</v-toolbar-title>
+        <v-toolbar-title>Edit a Project</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn dark flat @click.prevent="onProjectSave" id="save">Save</v-btn>
@@ -32,6 +32,7 @@
             label="Content"
             rows="1"
           ></v-textarea>
+
         </v-layout>
       </v-container>
     </v-card>
