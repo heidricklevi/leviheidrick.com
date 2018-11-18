@@ -25,6 +25,7 @@
       sm10
       v-if="project.files && project.files.length > 0 && !isLoading">
       <v-carousel
+        v-if="$vuetify.breakpoint.mdAndUp"
         height="500"
         max-width="768"
         :class="{'my-4': $vuetify.breakpoint.smAndUp}"
@@ -34,14 +35,19 @@
           :src="file.fileUrl">
         </v-carousel-item>
       </v-carousel>
+      <viewer @inited="inited" :images="project.files" class="viewer" ref="viewer">
+        <img v-for="(img, index) in project.files" :src="img.fileUrl" :key="index">
+      </viewer>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+    import Viewer from 'v-viewer/src/component.vue';
     import { mapActions, mapGetters } from 'vuex';
     export default {
       name: "project-detail",
+      components: { Viewer, },
       props: ['dialog'],
       beforeRouteEnter(to, from, next) {
         next(self => {
@@ -54,7 +60,10 @@
         }
       },
       methods: {
-        ...mapActions('projects/', ['fetchProjectByTitle'])
+        ...mapActions('projects/', ['fetchProjectByTitle']),
+        inited(viewer) {
+          this.$viewer = viewer;
+        }
       },
       computed: {
         ...mapGetters('projects/', [
@@ -71,6 +80,11 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+  .viewer {
+    > img {
+      max-width 100%
+    }
+  }
 
 </style>
