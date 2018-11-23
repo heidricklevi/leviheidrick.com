@@ -105,43 +105,6 @@
               {{ tool.text }}
             </v-chip>
           </template>
-          <!--<v-card class="border&#45;&#45;left__dark">-->
-            <!--<v-card-text>-->
-              <!--<v-list dense>-->
-                <!--<v-subheader>The technologies I mainly reach for today whether it be for work, personal projects or that I am learning include:</v-subheader>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>VueJS</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>JavaScript</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>Python</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>Django</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>Java (Spring)</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>SASS</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-              <!--</v-list>-->
-            <!--</v-card-text>-->
-          <!--</v-card>-->
         </v-flex>
       </v-layout>
     </v-container>

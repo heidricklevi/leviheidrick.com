@@ -35,7 +35,7 @@
           :src="file.fileUrl">
         </v-carousel-item>
       </v-carousel>
-      <viewer @inited="inited" :images="project.files" class="viewer" ref="viewer">
+      <viewer v-else @inited="inited" :images="project.files" class="viewer" ref="viewer">
         <img v-for="(img, index) in project.files" :src="img.fileUrl" :key="index">
       </viewer>
     </v-flex>
