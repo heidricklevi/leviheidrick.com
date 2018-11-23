@@ -4,6 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -38,14 +39,32 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  optimization: {
+    minimize: false,
+    runtimeChunk: {
+      name: 'vendor'
+    },
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        commons: {
+          test: /node_modules/,
+          name: "vendor",
+          chunks: "initial",
+          minSize: 1
+        }
+      }
+    }
+  },
   module: {
     rules: [
       //...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+
       },
+
       {
         test: /\.js$/,
         loader: 'babel-loader',
