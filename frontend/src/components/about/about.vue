@@ -38,7 +38,10 @@
             :class="{ 'justify-start': $vuetify.breakpoint.mdAndUp, 'justify-space-around': $vuetify.breakpoint.smAndDown }"
           >
             <div class="text-xs-center text-md-center">
-              <h5 class="display-3 playfair-font text-uppercase blue-grey--text text--lighten-3">Professional Profile</h5>
+              <h5
+                class="playfair-font text-uppercase blue-grey--text text--lighten-3"
+                :class="{ 'display-3': $vuetify.breakpoint.mdAndUp, 'display-1': $vuetify.breakpoint.smAndDown }"
+              > Professional Profile</h5>
               <p class="text-xs-center title playfair-font font-italic blue-grey--text text--lighten-1">Software Developer</p>
               <p class="text-xs-center caption playfair-font font-italic blue-grey--text text--lighten-1">Levi Heidrick</p>
             </div>
