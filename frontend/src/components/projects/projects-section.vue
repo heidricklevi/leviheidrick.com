@@ -43,12 +43,6 @@
                   aspect-ratio="2.33"
                   ></v-img>
               </div>
-              <v-card-title class="pb-0">
-                <div>
-                  <p class="caption pb-0 mb-0 mt-2">Initial concept: Spr 2017.</p>
-                  <p class="caption">Project adopted: Fall 2017.</p>
-                </div>
-              </v-card-title>
               <v-divider></v-divider>
               <v-card-actions>
                 <h5>
@@ -106,8 +100,6 @@
 </script>
 
 <style scoped lang="stylus">
-
-
 
   a {
     text-decoration none!important;
