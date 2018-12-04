@@ -25,7 +25,7 @@
                          py-2
                          d-inline-block
                          text-uppercase"
-                  :class="{ 'display-3': $vuetify.breakpoint.smAndUp, 'display-1': $vuetify.breakpoint.xlOnly }"
+                  :class="{ 'display-3': $vuetify.breakpoint.smAndUp, 'display-2': $vuetify.breakpoint.xsOnly }"
               >
 
                 software Developer.
