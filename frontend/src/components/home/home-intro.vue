@@ -21,11 +21,11 @@
 
               <h1 class="playfair-font-bold
                          grey--text text--lighten-2
-                         display-3
                          extra-letter-spacing-intro
                          py-2
                          d-inline-block
                          text-uppercase"
+                  :class="{ 'display-3': $vuetify.breakpoint.smAndUp, 'display-1': $vuetify.breakpoint.xlOnly }"
               >
 
                 software Developer.

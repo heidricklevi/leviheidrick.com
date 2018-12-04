@@ -81,6 +81,7 @@
                   @expired="recaptchaExpired"
                   @verify="recaptchaVerified"
                   sitekey="6LfO73IUAAAAALmRXi6dpEBIPDPu1HBtY-9ItT_c"
+                  class="g-recaptcha"
                 >
 
                 </vue-recaptcha>
@@ -199,5 +200,10 @@
 </script>
 
 <style scoped>
-
+  .g-recaptcha {
+    transform:scale(0.77);
+    -webkit-transform:scale(0.77);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+  }
 </style>
