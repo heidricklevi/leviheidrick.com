@@ -58,7 +58,7 @@ const actions = {
     commit('loading/loadingUpdate', null, { root: true });
     commit('responseStatusUpdate', false);
 
-    return axios.get(`/api/projects/${title}`).then((response) => {
+    return axios.get(`/api/projects/${encodeURIComponent(title)}`).then((response) => {
             commit('projectUpdate', response.data);
             commit('loading/loadingUpdate', null, { root: true });
           }).catch((err) => {

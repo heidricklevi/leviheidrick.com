@@ -38,10 +38,15 @@
                     </v-flex>
                   </v-layout>
                 </v-container>
-                <v-img
-                  src="/static/WMW2.png"
-                  aspect-ratio="2.33"
-                  ></v-img>
+                <template
+                  v-for="(img, index) in project.files">
+                  <v-img
+                    :key="index"
+                    v-if="img.isBacksplash"
+                    :src="img.fileUrl"
+                    aspect-ratio="2.33"
+                    ></v-img>
+                </template>
               </div>
               <v-divider></v-divider>
               <v-card-actions>

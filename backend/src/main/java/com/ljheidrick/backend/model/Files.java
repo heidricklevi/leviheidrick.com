@@ -9,14 +9,18 @@ public class Files  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "tinyint(0) default 0")
+    private Boolean isBacksplash;
+
     private String fileUrl;
 
     public Files () {
 
     }
 
-    public Files (String url) {
+    public Files (String url, Boolean isBacksplash) {
         this.fileUrl = url;
+        this.isBacksplash = isBacksplash;
     }
 
     public void setId(Long id) {
@@ -35,4 +39,11 @@ public class Files  {
         this.fileUrl = fileUrl;
     }
 
+    public Boolean getIsBacksplash() {
+        return isBacksplash;
+    }
+
+    public void setBacksplash(Boolean isBacksplash) {
+        this.isBacksplash = isBacksplash;
+    }
 }

@@ -27,6 +27,7 @@
         fluid
         grid-list-sm
         fill-height
+        v-if="!isLoading"
       >
         <v-layout
           row
@@ -42,7 +43,7 @@
             <h3 class="headline playfair-font">
               Gallery
             </h3>
-            <p class="caption font-italic mb-1">Tip: click an image to see viewing options.</p>
+            <p class="caption font-italic mb-1">Tip: select an image to see viewing options.</p>
             <v-divider></v-divider>
           </v-flex>
 
@@ -50,24 +51,31 @@
               xl7
               lg10
               sm11
-              v-if="project.files && project.files.length > 0 && !isLoading"
+              v-if="project.files && project.files.length > 0"
             >
 
               <viewer @inited="inited" :images="project.files" class="viewer" ref="viewer">
-                <v-flex xs6 md4 v-for="(img, index) in project.files">
-                  <v-card
-                    hover
-                    flat
-                    tile
-                    ripple
-                  >
-                    <img
-                      :src="img.fileUrl"
-                      :key="index"
+                <v-layout row wrap>
+                  <v-flex
+                    xs6
+                    md4
+                    v-for="(img, index) in project.files">
+                    <v-card
+                      v-if="!img.isBacksplash"
+                      hover
+                      flat
+                      tile
+                      ripple
+                      class="card__gallery__img__height card__gallery__img__cover card__gallery__img"
                     >
+                      <img
+                        :src="img.fileUrl"
+                        :key="index"
+                      >
 
-                  </v-card>
-                </v-flex>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
               </viewer>
             </v-flex>
         </v-layout>
@@ -98,10 +106,6 @@
         inited(viewer) {
           this.$viewer = viewer;
         },
-
-        showViewer() {
-          this.$viewer.show();
-        }
       },
       computed: {
         ...mapGetters('projects/', [
@@ -123,6 +127,23 @@
      img {
       max-width 100%
     }
+  }
+
+  .card__gallery__img {
+    max-height 200px
+
+    &__height {
+      img {
+        min-height 200px
+        max-height 200px
+      }
+    }
+    &__cover {
+      img {
+        object-fit cover
+      }
+    }
+
   }
 
 </style>
