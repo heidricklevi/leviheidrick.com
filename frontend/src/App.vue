@@ -33,7 +33,13 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar v-if="!$route.path.includes('admin')" app fixed clipped-left color="#253448">
+    <v-toolbar
+      v-if="!$route.path.includes('admin')"
+      app
+      fixed
+      clipped-left
+      color="#1E232A"
+    >
       <v-avatar size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
       <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -47,12 +53,17 @@
       <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :href="resume.url" dark flat target="_blank">Resume.pdf</v-btn>-->
 
     </v-toolbar>
-    <home/>
+    <v-content>
+      <breadcrumbs />
+      <router-view />
+      <experience v-if="$route.fullPath === '/'" />
+    </v-content>
     <v-footer
       app
       height="auto"
-      color="#253448"
+      color="#232D3A"
       absolute
+      class="footer__border-top"
     >
       <v-layout
         row
@@ -78,13 +89,15 @@
 <script>
 
 import Home from "../src/components/home/Home.vue"
+import Breadcrumbs from "../src/components/global/breadcrumbs.vue";
+import Experience from "../src/components/experience/experience.vue";
 import Loading from "../src/components/global/loading.vue"
 import { mapGetters } from "vuex";
 
 
 export default {
   name: 'App',
-  components: { Home, Loading },
+  components: { Home, Loading, Breadcrumbs, Experience },
   async created() {
     await this.$store.dispatch('auth/checkAuth');
     this.$store.dispatch('resume/fetchResume').then(() => {});
@@ -131,6 +144,13 @@ export default {
 </script>
 
 <style lang="stylus">
+  .footer {
+    &__border {
+      &-top {
+        border-top-color #354D6D
+      }
+    }
+  }
 
   .uppercase {
     text-transform: uppercase!important;

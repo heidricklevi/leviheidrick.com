@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <div v-if="items.length > 1">
+    <div v-if="items.length > 1">
+      <div >
         <v-breadcrumbs>
           <v-icon slot="divider">forward</v-icon>
 

@@ -1,16 +1,17 @@
 <template>
   <v-content>
-    <breadcrumbs></breadcrumbs>
-    <router-view></router-view>
+
   </v-content>
 </template>
 
 <script>
   import Breadcrumbs from "../../components/global/breadcrumbs.vue";
+  import Experience from "../experience/experience";
 
   export default {
     name: 'Home',
     components: {
+      Experience,
       Breadcrumbs
     },
     created() {

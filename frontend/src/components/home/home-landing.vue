@@ -1,8 +1,8 @@
 <template>
   <v-jumbotron
     dark
-    gradient="to top, #29323c, #485563"
-    height="100%"
+    color="#232D3A"
+    height="100vh"
 
   >
     <v-container
@@ -12,6 +12,7 @@
         row
         wrap
         align-center
+        justify-center
       >
         <v-flex
           xs12
@@ -19,7 +20,8 @@
         >
           <div>
 
-              <h1 class="playfair-font-bold
+              <h1 class="playfair-font
+                         playfair-font-bold
                          grey--text text--lighten-2
                          extra-letter-spacing-intro
                          py-2
@@ -44,7 +46,24 @@
               </v-btn>
             </div>
         </v-flex>
+
+          <v-btn
+            :class="{
+              'fab-position': $vuetify.breakpoint.mdAndUp,
+              'fab-position-mobile': $vuetify.breakpoint.smAndDown
+            }"
+            absolute
+            outline
+            fab
+            dark
+            large
+            color="#E59E61"
+
+          >
+              <v-icon ref="fab--arrow" dark class="animated bounce">arrow_downward</v-icon>
+          </v-btn>
       </v-layout>
+
     </v-container>
   </v-jumbotron>
 </template>
@@ -71,5 +90,17 @@
       border-image: linear-gradient(to bottom, #30cfd0 0%, #330867 100%) 100;
 
      }
+  }
+  .fab-position {
+    bottom 100px
+    right 100px
+    &-mobile {
+      bottom: 100px
+    }
+  }
+
+  div i.animated {
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
   }
 </style>
