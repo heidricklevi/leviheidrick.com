@@ -35,6 +35,7 @@
     </v-navigation-drawer>
     <v-toolbar
       v-if="!$route.path.includes('admin')"
+      class="py-2"
       app
       fixed
       clipped-left

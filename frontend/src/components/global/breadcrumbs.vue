@@ -1,5 +1,5 @@
 <template>
-    <div v-if="items.length > 1">
+    <div v-if="items.length > 1" class="mt-1">
       <div >
         <v-breadcrumbs>
           <v-icon slot="divider">forward</v-icon>

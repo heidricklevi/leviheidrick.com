@@ -1,10 +1,18 @@
 <template>
-  <v-container fluid>
-    <v-card>
-      <v-card-text>
-        <h1>dfasfsadfsadfsadfsdf</h1>
-      </v-card-text>
-    </v-card>
+  <v-container
+    id="experience-container"
+    fluid
+  >
+   <v-layout
+     row
+     wrap
+   >
+     <v-card>
+       <v-card-text>
+         <h1>dfasfsadfsadfsadfsdf</h1>
+       </v-card-text>
+     </v-card>
+   </v-layout>
   </v-container>
 </template>
 
@@ -19,6 +27,9 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+  #experience-container {
+    height 100vh
+  }
 
 </style>

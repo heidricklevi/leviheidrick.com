@@ -1,7 +1,7 @@
 <template>
   <v-jumbotron
     dark
-    color="#232D3A"
+    color="#1E232A"
     height="100vh"
 
   >
@@ -48,9 +48,12 @@
         </v-flex>
 
           <v-btn
+            @click="$vuetify.goTo('#experience-container', {
+              offset: -50
+            })"
+            class="fab-position"
             :class="{
-              'fab-position': $vuetify.breakpoint.mdAndUp,
-              'fab-position-mobile': $vuetify.breakpoint.smAndDown
+              'fab-position-desktop': $vuetify.breakpoint.mdAndUp
             }"
             absolute
             outline
@@ -93,9 +96,12 @@
   }
   .fab-position {
     bottom 100px
-    right 100px
-    &-mobile {
-      bottom: 100px
+    &-desktop {
+      right 100px
+    }
+
+    &.v-btn--floating.v-btn--absolute {
+      z-index 2
     }
   }
 
