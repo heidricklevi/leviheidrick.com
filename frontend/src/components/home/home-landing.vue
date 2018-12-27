@@ -49,7 +49,7 @@
 
           <v-btn
             @click="$vuetify.goTo('#experience-container', {
-              offset: -50
+              offset: -59
             })"
             class="fab-position"
             :class="{
