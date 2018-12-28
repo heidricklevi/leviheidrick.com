@@ -21,18 +21,19 @@
       wrap
     >
       <v-flex xs12>
-        <v-flex xs12 md6 offset-md3 text-xs-right layout justify-space-between>
-            <v-btn icon @click.prevent="positionDetails = digitalLagoonDetails">
+        <v-flex xs12 md7 offset-md2 text-xs-right layout justify-space-between>
+          <v-flex xs4 text-xs-center class="pb-2 experience__timeline--item__container">
+            <v-btn icon ripple @click.prevent="onTimeLineItemClicked($event, digitalLagoonDetails)">
               <v-icon>fas fa-code</v-icon>
             </v-btn>
-          <div class="d-inline-block experience__timeline--item__container">
-            <v-btn icon @click.prevent="positionDetails = garminDetails">
+            <h5 class="caption text-uppercase">Dec. 2017 - Feb. 2018</h5>
+          </v-flex>
+          <v-flex xs4 ripple text-xs-center class="pb-2 experience__timeline--item__container">
+            <v-btn icon @click.prevent="onTimeLineItemClicked($event, garminDetails)">
               <v-icon>fas fa-code</v-icon>
             </v-btn>
-            <div class="experience__timeline--item__heading text-xs-center">
-              <h5 class="caption text-uppercase">May 2018 - Present</h5>
-            </div>
-          </div>
+            <h5 class="caption text-uppercase">May 2018 - Present</h5>
+          </v-flex>
         </v-flex>
         <v-divider></v-divider>
       </v-flex>
@@ -56,6 +57,12 @@
       computed: {
         experienceTerminalDetails () {
           return this.positionDetails || this.garminDetails;
+        }
+      },
+      methods: {
+        onTimeLineItemClicked(e, val) {
+          this.positionDetails = val;
+
         }
       },
       data() {
@@ -119,24 +126,24 @@
 
   .experience {
     &__border {
-      min-height 6rem
+      min-height 4rem
     }
 
     &__timeline {
       &--item {
         &__container {
           position: relative
-          &:before {
+          &:after {
             content: "";
             display: flex;
             position: absolute;
             /* top: 0; */
-            bottom: -29px;
+            bottom: 0px;
             left: 49.8%;
             width: .5px;
             background-color rgba(255,255,255,0.12)
             height: 100%;
-            max-height 2rem
+            max-height calc(.5 * 1rem)
             z-index: 1000000;
           }
         }

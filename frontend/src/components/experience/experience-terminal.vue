@@ -1,6 +1,6 @@
 <template>
   <v-layout justify-center>
-    <v-flex xs12 md6>
+    <v-flex xs12 lg8>
       <v-card
         raised
         class="terminal__nav"
