@@ -1,8 +1,6 @@
 <template>
   <v-container
-    light
     id="experience-container"
-    fluid
   >
    <v-layout
      row
@@ -22,18 +20,19 @@
     >
       <v-flex xs12>
         <v-flex xs12 md7 offset-md2 text-xs-right layout justify-space-between>
-          <v-flex xs4 text-xs-center class="pb-2 experience__timeline--item__container">
-            <v-btn icon ripple @click.prevent="onTimeLineItemClicked($event, digitalLagoonDetails)">
-              <v-icon>fas fa-code</v-icon>
-            </v-btn>
-            <h5 class="caption text-uppercase">Dec. 2017 - Feb. 2018</h5>
-          </v-flex>
-          <v-flex xs4 ripple text-xs-center class="pb-2 experience__timeline--item__container">
-            <v-btn icon @click.prevent="onTimeLineItemClicked($event, garminDetails)">
-              <v-icon>fas fa-code</v-icon>
-            </v-btn>
-            <h5 class="caption text-uppercase">May 2018 - Present</h5>
-          </v-flex>
+          <template v-for="item in items">
+            <v-flex
+              xs4
+              text-xs-center
+              class="pb-2 experience__timeline--item__container"
+              :class="{ selected: selected === item }"
+            >
+              <v-btn icon ripple @click.prevent="onTimeLineItemClicked($event, item)">
+                <v-icon >fas fa-briefcase</v-icon>
+              </v-btn>
+              <h5 class="font-weight-thin">{{ item.timelineHeading }}</h5>
+            </v-flex>
+          </template>
         </v-flex>
         <v-divider></v-divider>
       </v-flex>
@@ -54,64 +53,58 @@
       components: {
         ExperienceTerminal,
       },
+      mounted () {
+        this.selected = this.items[this.items.length - 1];
+      },
       computed: {
         experienceTerminalDetails () {
-          return this.positionDetails || this.garminDetails;
+          return this.positionDetails || this.items[this.items.length - 1]; // reverse chron. order show most recent by default
         }
       },
       methods: {
         onTimeLineItemClicked(e, val) {
+          this.selected = val;
           this.positionDetails = val;
+
+          this.$vuetify.goTo('.terminal__main')
 
         }
       },
       data() {
         return {
+          selected: false,
           key: 0,
           positionDetails: false,
-          digitalLagoonDetails: {
-            company: 'Digital Lagoon',
-            title: 'Contract Software Developer',
-            timespan: 'Dec. 2017 - Feb. 2018',
-            companyLocation: 'Overland Park, KS',
-            positionRoles: [
-              'Develop new features/functionality for existing projects',
-              'Integrate, test and provide custom code changes for migrating to a new e-commerce solution',
-              'Provide custom coupon codes and subscription services for an existing project integrating with a custom CMS.',
-              'Integrate third party APIs throughout existing projects',
-              'Utilize modern development methodologies and tooling for implementations on a project basis touching all parts of the web stack. '
-            ],
-            techStack: '',
-          },
-          garminDetails: {
-            company: 'Garmin International',
-            title: 'IT Software Engineer I',
-            timespan: 'May 2018 - Present',
-            companyLocation: 'Olathe, KS',
-            positionRoles: [
-              'Implement business & stakeholder requirements into software',
-              'Communicate effectively across various teams to utilize various solutions',
-              'Take ownership & provide guidance to other team members regarding certain solutions. For example, migration to a new backend CMS solution.',
-              'Develop highly flexible, complex and scalable web applications with an emphasis on reuse. '
-            ],
-            techStack: '',
-          },
+
           items: [
             {
-              color: 'red lighten-2',
-              icon: 'mdi-star'
+              timelineHeading: 'Dec. 2017 - Feb. 2018',
+              company: 'Digital Lagoon',
+              title: 'Contract Software Developer',
+              timespan: 'Dec. 2017 - Feb. 2018',
+              companyLocation: 'Overland Park, KS',
+              positionRoles: [
+                'Develop new features/functionality for existing projects',
+                'Integrate, test and provide custom code changes for migrating to a new e-commerce solution',
+                'Provide custom coupon codes and subscription services for an existing project integrating with a custom CMS.',
+                'Integrate third party APIs throughout existing projects',
+                'Utilize modern development methodologies and tooling for implementations on a project basis touching all parts of the web stack. '
+              ],
+              techStack: '',
             },
             {
-              color: 'purple darken-1',
-              icon: 'mdi-book-variant'
-            },
-            {
-              color: 'green lighten-1',
-              icon: 'mdi-airballoon'
-            },
-            {
-              color: 'indigo',
-              icon: 'mdi-buffer'
+              timelineHeading: 'May 2018 - Present',
+              company: 'Garmin International',
+              title: 'IT Software Engineer I',
+              timespan: 'May 2018 - Present',
+              companyLocation: 'Olathe, KS',
+              positionRoles: [
+                'Implement business & stakeholder requirements into software',
+                'Communicate effectively across various teams to utilize various solutions',
+                'Take ownership & provide guidance to other team members regarding certain solutions. For example, migration to a new backend CMS solution.',
+                'Develop highly flexible, complex and scalable web applications with an emphasis on reuse. '
+              ],
+              techStack: '',
             }
           ]
         };
@@ -145,6 +138,14 @@
             height: 100%;
             max-height calc(.5 * 1rem)
             z-index: 1000000;
+          }
+          &.selected {
+            border-bottom-color rgb(229, 158, 97);
+            border-bottom-width .5px
+            border-bottom-style solid
+            &:after{
+              background-color: rgb(229, 158, 97);
+            }
           }
         }
         &__heading {

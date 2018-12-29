@@ -1,6 +1,6 @@
 <template>
   <v-layout justify-center>
-    <v-flex xs12 lg8>
+    <v-flex xs12 xl8>
       <v-card
         raised
         class="terminal__nav"
@@ -100,7 +100,6 @@
 
   .terminal__main {
     background-color: #151515;
-    padding: 20px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     height: auto;
