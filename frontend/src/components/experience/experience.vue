@@ -19,16 +19,18 @@
       wrap
     >
       <v-flex xs12>
-        <v-flex xs12 md7 offset-md2 text-xs-right layout justify-space-between>
+        <v-flex xs12 layout justify-space-between>
           <template v-for="item in items">
             <v-flex
               xs4
+              xl1
+              md2
               text-xs-center
               class="pb-2 experience__timeline--item__container"
               :class="{ selected: selected === item }"
             >
               <v-btn icon ripple @click.prevent="onTimeLineItemClicked($event, item)">
-                <v-icon >fas fa-briefcase</v-icon>
+                <v-icon>{{ item.icon }}</v-icon>
               </v-btn>
               <h5 class="font-weight-thin">{{ item.timelineHeading }}</h5>
             </v-flex>
@@ -40,7 +42,22 @@
         <hr class="v-divider v-divider--vertical theme--dark">
       </v-flex>
       <v-flex xs12>
-        <experience-terminal :key="Math.floor(Math.random() * (+1 - +99)) + +1" :optional-props="experienceTerminalDetails" />
+        <transition
+          name="flipper"
+          mode="out-in"
+        >
+        <experience-terminal
+          v-if="!isEducation"
+          :optional-props="experienceTerminalDetails"
+          :key="Math.floor(Math.random() * (+1 - +99)) + +1"
+        >
+          <!---->
+        </experience-terminal>
+        <experience-education
+          v-else
+          :education-props="experienceTerminalDetails"
+        />
+        </transition>
       </v-flex>
     </v-layout>
   </v-container>
@@ -48,36 +65,44 @@
 
 <script>
     import ExperienceTerminal from './experience-terminal';
+    import ExperienceEducation from './experience-education'
     export default {
       name: "experience",
       components: {
         ExperienceTerminal,
+        ExperienceEducation,
       },
       mounted () {
         this.selected = this.items[this.items.length - 1];
       },
       computed: {
         experienceTerminalDetails () {
-          return this.positionDetails || this.items[this.items.length - 1]; // reverse chron. order show most recent by default
+          return this.positionDetails || this.items[this.items.length - 1]; // show most recent by default
         }
       },
       methods: {
         onTimeLineItemClicked(e, val) {
+          this.isEducation = val.isEducation;
           this.selected = val;
           this.positionDetails = val;
 
-          this.$vuetify.goTo('.terminal__main')
+          // this.$vuetify.goTo('.terminal__main', {
+          //   offset: -50
+          // });
 
         }
       },
       data() {
         return {
+          isEducation: false,
           selected: false,
           key: 0,
           positionDetails: false,
 
           items: [
             {
+              isEducation: false,
+              icon: 'fas fa-briefcase',
               timelineHeading: 'Dec. 2017 - Feb. 2018',
               company: 'Digital Lagoon',
               title: 'Contract Software Developer',
@@ -93,6 +118,21 @@
               techStack: '',
             },
             {
+              isEducation: true,
+              icon: 'school',
+              timelineHeading: 'May 2018',
+              major: 'Bachelors of Science,  Information Technology',
+              universityName: 'The University of Kansas,',
+              school: 'School of Engineering',
+
+              gradDate: 'May 2018',
+              gpaText: 'GPA: ',
+              gpaValue: '3.6, 4.0',
+              techStack: '',
+            },
+            {
+              isEducation: false,
+              icon: 'fas fa-briefcase',
               timelineHeading: 'May 2018 - Present',
               company: 'Garmin International',
               title: 'IT Software Engineer I',
@@ -112,7 +152,21 @@
     }
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus">
+
+  .flipper-enter-active {
+    transition: all .2s cubic-bezier(0.55, 0.085, 0.68, 0.53); //ease-in-quad
+  }
+
+  .flipper-leave-active {
+    transition: all .25s cubic-bezier(0.25, 0.46, 0.45, 0.94); //ease-out-quad
+  }
+
+  .flipper-enter, .flipper-leave-to {
+    transform: scaleY(0) translateZ(0);
+    opacity: 0;
+  }
+
   #experience-container {
     height auto
   }

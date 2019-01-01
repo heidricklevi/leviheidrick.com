@@ -1,41 +1,42 @@
 <template>
   <v-layout justify-center>
     <v-flex xs12 xl8>
-      <v-card
-        raised
-        class="terminal__nav"
-      >
-        <div class="terminal__nav__buttons terminal__nav__buttons--close"></div>
-        <div class="terminal__nav__buttons terminal__nav__buttons--minimize"></div>
-        <div class="terminal__nav__buttons terminal__nav__buttons--zoom"></div>
+       <v-card
+          raised
+          class="terminal__nav"
+        >
 
-        <v-card-text class="terminal__main">
+            <div class="terminal__nav__buttons terminal__nav__buttons--close"></div>
+            <div class="terminal__nav__buttons terminal__nav__buttons--minimize"></div>
+            <div class="terminal__nav__buttons terminal__nav__buttons--zoom"></div>
 
-          <p class="line1 line-title blue-grey--text font-weight-bold">[~/work] $ ./position-details.sh<span class="cursor1">_</span></p>
-          <p class="line2">
-            <span class="line2 my-1"><v-icon small>fas fa-briefcase</v-icon> | {{ positionDetails.company }}</span>
-            <br>
-            <span class="line2 my-1"><v-icon small>location_city</v-icon> | {{ positionDetails.companyLocation }}</span>
-            <br>
-            <span class="line2 my-1"><v-icon small>person</v-icon> | {{ positionDetails.title }}</span>
-            <br>
-            <span class="line2 my-1"><v-icon small>timelapse</v-icon> | {{ positionDetails.timespan }}</span>
-            <span class="cursor2">_</span>
-          </p>
-          <p class="line3 white--text font-weight-bold mt-5">
-            <i>Key roles and responsibilities</i>
-            <span class="cursor3">_</span>
-          </p>
-          <ul class="line3">
-            <template v-for="role in positionDetails.positionRoles">
-              <li class="line3 blue-grey--text text--lighten-2 pb-1">{{ role }}</li>
-            </template>
-            <span class="cursor3">_</span>
-          </ul>
-          <p class="line4">><span class="cursor4">_</span></p>
+            <v-card-text class="terminal__main">
 
-        </v-card-text>
-      </v-card>
+              <p class="line1 line-title blue-grey--text font-weight-bold">[~/work] $ ./position-details.sh<span class="cursor1">_</span></p>
+              <p class="line2">
+                <span class="line2 my-1"><v-icon small>fas fa-briefcase</v-icon> | {{ positionDetails.company }}</span>
+                <br>
+                <span class="line2 my-1"><v-icon small>location_city</v-icon> | {{ positionDetails.companyLocation }}</span>
+                <br>
+                <span class="line2 my-1"><v-icon small>person</v-icon> | {{ positionDetails.title }}</span>
+                <br>
+                <span class="line2 my-1"><v-icon small>timelapse</v-icon> | {{ positionDetails.timespan }}</span>
+                <span class="cursor2">_</span>
+              </p>
+              <p class="line3 white--text font-weight-bold mt-5">
+                <i>Key roles and responsibilities</i>
+                <span class="cursor3">_</span>
+              </p>
+              <ul class="line3">
+                <template v-for="role in positionDetails.positionRoles">
+                  <li class="line3 blue-grey--text text--lighten-2 pb-1">{{ role }}</li>
+                </template>
+                <span class="cursor3">_</span>
+              </ul>
+              <p class="line4">><span class="cursor4">_</span></p>
+
+            </v-card-text>
+        </v-card>
     </v-flex>
   </v-layout>
 </template>
@@ -46,25 +47,15 @@
       props: [
         'optionalProps',
       ],
-
-      data: () => ({
-
-      }),
-
       computed: {
         positionDetails () {
           return this.optionalProps;
         }
       },
-
-      methods: {
-
-      }
     }
 </script>
 
 <style lang="stylus" scoped>
-
   .terminal__nav {
     background-color: #bbb;
     margin: 0 auto;
