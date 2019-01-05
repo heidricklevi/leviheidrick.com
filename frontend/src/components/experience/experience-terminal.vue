@@ -3,7 +3,7 @@
     <v-flex xs12 xl8>
        <v-card
           raised
-          class="terminal__nav"
+          class="experience__card terminal__nav"
         >
 
             <div class="terminal__nav__buttons terminal__nav__buttons--close"></div>
@@ -46,7 +46,17 @@
       name: "experience-terminal",
       props: [
         'optionalProps',
+        'isClicked',
       ],
+      mounted () {
+        if (this.isClicked) {
+          setTimeout(() => {
+            this.$vuetify.goTo('.line1', {
+              offset: -125
+            });
+          }, 1750);
+        }
+      },
       computed: {
         positionDetails () {
           return this.optionalProps;

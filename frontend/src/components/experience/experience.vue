@@ -7,9 +7,8 @@
      wrap
    >
      <v-flex xs12 text-xs-center text-md-left class="my-5">
-       <h3 class="playfair-font display-2 text-uppercase extra-letter-spacing">
-         <v-icon large>fas fa-code-branch</v-icon>
-         Experience
+       <h3 class="playfair-font playfair-font-bold display-1 text-uppercase extra-letter-spacing">
+         Experience & Education
        </h3>
      </v-flex>
    </v-layout>
@@ -48,13 +47,14 @@
         >
         <experience-terminal
           v-if="!isEducation"
+          :is-clicked="isClicked"
           :optional-props="experienceTerminalDetails"
           :key="Math.floor(Math.random() * (+1 - +99)) + +1"
         >
-          <!---->
         </experience-terminal>
         <experience-education
           v-else
+          :is-clicked="isClicked"
           :education-props="experienceTerminalDetails"
         />
         </transition>
@@ -82,20 +82,17 @@
       },
       methods: {
         onTimeLineItemClicked(e, val) {
+          this.isClicked = true;
           this.isEducation = val.isEducation;
           this.selected = val;
           this.positionDetails = val;
-
-          // this.$vuetify.goTo('.terminal__main', {
-          //   offset: -50
-          // });
-
         }
       },
       data() {
         return {
           isEducation: false,
           selected: false,
+          isClicked: false,
           key: 0,
           positionDetails: false,
 
@@ -121,7 +118,7 @@
               isEducation: true,
               icon: 'school',
               timelineHeading: 'May 2018',
-              major: 'Bachelors of Science,  Information Technology',
+              major: 'Bachelors of Science, Information Technology',
               universityName: 'The University of Kansas,',
               school: 'School of Engineering',
 
