@@ -17,7 +17,7 @@
       row
       wrap
     >
-      <v-flex xs12>
+      <v-flex xs12 xl8 offset-xl2>
         <v-flex xs12 layout justify-space-between>
           <template v-for="item in items">
             <v-flex

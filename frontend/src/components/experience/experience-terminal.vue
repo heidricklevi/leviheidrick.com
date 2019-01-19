@@ -52,7 +52,7 @@
         if (this.isClicked) {
           setTimeout(() => {
             this.$vuetify.goTo('.line1', {
-              offset: -125
+              offset: -80
             });
           }, 1750);
         }

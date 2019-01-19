@@ -34,7 +34,7 @@
       mounted () {
         if (this.isClicked) {
           this.$vuetify.goTo('.experience__card', {
-            offset: -100
+            offset: -150
           });
         }
       },

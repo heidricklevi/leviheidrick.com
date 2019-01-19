@@ -38,6 +38,7 @@
         class="py-2"
         app
         fixed
+        :absolute="$vuetify.breakpoint.smAndDown"
         clipped-left
         color="#1E232A"
       >
@@ -62,11 +63,12 @@
       <breadcrumbs />
       <router-view />
       <experience v-if="$route.fullPath === '/'" />
+      <skills-section v-if="$route.fullPath === '/'" />
     </v-content>
     <v-footer
       app
       height="auto"
-      color="#232D3A"
+      color="#000102"
       absolute
       class="footer__border-top"
     >
@@ -82,8 +84,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>12/28/2018</span>
-            <span>v0.9.0</span>
+            <span>01/19/2019</span>
+            <span>v0.9.1</span>
           </div>
         </v-flex>
       </v-layout>
@@ -93,16 +95,17 @@
 
 <script>
 
-import Home from "../src/components/home/Home.vue"
+import SkillsSection from "../src/components/home/skills-section.vue"
 import Breadcrumbs from "../src/components/global/breadcrumbs.vue";
 import Experience from "../src/components/experience/experience.vue";
+
 import Loading from "../src/components/global/loading.vue"
 import { mapGetters } from "vuex";
 
 
 export default {
   name: 'App',
-  components: { Home, Loading, Breadcrumbs, Experience },
+  components: { SkillsSection, Loading, Breadcrumbs, Experience },
   async created() {
     await this.$store.dispatch('auth/checkAuth');
     this.$store.dispatch('resume/fetchResume').then(() => {});
