@@ -1,7 +1,5 @@
 <template>
-    <div v-if="items.length > 1" class="mt-1">
-      <div >
-        <v-breadcrumbs>
+        <v-breadcrumbs class="pl-0">
           <v-icon slot="divider">forward</v-icon>
 
           <v-breadcrumbs-item
@@ -9,14 +7,14 @@
             :key="item.text"
             :to="item.url"
             active-class=""
-            :class="{'v-breadcrumbs__item': index < items.length - 1}"
+            :class="{
+              'v-breadcrumbs__item': index < items.length - 1,
+              'disabled': index === items.length - 1,
+            }"
           >
             {{ item.text }}
           </v-breadcrumbs-item>
         </v-breadcrumbs>
-      </div>
-      <v-divider></v-divider>
-    </div>
 </template>
 
 <script>
@@ -47,6 +45,14 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+  .disabled {
+    text-transform uppercase;
+    pointer-events: none;
 
+
+  }
+  .disabled .v-breadcrumbs__item a{
+    color: lightgray !important;
+  }
 </style>

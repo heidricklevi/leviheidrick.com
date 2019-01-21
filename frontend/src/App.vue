@@ -10,7 +10,17 @@
     >
       <v-list>
         <template v-for="item in navItems">
-          <v-list-tile  :key="item.text" :to="item.url">
+          <v-list-tile v-if="!item.selector && item.url" :key="item.text" :to="item.url">
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                {{ item.text }}
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile v-else-if="item.selector" @click.prevent="goTo(item.selector)" :key="item.text">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -52,7 +62,7 @@
             <v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>
             <v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat dark>Contact</v-btn>
             <v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/about" dark flat>About</v-btn>
-            <v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/skills" dark flat>Skills</v-btn>
+            <v-btn v-if="$vuetify.breakpoint.mdAndUp" @click.prevent="goTo('#section-skills')" dark flat>Skills</v-btn>
             <v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/projects" dark flat>Projects</v-btn>
           <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :href="resume.url" dark flat target="_blank">Resume.pdf</v-btn>-->
           </v-layout>
@@ -60,7 +70,10 @@
         </v-container>
       </v-toolbar>
     <v-content>
-      <breadcrumbs />
+      <v-container v-if="$route.fullPath !== '/'" class="pb-0">
+        <breadcrumbs />
+      </v-container>
+      <v-divider></v-divider>
       <router-view />
       <experience v-if="$route.fullPath === '/'" />
       <skills-section v-if="$route.fullPath === '/'" />
@@ -117,7 +130,7 @@ export default {
       show: false,
       navItems: [
         { text: 'Projects', icon: '', url: '/projects'},
-        { text: 'Skills', icon: '', url: '/skills'},
+        { text: 'Skills', icon: '', selector: '#section-skills'},
         { text: 'About', icon: 'fa fa-question', url: '/about'},
         { text: 'Contact', icon: 'info', url: '/contact'},
       ],
@@ -144,6 +157,9 @@ export default {
 
   },
   methods: {
+    goTo(selector) {
+      this.$vuetify.goTo(selector);
+    },
     logout() {
       this.$store.dispatch('auth/logout');
     }

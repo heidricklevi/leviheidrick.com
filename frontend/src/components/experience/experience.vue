@@ -188,7 +188,7 @@
             background-color rgba(255,255,255,0.12)
             height: 100%;
             max-height calc(.5 * 1rem)
-            z-index: 1000000;
+            z-index: 2;
           }
           &.selected {
             border-bottom-color rgb(229, 158, 97);

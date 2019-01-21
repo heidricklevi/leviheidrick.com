@@ -14,7 +14,7 @@
         </v-flex>
       </v-layout>
       <v-layout row wrap :justify-center="$vuetify.breakpoint.smAndDown">
-        <v-flex class="text-xs-center" xs5 md2 xlg1 v-for="skill in skillsList" :key="skill.text">
+        <v-flex class="text-xs-center" xs4 md2 xlg1 v-for="skill in skillsList" :key="skill.text">
           <v-chip ripple>
             <v-avatar v-if="skill.imageURL">
               <img :src="skill.imageURL">

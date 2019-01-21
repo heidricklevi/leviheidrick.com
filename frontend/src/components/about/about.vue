@@ -1,11 +1,10 @@
 <template>
   <div
-    style="height: 100%;"
+    style="height: 100vh;"
     class="background__gradient--deepspace"
   >
     <v-container
       fluid
-
     >
         <v-layout
           class="py-3"
