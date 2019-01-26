@@ -1,45 +1,87 @@
 <template>
-  <v-layout
-    row
-    wrap
-    justify-center>
-    <v-flex xl8 lg10 sm12>
-      <v-card v-if="!isLoading" class="elevation-5" :class="{'ma-4': $vuetify.breakpoint.smAndUp}">
-        <v-layout row wrap>
-          <v-flex xs12 lg3>
-            <v-card-title class="display-1 playfair-font">{{project.title}}</v-card-title>
-          </v-flex>
-          <v-flex xs12><v-divider dark></v-divider></v-flex>
-          <v-flex xs12>
-            <v-spacer></v-spacer>
-            <v-card-text v-html="project.content" class="body-1">
-              {{project.content}}
-            </v-card-text>
-          </v-flex>
-        </v-layout>
-      </v-card>
-    </v-flex>
-    <v-flex
-      xl7
-      lg10
-      sm10
-      v-if="project.files && project.files.length > 0 && !isLoading">
-      <v-carousel
-        v-if="$vuetify.breakpoint.mdAndUp"
-        height="500"
-        max-width="768"
-        :class="{'my-4': $vuetify.breakpoint.smAndUp}"
+  <v-container
+    fluid
+  >
+    <v-layout
+      row
+      wrap
+      justify-center
+    >
+      <v-flex xl8 lg10 sm12>
+        <v-card v-if="!isLoading" class="elevation-5" :class="{'ma-4': $vuetify.breakpoint.smAndUp}">
+          <v-layout row wrap>
+            <v-flex xs12 lg3>
+              <v-card-title class="display-1 playfair-font">{{project.title}}</v-card-title>
+            </v-flex>
+            <v-flex xs12><v-divider dark></v-divider></v-flex>
+            <v-flex xs12>
+              <v-spacer></v-spacer>
+              <v-card-text v-html="project.content" class="body-1">
+                {{project.content}}
+              </v-card-text>
+            </v-flex>
+          </v-layout>
+        </v-card>
+      </v-flex>
+      <v-container
+        fluid
+        grid-list-sm
+        fill-height
+        v-if="!isLoading"
       >
-        <v-carousel-item
-          v-for="file in project.files"
-          :src="file.fileUrl">
-        </v-carousel-item>
-      </v-carousel>
-      <viewer @inited="inited" :images="project.files" class="viewer" ref="viewer">
-        <img v-for="(img, index) in project.files" :src="img.fileUrl" :key="index">
-      </viewer>
-    </v-flex>
-  </v-layout>
+        <v-layout
+          row
+          wrap
+          justify-center
+        >
+          <v-flex
+            sm11
+            xl7
+            lg10
+            class="mb-2"
+          >
+            <h3 class="headline playfair-font">
+              Gallery
+            </h3>
+            <p class="caption font-italic mb-1">Tip: select an image to see viewing options.</p>
+            <v-divider></v-divider>
+          </v-flex>
+
+            <v-flex
+              xl7
+              lg10
+              sm11
+              v-if="project.files && project.files.length > 0"
+            >
+
+              <viewer @inited="inited" :images="project.files" class="viewer" ref="viewer">
+                <v-layout row wrap>
+                  <v-flex
+                    xs6
+                    md4
+                    v-for="(img, index) in project.files">
+                    <v-card
+                      v-if="!img.isBacksplash"
+                      hover
+                      flat
+                      tile
+                      ripple
+                      class="card__gallery__img__height card__gallery__img__cover card__gallery__img"
+                    >
+                      <img
+                        :src="img.fileUrl"
+                        :key="index"
+                      >
+
+                    </v-card>
+                  </v-flex>
+                </v-layout>
+              </viewer>
+            </v-flex>
+        </v-layout>
+      </v-container>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -63,7 +105,7 @@
         ...mapActions('projects/', ['fetchProjectByTitle']),
         inited(viewer) {
           this.$viewer = viewer;
-        }
+        },
       },
       computed: {
         ...mapGetters('projects/', [
@@ -82,9 +124,26 @@
 
 <style scoped lang="stylus">
   .viewer {
-    > img {
+     img {
       max-width 100%
     }
+  }
+
+  .card__gallery__img {
+    max-height 200px
+
+    &__height {
+      img {
+        min-height 200px
+        max-height 200px
+      }
+    }
+    &__cover {
+      img {
+        object-fit cover
+      }
+    }
+
   }
 
 </style>

@@ -3,13 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Vuetify from 'vuetify'
+
 import store from './store/index'
 import Viewer from 'v-viewer'
+import Vuetify from 'vuetify'
+
+require('vue2-animate/dist/vue2-animate.min.css');
 
 import './stylus/main.styl'
 import 'viewerjs/dist/viewer.css'
-require('vue2-animate/dist/vue2-animate.min.css');
 
 
 Vue.config.productionTip = false;
@@ -17,6 +19,10 @@ Vue.config.productionTip = false;
 Vue.use(Vuetify, {
   theme: {
     primary: '#485563',
+  },
+  iconfont: 'fa',
+  icons: {
+    code: 'fas fa-code',
   }
 });
 

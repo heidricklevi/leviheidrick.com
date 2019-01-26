@@ -55,7 +55,7 @@ public class FileStorageServiceImpl implements FileStorageService {
 
         for (MultipartFile multipartFile : multipartFiles) {
             String url = this.saveFile(multipartFile, multipartFile.getOriginalFilename().split("\\.")[0], folderName);
-            Files files = new Files(url);
+            Files files = new Files(url, false);
             filesRepository.save(files);
 
             imageUrls.add(files);

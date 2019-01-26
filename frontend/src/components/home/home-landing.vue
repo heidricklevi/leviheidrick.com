@@ -1,8 +1,8 @@
 <template>
   <v-jumbotron
     dark
-    gradient="to top, #29323c, #485563"
-    height="100%"
+    color="#1E232A"
+    height="100vh"
 
   >
     <v-container
@@ -12,6 +12,7 @@
         row
         wrap
         align-center
+        justify-center
       >
         <v-flex
           xs12
@@ -19,13 +20,14 @@
         >
           <div>
 
-              <h1 class="playfair-font-bold
+              <h1 class="playfair-font
+                         playfair-font-bold
                          grey--text text--lighten-2
-                         display-3
                          extra-letter-spacing-intro
                          py-2
                          d-inline-block
                          text-uppercase"
+                  :class="{ 'display-3': $vuetify.breakpoint.smAndUp, 'display-2': $vuetify.breakpoint.xsOnly }"
               >
 
                 software Developer.
@@ -44,7 +46,27 @@
               </v-btn>
             </div>
         </v-flex>
+
+          <v-btn
+            @click="$vuetify.goTo('#experience-container', {
+              offset: -59
+            })"
+            class="fab-position"
+            :class="{
+              'fab-position-desktop': $vuetify.breakpoint.mdAndUp
+            }"
+            absolute
+            outline
+            fab
+            dark
+            large
+            color="#E59E61"
+
+          >
+              <v-icon ref="fab--arrow" dark class="animated bounce">arrow_downward</v-icon>
+          </v-btn>
       </v-layout>
+
     </v-container>
   </v-jumbotron>
 </template>
@@ -71,5 +93,20 @@
       border-image: linear-gradient(to bottom, #30cfd0 0%, #330867 100%) 100;
 
      }
+  }
+  .fab-position {
+    bottom 100px
+    &-desktop {
+      right 100px
+    }
+
+    &.v-btn--floating.v-btn--absolute {
+      z-index 2
+    }
+  }
+
+  div i.animated {
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
   }
 </style>

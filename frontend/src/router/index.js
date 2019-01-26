@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import Home from '../components/home/Home';
 import Projects from '../components/projects/projects-section';
 import Skills from '../components/home/skills-section';
-import HomeIntro from '../components/home/home-intro';
+import HomeLanding from '../components/home/home-landing';
 import Login from '../components/auth/login';
 import ProjectDetail from '../components/projects/project-detail';
 import Admin from '../components/admin/admin';
@@ -22,7 +22,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: HomeIntro,
+      component: HomeLanding,
       meta: {
         breadcrumb: [
           {

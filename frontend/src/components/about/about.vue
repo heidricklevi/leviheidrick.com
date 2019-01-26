@@ -1,11 +1,10 @@
 <template>
   <div
-    style="height: 100%;"
+    style="height: 100vh;"
     class="background__gradient--deepspace"
   >
     <v-container
       fluid
-
     >
         <v-layout
           class="py-3"
@@ -38,7 +37,10 @@
             :class="{ 'justify-start': $vuetify.breakpoint.mdAndUp, 'justify-space-around': $vuetify.breakpoint.smAndDown }"
           >
             <div class="text-xs-center text-md-center">
-              <h5 class="display-3 playfair-font text-uppercase blue-grey--text text--lighten-3">Professional Profile</h5>
+              <h5
+                class="playfair-font text-uppercase blue-grey--text text--lighten-3"
+                :class="{ 'display-3': $vuetify.breakpoint.mdAndUp, 'display-1': $vuetify.breakpoint.smAndDown }"
+              > Professional Profile</h5>
               <p class="text-xs-center title playfair-font font-italic blue-grey--text text--lighten-1">Software Developer</p>
               <p class="text-xs-center caption playfair-font font-italic blue-grey--text text--lighten-1">Levi Heidrick</p>
             </div>
@@ -105,43 +107,6 @@
               {{ tool.text }}
             </v-chip>
           </template>
-          <!--<v-card class="border&#45;&#45;left__dark">-->
-            <!--<v-card-text>-->
-              <!--<v-list dense>-->
-                <!--<v-subheader>The technologies I mainly reach for today whether it be for work, personal projects or that I am learning include:</v-subheader>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>VueJS</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>JavaScript</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>Python</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>Django</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>Java (Spring)</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-                <!--<v-list-tile>-->
-                  <!--<v-list-tile-content>-->
-                    <!--<v-list-tile-title>SASS</v-list-tile-title>-->
-                  <!--</v-list-tile-content>-->
-                <!--</v-list-tile>-->
-              <!--</v-list>-->
-            <!--</v-card-text>-->
-          <!--</v-card>-->
         </v-flex>
       </v-layout>
     </v-container>
