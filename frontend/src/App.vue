@@ -97,8 +97,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>01/19/2019</span>
-            <span>v0.9.1</span>
+            <span>03/08/2019</span>
+            <span>v0.9.2</span>
           </div>
         </v-flex>
       </v-layout>
