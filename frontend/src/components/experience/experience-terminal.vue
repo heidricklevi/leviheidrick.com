@@ -12,7 +12,7 @@
 
             <v-card-text class="terminal__main">
 
-              <p class="line1 line-title blue-grey--text font-weight-bold">[~/work] $ ./position-details.sh<span class="cursor1">_</span></p>
+              <p class="line1 line-title blue-grey--text font-weight-bold">[~/work] $ ./position-details.sh</p>
               <p class="line2">
                 <span class="line2 my-1"><v-icon small>fas fa-briefcase</v-icon> | {{ positionDetails.company }}</span>
                 <br>
@@ -21,17 +21,14 @@
                 <span class="line2 my-1"><v-icon small>person</v-icon> | {{ positionDetails.title }}</span>
                 <br>
                 <span class="line2 my-1"><v-icon small>timelapse</v-icon> | {{ positionDetails.timespan }}</span>
-                <span class="cursor2">_</span>
               </p>
               <p class="line3 white--text font-weight-bold mt-5">
                 <i>Key roles and responsibilities</i>
-                <span class="cursor3">_</span>
               </p>
               <ul class="line3">
                 <template v-for="role in positionDetails.positionRoles">
                   <li class="line3 blue-grey--text text--lighten-2 pb-1">{{ role }}</li>
                 </template>
-                <span class="cursor3">_</span>
               </ul>
               <p class="line4">><span class="cursor4">_</span></p>
 
@@ -50,11 +47,7 @@
       ],
       mounted () {
         if (this.isClicked) {
-          setTimeout(() => {
-            this.$vuetify.goTo('.line1', {
-              offset: -80
-            });
-          }, 1750);
+          this.$vuetify.goTo('.line1');
         }
       },
       computed: {
@@ -111,8 +104,8 @@
       font-size: 1.25rem;
       font-family: monospace;
       white-space: normal;
-      overflow: hidden;
-      width: 0;
+      overflow: visible;
+      width: 100%;
     }
 
     & .line-title {
@@ -126,62 +119,29 @@
 
     & .line1 {
       color: #9CD9F0;
-      -webkit-animation: type .5s 1s steps(20, end) forwards;
-      -moz-animation: type .5s 1s steps(20, end) forwards;
-      -o-animation: type .5s 1s steps(20, end) forwards;
-      animation: type .5s 1s steps(20, end) forwards;
-    }
-
-    & .cursor1 {
-      -webkit-animation: blink 1s 2s 2 forwards;
-      -moz-animation: blink 1s 2s 2 forwards;
-      -o-animation: blink 1s 2s 2 forwards;
-      animation: blink 1s 2s 2 forwards;
     }
 
     & .line2 {
       color: #CDEE69;
-      -webkit-animation: type .5s 4.25s steps(20, end) forwards;
-      -moz-animation: type .5s 4.25s steps(20, end) forwards;
-      -o-animation: type .5s 4.25s steps(20, end) forwards;
-      animation: type .5s 4.25s steps(20, end) forwards;
-    }
-
-    & .cursor2 {
-      -webkit-animation: blink 1s 5.25s 2 forwards;
-      -moz-animation: blink 1s 5.25s 2 forwards;
-      -o-animation: blink 1s 5.25s 2 forwards;
-      animation: blink 1s 5.25s 2 forwards;
     }
 
     & .line3 {
       color: #E09690;
-      -webkit-animation: type .5s 7.5s steps(20, end) forwards;
-      -moz-animation: type .5s 7.5s steps(20, end) forwards;
-      -o-animation: type .5s 7.5s steps(20, end) forwards;
-      animation: type .5s 7.5s steps(20, end) forwards;
-    }
-
-    & .cursor3 {
-      -webkit-animation: blink 1s 8.5s 2 forwards;
-      -moz-animation: blink 1s 8.5s 2 forwards;
-      -o-animation: blink 1s 8.5s 2 forwards;
-      animation: blink 1s 8.5s 2 forwards;
     }
 
     & .line4 {
       color: #fff;
-      -webkit-animation: type .5s 10.75s steps(20, end) forwards;
-      -moz-animation: type .5s 10.75s steps(20, end) forwards;
-      -o-animation: type .5s 10.75s steps(20, end) forwards;
-      animation: type .5s 10.75s steps(20, end) forwards;
+      -webkit-animation: type .5s .75s steps(20, end) forwards;
+      -moz-animation: type .5s .75s steps(20, end) forwards;
+      -o-animation: type .5s .75s steps(20, end) forwards;
+      animation: type .5s .75s steps(20, end) forwards;
     }
 
     & .cursor4 {
-      -webkit-animation: blink 1s 11.5s infinite;
-      -moz-animation: blink 1s 8.5s infinite;
-      -o-animation: blink 1s 8.5s infinite;
-      animation: blink 1s 8.5s infinite;
+      -webkit-animation: blink 1s .5s infinite;
+      -moz-animation: blink 1s .5s infinite;
+      -o-animation: blink 1s .5s infinite;
+      animation: blink 1s .5s infinite;
     }
   }
 
