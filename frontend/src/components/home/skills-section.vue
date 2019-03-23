@@ -9,7 +9,7 @@
       <v-layout row wrap>
         <v-flex xs12 class="pb-4" text-xs-center text-md-left>
           <h3 class="title"><v-icon color="white" class="pr-3">fas fa-cogs</v-icon>
-            Technical Skills & Familiarity
+            Some Tech I've Used
           </h3>
         </v-flex>
       </v-layout>
@@ -28,8 +28,6 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex';
-
   export default {
         name: "skills-section",
         data() {
@@ -99,13 +97,6 @@
               },
             ]
           }
-        },
-
-        beforeRouteEnter(to, from, next) {
-          next(self => {
-
-
-          })
         },
     }
 </script>

@@ -57,13 +57,13 @@
             <v-avatar size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
             <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>
-            <v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>
-            <v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>
-            <v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat dark>Contact</v-btn>
-            <v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/about" dark flat>About</v-btn>
-            <v-btn v-if="$vuetify.breakpoint.mdAndUp" @click.prevent="goTo('#section-skills')" dark flat>Skills</v-btn>
-            <v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/projects" dark flat>Projects</v-btn>
+            <!--<v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>-->
+            <!--<v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>-->
+            <!--<v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>-->
+            <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat dark>Contact</v-btn>-->
+            <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/about" dark flat>About</v-btn>-->
+            <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/' }" @click.prevent="goTo('#section-skills')" dark flat>Skills</v-btn>-->
+            <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/projects" dark flat>Projects</v-btn>-->
           <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :href="resume.url" dark flat target="_blank">Resume.pdf</v-btn>-->
           </v-layout>
 
@@ -93,12 +93,15 @@
         class="pa-2"
       >
         <v-flex xs12 text-xs-center>
-          <span>&copy; 2018 Levi Heidrick</span>
+          <span>&copy; 2019 Levi Heidrick</span>
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>01/19/2019</span>
-            <span>v0.9.1</span>
+            <span>03/23/2019</span>
+            <span>v0.9.3</span>
+            <span class="font-italic orange--text text--lighten-2">
+              Full Launch Coming Soon
+            </span>
           </div>
         </v-flex>
       </v-layout>
@@ -129,10 +132,10 @@ export default {
       drawer: false,
       show: false,
       navItems: [
-        { text: 'Projects', icon: '', url: '/projects'},
-        { text: 'Skills', icon: '', selector: '#section-skills'},
-        { text: 'About', icon: 'fa fa-question', url: '/about'},
-        { text: 'Contact', icon: 'info', url: '/contact'},
+        // { text: 'Projects', icon: '', url: '/projects'},
+        // { text: 'Skills', icon: '', selector: '#section-skills'},
+        // { text: 'About', icon: 'fa fa-question', url: '/about'},
+        // { text: 'Contact', icon: 'info', url: '/contact'},
       ],
 
       resumeItem: {

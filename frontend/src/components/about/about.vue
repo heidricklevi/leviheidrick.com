@@ -1,6 +1,6 @@
 <template>
   <div
-    style="height: 100vh;"
+    style="min-height: 85vh"
     class="background__gradient--deepspace"
   >
     <v-container
@@ -110,7 +110,8 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </div>
+  </div
+    style="min-height: 100vh">
 </template>
 
 <script>
