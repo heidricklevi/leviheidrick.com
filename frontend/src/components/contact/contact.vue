@@ -12,7 +12,7 @@
 
     >
 
-        <v-responsive
+        <div
           class="elevation-10"
           :class="{'pa-4': $vuetify.breakpoint.mdAndUp}"
         >
@@ -126,7 +126,7 @@
             </v-form>
               </v-flex>
           </v-layout>
-        </v-responsive>
+        </div>
       <v-snackbar
         v-model="snackbar"
         top
