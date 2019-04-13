@@ -1,6 +1,7 @@
 <template>
   <v-app dark>
     <loading v-if="$store.getters['loading/isLoading']"></loading>
+
     <v-navigation-drawer
       v-if="$vuetify.breakpoint.smAndDown"
       v-model="drawer"
@@ -45,17 +46,27 @@
     </v-navigation-drawer>
       <v-toolbar
         v-if="!$route.path.includes('admin')"
-        class="py-2"
+        class="px-0 main-hover"
         app
+        flat
         fixed
         :absolute="$vuetify.breakpoint.smAndDown"
         clipped-left
-        color="#1E232A"
+        color="rgb(0, 1, 2)"
+        height="52"
       >
+        <router-link class="header__logo-wrap main-hover d-flex" to="/">
+          <span class="header__logo-wrap--text">
+            LH
+          </span>
+          <span class="header__logo-wrap--name" :class="{'d-block': $vuetify.breakpoint.smAndUp}">
+            Levi Heidrick
+          </span>
+        </router-link>
         <v-container class="py-0" id="toolbarContainer">
           <v-layout row wrap align-center>
-            <v-avatar size="56"><img src="/static/levi-heidrick1.png"></v-avatar>
-            <v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>
+            <!--<v-avatar size="56"><img src="/static/levi-heidrick1.png"></v-avatar>-->
+            <!--<v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>-->
             <v-spacer></v-spacer>
             <!--<v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>-->
             <!--<v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>-->
@@ -70,10 +81,6 @@
         </v-container>
       </v-toolbar>
     <v-content>
-      <v-container v-if="$route.fullPath !== '/'" class="pb-0">
-        <breadcrumbs />
-      </v-container>
-      <v-divider></v-divider>
       <router-view />
       <experience v-if="$route.fullPath === '/'" />
       <skills-section v-if="$route.fullPath === '/'" />
@@ -171,6 +178,61 @@ export default {
 </script>
 
 <style lang="stylus">
+
+  .main-hover:hover {
+    .header__logo-wrap--name {
+      transform: translate3d(80px, 0px, 0px);
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+    }
+  }
+  .header__logo-wrap {
+    &--text {
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: rgb(17, 17, 17);
+      position: relative;
+      z-index: 10;
+      font-size: 26px;
+      height: 52px;
+      width: 52px;
+      display: block;
+      background: rgb(255, 183, 77);
+      padding: 10px;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        left: 0px;
+        height: 52px;
+        width: 200px;
+        position: absolute;
+        display: block;
+        z-index: -1;
+        transform: translate3d(52px, 0px, 0px);
+        background-image: linear-gradient(90deg, rgb(22, 160, 133) 33.333%, rgb(231, 76, 60) 33.333%, rgb(231, 76, 60) 66.667%, rgb(41, 128, 185) 66.667%);
+        background-size: 156px 52px;
+        transition: all 0.3s cubic-bezier(0.86, 0, 0.07, 1) 0s;
+      }
+    }
+
+    &--name {
+      top: 0px;
+      position: absolute;
+      display: none;
+      z-index: 5;
+      transform: translate3d(-100%, 0px, 0px);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 52px;
+      color: rgb(255, 255, 255);
+      margin: 0px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.895, 0.03, 0.685, 0.22) 0s;
+    }
+  }
   #toolbarContainer {
     margin: auto!important;
   }

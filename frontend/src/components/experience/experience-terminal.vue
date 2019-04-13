@@ -14,13 +14,13 @@
 
               <p class="line1 line-title blue-grey--text font-weight-bold">[~/work] $ ./position-details.sh</p>
               <p class="line2">
-                <span class="line2 my-1"><v-icon small>fas fa-briefcase</v-icon> | {{ positionDetails.company }}</span>
+                <span class="line2 my-1" v-if="positionDetails.company"><v-icon small>fas fa-briefcase</v-icon> | {{ positionDetails.company }}</span>
                 <br>
-                <span class="line2 my-1"><v-icon small>location_city</v-icon> | {{ positionDetails.companyLocation }}</span>
+                <span class="line2 my-1" v-if="positionDetails.companyLocation"><v-icon small>location_city</v-icon> | {{ positionDetails.companyLocation }}</span>
                 <br>
-                <span class="line2 my-1"><v-icon small>person</v-icon> | {{ positionDetails.title }}</span>
+                <span class="line2 my-1" v-if="positionDetails.title"><v-icon small>person</v-icon> | {{ positionDetails.title }}</span>
                 <br>
-                <span class="line2 my-1"><v-icon small>timelapse</v-icon> | {{ positionDetails.timespan }}</span>
+                <span class="line2 my-1" v-if="positionDetails.timespan"><v-icon small>timelapse</v-icon> | {{ positionDetails.timespan }}</span>
               </p>
               <p class="line3 white--text font-weight-bold mt-5">
                 <i>Key roles and responsibilities</i>
@@ -42,14 +42,8 @@
     export default {
       name: "experience-terminal",
       props: [
-        'optionalProps',
-        'isClicked',
+        'optionalProps'
       ],
-      mounted () {
-        if (this.isClicked) {
-          this.$vuetify.goTo('.line1');
-        }
-      },
       computed: {
         positionDetails () {
           return this.optionalProps;

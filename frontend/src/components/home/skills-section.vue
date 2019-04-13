@@ -2,18 +2,19 @@
   <v-jumbotron
     id="section-skills"
     dark
-    gradient="0, #000102, 50%, #010912"
-    height="auto">
+    gradient="0, #010912, 50%, #000102"
+    height="auto"
+  >
 
     <v-container>
-      <v-layout row wrap>
-        <v-flex xs12 class="pb-4" text-xs-center text-md-left>
-          <h3 class="title"><v-icon color="white" class="pr-3">fas fa-cogs</v-icon>
-            Some Tech I've Used
+      <v-layout row wrap class="py-3">
+        <v-flex xs12 text-xs-center text-md-left>
+          <h3 class="header-tech extra-letter-spacing"><v-icon color="orange lighten-2">fas fa-terminal</v-icon>
+            Tech
           </h3>
         </v-flex>
       </v-layout>
-      <v-layout row wrap :justify-center="$vuetify.breakpoint.smAndDown">
+      <v-layout row wrap :justify-center="$vuetify.breakpoint.smAndDown" class="py-4">
         <v-flex class="text-xs-center" xs4 md2 xlg1 v-for="skill in skillsList" :key="skill.text">
           <v-chip ripple>
             <v-avatar v-if="skill.imageURL">
@@ -102,7 +103,9 @@
 </script>
 
 <style scoped lang="stylus">
-  #section-skills {
-    margin-top: 10vh;
+  .header-tech {
+    font-family monospace
+    font-size 2rem
   }
+
 </style>

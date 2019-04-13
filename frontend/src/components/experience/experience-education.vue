@@ -31,18 +31,6 @@
         'educationProps',
         'isClicked',
       ],
-      mounted () {
-        if (this.isClicked) {
-          this.$vuetify.goTo('.experience__card', {
-            offset: -150
-          });
-        }
-      },
-      data() {
-        return {
-
-        };
-      }
     }
 </script>
 

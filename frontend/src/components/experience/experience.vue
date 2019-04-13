@@ -1,13 +1,18 @@
 <template>
+  <div class="section__experience-wrapper">
   <v-container
     id="experience-container"
+    class="py-5"
   >
    <v-layout
      row
      wrap
+     class="py-2"
+
    >
-     <v-flex xs12 text-xs-center text-md-left class="my-5">
-       <h3 class="playfair-font playfair-font-bold display-1 text-uppercase extra-letter-spacing">
+     <v-flex xs12 text-xs-center text-md-left>
+       <h3 class="header-tech extra-letter-spacing">
+         <v-icon color="orange lighten-2">fas fa-terminal</v-icon>
          Experience & Education
        </h3>
      </v-flex>
@@ -16,6 +21,7 @@
       container
       row
       wrap
+
     >
       <v-flex xs12 xl8 offset-xl2>
         <v-flex xs12 layout justify-space-between>
@@ -61,6 +67,7 @@
       </v-flex>
     </v-layout>
   </v-container>
+  </div>
 </template>
 
 <script>
@@ -150,6 +157,13 @@
 </script>
 
 <style lang="stylus">
+  .header-tech {
+    font-family monospace
+    font-size 2rem
+  }
+  .section__experience-wrapper {
+    background: linear-gradient(0deg, rgb(0, 1, 2), 50%, rgb(1, 9, 18));
+  }
 
   .flipper-enter-active {
     transition: all .2s cubic-bezier(0.55, 0.085, 0.68, 0.53); //ease-in-quad
@@ -170,7 +184,7 @@
 
   .experience {
     &__border {
-      min-height 4rem
+
     }
 
     &__timeline {
@@ -191,11 +205,11 @@
             z-index: 2;
           }
           &.selected {
-            border-bottom-color rgb(229, 158, 97);
+            border-bottom-color #ffb74d;
             border-bottom-width .5px
             border-bottom-style solid
             &:after{
-              background-color: rgb(229, 158, 97);
+              background-color: #ffb74d;
             }
           }
         }

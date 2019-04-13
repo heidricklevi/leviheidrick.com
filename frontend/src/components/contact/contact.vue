@@ -1,7 +1,8 @@
 <template>
   <v-container
+    class="contact__container"
     fluid
-
+    fill-height
   >
     <v-layout
       row
@@ -10,19 +11,31 @@
       align-center
 
     >
-      <v-flex
-        xs12
-        lg8
-      >
-        <v-card
+
+        <v-responsive
           class="elevation-10"
           :class="{'pa-4': $vuetify.breakpoint.mdAndUp}"
         >
-          <v-card-title>
-            <h5 class="playfair-font display-1">Need to get in touch?</h5>
-          </v-card-title>
-          <v-divider dark></v-divider>
-          <v-card-text>
+          <v-layout row wrap class="py-3">
+            <v-flex xs12 text-xs-center text-md-left>
+              <h3 class="header-tech extra-letter-spacing"><v-icon color="orange lighten-2">fas fa-terminal</v-icon>
+                Contact
+              </h3>
+            </v-flex>
+          </v-layout>
+          <v-layout
+            container
+            row
+            wrap
+            align-center
+            justify-center
+          >
+            <v-flex xs12 class="py-5 text-xs-center">
+              <h5 class="playfair-font display-1">Need to get in touch?</h5>
+              <span class="caption font-italic grey--text text--lighten-2"> Reach out below or shoot me an email at levi@leviheidrick.com</span>
+
+            </v-flex>
+            <v-flex xs12 justify-center layout row wrap>
             <v-form ref="contactForm" @submit.prevent="onContactFormSubmit" v-model="valid" lazy-validation>
               <v-flex
                 xs12
@@ -45,10 +58,10 @@
               >
                 <v-text-field
                   required
+                  dark
                   :rules="[rules.required, rules.length(100), rules.email]"
                   append-icon="mail"
                   solo
-
                   clearable
                   v-model="email"
                   label="Your email"
@@ -65,15 +78,13 @@
                   :rules="[rules.required, rules.length(2000)]"
                   append-icon="edit"
                   solo
-                  box
                   auto-grow
                   v-model="content"
                   label="Your Message"></v-textarea>
               </v-flex>
               <v-flex
-                md5
-                sm5
-                xs10
+                xs12
+                md8
               >
                 <vue-recaptcha
                   theme="dark"
@@ -92,8 +103,9 @@
                 </div>
               </v-flex>
               <v-flex
-                class="mt-4"
-                xs10
+                class="mt-4 text-xs-right"
+                xs12
+                md8
               >
                 <v-btn
                   :class="{'v-btn--top': $vuetify.breakpoint.mdAndUp,
@@ -107,14 +119,14 @@
                   :disabled="!valid"
 
                 >
-                  Submit
+                  Send
                   <v-icon right>send</v-icon>
                 </v-btn>
               </v-flex>
             </v-form>
-          </v-card-text>
-        </v-card>
-      </v-flex>
+              </v-flex>
+          </v-layout>
+        </v-responsive>
       <v-snackbar
         v-model="snackbar"
         top
@@ -200,6 +212,14 @@
 </script>
 
 <style scoped>
+  form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .contact__container {
+    background-color: rgb(0, 1, 2);
+  }
   .g-recaptcha {
     transform:scale(0.77);
     -webkit-transform:scale(0.77);

@@ -1,7 +1,7 @@
 <template>
   <v-jumbotron
     dark
-    color="#1E232A"
+    color="rgb(0, 1, 2)"
     height="100vh"
 
   >
@@ -60,7 +60,7 @@
             fab
             dark
             large
-            color="#E59E61"
+            color="#ffb74d"
 
           >
               <v-icon ref="fab--arrow" dark class="animated bounce">arrow_downward</v-icon>
