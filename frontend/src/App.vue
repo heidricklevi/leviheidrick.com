@@ -104,8 +104,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>03/23/2019</span>
-            <span>v0.9.3</span>
+            <span>04/13/2019</span>
+            <span>v0.9.4</span>
             <span class="font-italic orange--text text--lighten-2">
               Full Launch Coming Soon
             </span>
