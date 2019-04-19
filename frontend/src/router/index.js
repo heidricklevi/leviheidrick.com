@@ -185,6 +185,7 @@ export default new Router({
       name: 'about',
       component: About,
       meta: {
+        transitionName: 'slide',
         breadcrumb: [
           {
             text: "Home",
@@ -206,6 +207,7 @@ export default new Router({
       name: 'contact',
       component: Contact,
       meta: {
+        transitionName: 'slide',
         breadcrumb: [
           {
             text: "Home",

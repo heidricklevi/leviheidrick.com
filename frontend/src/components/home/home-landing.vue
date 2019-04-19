@@ -1,9 +1,6 @@
 <template>
-  <v-jumbotron
-    dark
-    color="rgb(0, 1, 2)"
-    height="100vh"
-
+  <div
+    class="landing--wrap"
   >
     <v-container
       fill-height
@@ -12,7 +9,6 @@
         row
         wrap
         align-center
-        justify-center
       >
         <v-flex
           xs12
@@ -46,29 +42,26 @@
               </v-btn>
             </div>
         </v-flex>
+        <!--<div >-->
+          <!--<v-btn-->
+            <!--@click="$vuetify.goTo('#experience-container', {-->
+              <!--offset: -59-->
+            <!--})"-->
+            <!--outline-->
+            <!--fab-->
+            <!--dark-->
+            <!--large-->
+            <!--right-->
+            <!--color="#ffb74d"-->
 
-          <v-btn
-            @click="$vuetify.goTo('#experience-container', {
-              offset: -59
-            })"
-            class="fab-position"
-            :class="{
-              'fab-position-desktop': $vuetify.breakpoint.mdAndUp
-            }"
-            absolute
-            outline
-            fab
-            dark
-            large
-            color="#ffb74d"
-
-          >
-              <v-icon ref="fab--arrow" dark class="animated bounce">arrow_downward</v-icon>
-          </v-btn>
+          <!--&gt;-->
+            <!--<v-icon ref="fab&#45;&#45;arrow" dark class="animated bounce">arrow_downward</v-icon>-->
+          <!--</v-btn>-->
+        <!--</div>-->
       </v-layout>
 
     </v-container>
-  </v-jumbotron>
+  </div>
 </template>
 
 <script>
@@ -87,6 +80,10 @@
 </script>
 
 <style lang="stylus" scoped>
+  .landing--wrap {
+    height: 100vh;
+    background-color: rgb(0, 1, 2);
+  }
   .home__intro {
     &-border {
       border-bottom: 10px solid;

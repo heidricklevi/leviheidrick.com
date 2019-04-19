@@ -63,16 +63,15 @@
             Levi Heidrick
           </span>
         </router-link>
-        <v-container class="py-0" id="toolbarContainer">
+        <v-container fluid class="py-0 mx-0" id="toolbarContainer">
           <v-layout row wrap align-center>
-            <!--<v-avatar size="56"><img src="/static/levi-heidrick1.png"></v-avatar>-->
-            <!--<v-toolbar-title class="headline">Levi Heidrick</v-toolbar-title>-->
             <v-spacer></v-spacer>
             <!--<v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>-->
             <!--<v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>-->
             <!--<v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>-->
             <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat dark>Contact</v-btn>-->
-            <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/about" dark flat>About</v-btn>-->
+            <router-link v-if="$vuetify.breakpoint.mdAndUp" class="nav--link" to="/contact">contact</router-link>
+            <router-link v-if="$vuetify.breakpoint.mdAndUp" class="nav--link" to="/about">about</router-link>
             <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/' }" @click.prevent="goTo('#section-skills')" dark flat>Skills</v-btn>-->
             <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/projects" dark flat>Projects</v-btn>-->
           <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :href="resume.url" dark flat target="_blank">Resume.pdf</v-btn>-->
@@ -81,7 +80,9 @@
         </v-container>
       </v-toolbar>
     <v-content>
-      <router-view />
+      <page-transition>
+        <router-view />
+      </page-transition>
       <experience v-if="$route.fullPath === '/'" />
       <skills-section v-if="$route.fullPath === '/'" />
     </v-content>
@@ -117,18 +118,17 @@
 </template>
 
 <script>
-
 import SkillsSection from "../src/components/home/skills-section.vue"
 import Breadcrumbs from "../src/components/global/breadcrumbs.vue";
 import Experience from "../src/components/experience/experience.vue";
-
-import Loading from "../src/components/global/loading.vue"
+import PageTransition from "../src/components/page-transition/PageTransition.vue";
+import Loading from "../src/components/global/loading.vue";
 import { mapGetters } from "vuex";
 
 
 export default {
   name: 'App',
-  components: { SkillsSection, Loading, Breadcrumbs, Experience },
+  components: { SkillsSection, Loading, Breadcrumbs, Experience, PageTransition },
   async created() {
     await this.$store.dispatch('auth/checkAuth');
     this.$store.dispatch('resume/fetchResume').then(() => {});
@@ -139,10 +139,10 @@ export default {
       drawer: false,
       show: false,
       navItems: [
-        // { text: 'Projects', icon: '', url: '/projects'},
-        // { text: 'Skills', icon: '', selector: '#section-skills'},
-        // { text: 'About', icon: 'fa fa-question', url: '/about'},
-        // { text: 'Contact', icon: 'info', url: '/contact'},
+        { text: 'Projects', icon: '', url: '/projects'},
+        { text: 'Skills', icon: '', selector: '#section-skills'},
+        { text: 'About', icon: 'fa fa-question', url: '/about'},
+        { text: 'Contact', icon: 'info', url: '/contact'},
       ],
 
       resumeItem: {
@@ -178,6 +178,23 @@ export default {
 </script>
 
 <style lang="stylus">
+  @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans:300,400,500,600');
+  .nav--link {
+    text-decoration none;
+    text-transform uppercase;
+    color: whitesmoke;
+    font-size 1rem;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    letter-spacing 5px;
+    margin 0 1rem;
+    padding: 10px;
+
+    &:hover, &.router-link-exact-active {
+      border-bottom 2px solid orange
+    }
+
+  }
 
   .main-hover:hover {
     .header__logo-wrap--name {

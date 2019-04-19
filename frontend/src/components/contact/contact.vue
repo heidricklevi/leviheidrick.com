@@ -30,8 +30,8 @@
             align-center
             justify-center
           >
-            <v-flex xs12 class="py-5 text-xs-center">
-              <h5 class="playfair-font display-1">Need to get in touch?</h5>
+            <v-flex xs12 class="py-2 text-xs-center">
+              <h5 class="playfair-font display-2">Need to get in touch?</h5>
               <span class="caption font-italic grey--text text--lighten-2"> Reach out below or shoot me an email at levi@leviheidrick.com</span>
 
             </v-flex>
@@ -46,10 +46,10 @@
                   required
                   :rules="[rules.required, rules.length(100)]"
                   append-icon="person"
-                  solo
+                  outline
                   clearable
                   v-model="name"
-                  label="Your Name"></v-text-field>
+                  label="Name"></v-text-field>
               </v-flex>
               <v-flex
                 xs12
@@ -61,10 +61,10 @@
                   dark
                   :rules="[rules.required, rules.length(100), rules.email]"
                   append-icon="mail"
-                  solo
+                  outline
                   clearable
                   v-model="email"
-                  label="Your email"
+                  label="Email"
                 ></v-text-field>
               </v-flex>
               <v-flex
@@ -77,10 +77,10 @@
                   counter="2000"
                   :rules="[rules.required, rules.length(2000)]"
                   append-icon="edit"
-                  solo
+                  outline
                   auto-grow
                   v-model="content"
-                  label="Your Message"></v-textarea>
+                  label="Message"></v-textarea>
               </v-flex>
               <v-flex
                 xs12

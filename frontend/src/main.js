@@ -18,7 +18,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#485563',
+    primary: '#2196F3',
   },
   iconfont: 'fa',
   icons: {
