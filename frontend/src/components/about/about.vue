@@ -17,6 +17,7 @@
             text-md-center
             md3
             offset-md2
+            my-5
           >
             <v-avatar
               size="200"
@@ -49,8 +50,8 @@
           >
             <v-divider dark></v-divider>
           </v-flex>
-          <v-flex xs11 md8 offset-md1 lg7 offset-lg0>
-            <div class="about__desc grey--text text--lighten-1">
+          <v-flex xs11 md8 offset-md1 lg6 my-5 offset-lg0>
+            <div class="about__desc grey--text text--lighten-1 py-3">
               <p>Hey there, I am <span style="border-bottom: 2px solid orange">Levi</span>. I am a full stack web developer here in the Kansas City Metro.
                 I recently graduated from the University of Kansas' Engineering School with a Bachelors of Science in Information Technology (2018).</p>
 
@@ -104,14 +105,28 @@
                 <!--</v-chip>-->
               <!--</template>-->
             <!--</v-flex>-->
+                <v-flex xs12>
+                <experience />
+
+              </v-flex>
+              <v-flex xs12>
+                <skills-section />
+              </v-flex>
           </v-layout>
         <!--</v-layout>-->
+
     </v-container>
 </template>
 
 <script>
+  import SkillsSection from "../home/skills-section.vue"
+  import Experience from "../experience/experience.vue";
     export default {
       name: "about",
+      components: {
+        SkillsSection,
+        Experience,
+      },
       data () {
         return {
           tools: [
@@ -173,7 +188,8 @@
     }
   }
   .about--wrap {
-    background: linear-gradient(0deg, rgb(0, 1, 2), 50%, rgb(1, 9, 18));
+    background-color: rgb(0, 1, 2);
+
 
   }
   .border--left__dark {

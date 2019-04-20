@@ -9,22 +9,21 @@
       clipped-right
       app
     >
-      <v-list>
-        <template v-for="item in navItems">
-          <v-list-tile v-if="!item.selector && item.url" :key="item.text" :to="item.url">
-            <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
+        <v-list>
+          <v-list-tile to="/" class="nav--link mx-0">
+            <v-list-tile-action v-if="$route.fullPath !== '/'">
+              <v-icon>fa fa-long-arrow-alt-left</v-icon>
             </v-list-tile-action>
+
             <v-list-tile-content>
-              <v-list-tile-title>
-                {{ item.text }}
-              </v-list-tile-title>
+              <v-list-tile-title>Levi Heidrick</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile v-else-if="item.selector" @click.prevent="goTo(item.selector)" :key="item.text">
-            <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
+        </v-list>
+      <v-divider></v-divider>
+      <v-list>
+        <template v-for="item in navItems">
+          <v-list-tile v-if="!item.selector && item.url" :key="item.text" :to="item.url" class="nav--link mx-0">
             <v-list-tile-content>
               <v-list-tile-title>
                 {{ item.text }}
@@ -32,13 +31,11 @@
             </v-list-tile-content>
           </v-list-tile>
         </template>
-        <v-list-tile v-if="resume && resume.url" :href="resume.url" target="_blank">
-          <v-list-tile-action>
-            <v-icon>cloud_download</v-icon>
-          </v-list-tile-action>
+        <v-list-tile v-if="resume && resume.url" :href="resume.url" target="_blank" class="nav--link mx-0">
           <v-list-tile-content>
             <v-list-tile-title>
-              Resume.pdf
+              Resume
+              <v-icon small class="nav--link--icon">fa fa-external-link-alt</v-icon>
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -66,7 +63,7 @@
         <v-container fluid class="py-0 mx-0" id="toolbarContainer">
           <v-layout row wrap align-center>
             <v-spacer></v-spacer>
-            <!--<v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>-->
+            <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>
             <!--<v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>-->
             <!--<v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>-->
             <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat dark>Contact</v-btn>-->
@@ -83,8 +80,8 @@
       <page-transition>
         <router-view />
       </page-transition>
-      <experience v-if="$route.fullPath === '/'" />
-      <skills-section v-if="$route.fullPath === '/'" />
+      <!--<experience v-if="$route.fullPath === '/about'" />-->
+      <!--<skills-section v-if="$route.fullPath === '/about'" />-->
     </v-content>
     <v-footer
       app
@@ -105,8 +102,8 @@
         </v-flex>
         <v-flex xs12 text-xs-center>
           <div class="caption">
-            <span>04/13/2019</span>
-            <span>v0.9.4</span>
+            <span>04/20/2019</span>
+            <span>v0.9.5</span>
             <span class="font-italic orange--text text--lighten-2">
               Full Launch Coming Soon
             </span>
@@ -139,7 +136,7 @@ export default {
       drawer: false,
       show: false,
       navItems: [
-        { text: 'Projects', icon: '', url: '/projects'},
+        // { text: 'Projects', icon: '', url: '/projects'},
         { text: 'Skills', icon: '', selector: '#section-skills'},
         { text: 'About', icon: 'fa fa-question', url: '/about'},
         { text: 'Contact', icon: 'info', url: '/contact'},
@@ -178,7 +175,7 @@ export default {
 </script>
 
 <style lang="stylus">
-  @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans:300,400,500,600');
+  @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans:300,400,500,600,700');
   .nav--link {
     text-decoration none;
     text-transform uppercase;
@@ -194,6 +191,9 @@ export default {
       border-bottom 2px solid orange
     }
 
+    &--icon.v-icon {
+      vertical-align top
+    }
   }
 
   .main-hover:hover {

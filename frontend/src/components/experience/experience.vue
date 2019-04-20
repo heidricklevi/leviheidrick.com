@@ -10,8 +10,8 @@
      class="py-2"
 
    >
-     <v-flex xs12 text-xs-center text-md-left>
-       <h3 class="header-tech extra-letter-spacing">
+     <v-flex xs12 text-xs-center my-5>
+       <h3 class="header-tech">
          <v-icon color="orange lighten-2">fas fa-terminal</v-icon>
          Experience & Education
        </h3>
@@ -158,12 +158,15 @@
 
 <style lang="stylus">
   .header-tech {
-    font-family monospace
+    font-family: 'Lato', sans-serif;
     font-size 2rem
+    text-transform uppercase
+    letter-spacing 5px
+    font-weight 300
   }
-  .section__experience-wrapper {
-    background: linear-gradient(0deg, rgb(0, 1, 2), 50%, rgb(1, 9, 18));
-  }
+  /*.section__experience-wrapper {
+    <!--background: linear-gradient(0deg, rgb(0, 1, 2), 50%, rgb(1, 9, 18));-->
+  }*/
 
   .flipper-enter-active {
     transition: all .2s cubic-bezier(0.55, 0.085, 0.68, 0.53); //ease-in-quad

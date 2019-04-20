@@ -81,8 +81,8 @@
 
 <style lang="stylus" scoped>
   .landing--wrap {
-    height: 100vh;
     background-color: rgb(0, 1, 2);
+    height: 100%;
   }
   .home__intro {
     &-border {

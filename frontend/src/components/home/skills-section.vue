@@ -1,14 +1,12 @@
 <template>
   <v-jumbotron
-    id="section-skills"
     dark
-    gradient="0, #010912, 50%, #000102"
     height="auto"
   >
 
     <v-container>
-      <v-layout row wrap class="py-3">
-        <v-flex xs12 text-xs-center text-md-left>
+      <v-layout row wrap class="my-5">
+        <v-flex xs12 text-xs-center>
           <h3 class="header-tech extra-letter-spacing"><v-icon color="orange lighten-2">fas fa-terminal</v-icon>
             Tech
           </h3>
@@ -104,8 +102,11 @@
 
 <style scoped lang="stylus">
   .header-tech {
-    font-family monospace
+    font-family: 'Lato', sans-serif;
     font-size 2rem
+    text-transform uppercase
+    letter-spacing 5px
+    font-weight 300
   }
 
 </style>
