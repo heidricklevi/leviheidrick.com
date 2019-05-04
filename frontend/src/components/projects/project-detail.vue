@@ -93,6 +93,7 @@
       props: ['dialog'],
       beforeRouteEnter(to, from, next) {
         next(self => {
+          console.log(self.$route.params.name)
           self.fetchProjectByTitle(self.$route.params.name).then(() => {});
         })
       },

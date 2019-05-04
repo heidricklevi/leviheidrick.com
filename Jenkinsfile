@@ -6,7 +6,7 @@ node {
         //sh 'pwd; la -l;'
             sh "sudo git fetch --all"
             sh "sudo git reset --hard origin/dev"
-            sh 'cd frontend && sudo npm install && sudo npm run build'
+            sh 'cd frontend && sudo chown jenkins node_modules && sudo npm install && sudo npm run build'
         }
     }
 

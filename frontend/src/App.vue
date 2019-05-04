@@ -70,7 +70,7 @@
             <router-link v-if="$vuetify.breakpoint.mdAndUp" class="nav--link" to="/contact">contact</router-link>
             <router-link v-if="$vuetify.breakpoint.mdAndUp" class="nav--link" to="/about">about</router-link>
             <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/' }" @click.prevent="goTo('#section-skills')" dark flat>Skills</v-btn>-->
-            <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" to="/projects" dark flat>Projects</v-btn>-->
+            <router-link v-if="$vuetify.breakpoint.mdAndUp" class="nav--link" to="/projects">projects</router-link>
           <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :href="resume.url" dark flat target="_blank">Resume.pdf</v-btn>-->
           </v-layout>
 

@@ -18,7 +18,7 @@
         >
           <v-layout row wrap class="py-3">
             <v-flex xs12 text-xs-center text-md-left>
-              <h3 class="header-tech extra-letter-spacing"><v-icon color="orange lighten-2">fas fa-terminal</v-icon>
+              <h3 class="header-tech"><v-icon color="orange lighten-2">fas fa-terminal</v-icon>
                 Contact
               </h3>
             </v-flex>
