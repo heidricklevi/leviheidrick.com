@@ -4,7 +4,7 @@
       ref="projectSection"
       class="projects"
       >
-      <v-container fluid fill-height pl-0>
+      <v-container fluid fill-height pl-0 pr-0>
           <v-bottom-sheet lazy v-model="drawer" v-if="$vuetify.breakpoint.smAndDown && $route.fullPath !== '/projects'">
             <v-btn outline icon @click="drawer = !drawer" absolute right>
               <v-icon>{{ drawer ? 'close' : 'add'}}</v-icon>

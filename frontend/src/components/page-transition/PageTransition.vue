@@ -69,7 +69,7 @@
         });
       },
       afterEnter(element) {
-        //element.style.height = 'auto';
+        element.style.height = 'auto';
       },
     },
   };

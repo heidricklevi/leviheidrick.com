@@ -136,7 +136,7 @@ export default {
       drawer: false,
       show: false,
       navItems: [
-        // { text: 'Projects', icon: '', url: '/projects'},
+        { text: 'Projects', icon: '', url: '/projects'},
         { text: 'Skills', icon: '', selector: '#section-skills'},
         { text: 'About', icon: 'fa fa-question', url: '/about'},
         { text: 'Contact', icon: 'info', url: '/contact'},
