@@ -25,11 +25,12 @@ root@leviheidrick.
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
+### IntelliJ & VSCODE IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+*.vscode
 
 ### NetBeans ###
 /nbproject/private/
