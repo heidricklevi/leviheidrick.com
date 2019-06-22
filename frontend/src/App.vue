@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <loading v-if="$store.getters['loading/isLoading']"></loading>
+    <loading v-if="$store.getters['loading/isLoading']"/>
 
     <v-navigation-drawer
       v-if="$vuetify.breakpoint.smAndDown"
@@ -9,21 +9,27 @@
       clipped-right
       app
     >
-        <v-list>
-          <v-list-tile to="/" class="nav--link mx-0">
-            <v-list-tile-action v-if="$route.fullPath !== '/'">
-              <v-icon>fa fa-long-arrow-alt-left</v-icon>
-            </v-list-tile-action>
+      <v-list>
+        <v-list-tile 
+          to="/" 
+          class="nav--link mx-0">
+          <v-list-tile-action v-if="$route.fullPath !== '/'">
+            <v-icon>fa fa-long-arrow-alt-left</v-icon>
+          </v-list-tile-action>
 
-            <v-list-tile-content>
-              <v-list-tile-title>Levi Heidrick</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      <v-divider></v-divider>
+          <v-list-tile-content>
+            <v-list-tile-title>Levi Heidrick</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+      <v-divider/>
       <v-list>
         <template v-for="item in navItems">
-          <v-list-tile v-if="!item.selector && item.url" :key="item.text" :to="item.url" class="nav--link mx-0">
+          <v-list-tile 
+            v-if="!item.selector && item.url" 
+            :key="item.text" 
+            :to="item.url" 
+            class="nav--link mx-0">
             <v-list-tile-content>
               <v-list-tile-title>
                 {{ item.text }}
@@ -31,51 +37,78 @@
             </v-list-tile-content>
           </v-list-tile>
         </template>
-        <v-list-tile v-if="resume && resume.url" :href="resume.url" target="_blank" class="nav--link mx-0">
+        <v-list-tile 
+          v-if="resume && resume.url" 
+          :href="resume.url" 
+          target="_blank" 
+          class="nav--link mx-0">
           <v-list-tile-content>
             <v-list-tile-title>
               Resume
-              <v-icon small class="nav--link--icon">fa fa-external-link-alt</v-icon>
+              <v-icon 
+                small 
+                class="nav--link--icon">fa fa-external-link-alt</v-icon>
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-      <v-toolbar
-        v-if="!$route.path.includes('admin')"
-        class="px-0 main-hover"
-        app
-        flat
-        fixed
-        :absolute="$vuetify.breakpoint.smAndDown"
-        clipped-left
-        color="rgb(0, 1, 2)"
-        height="52"
-      >
-        <router-link class="header__logo-wrap main-hover d-flex" to="/">
-          <span class="header__logo-wrap--text">
-            LH
-          </span>
-          <span class="header__logo-wrap--name" :class="{'d-block': $vuetify.breakpoint.smAndUp}">
-            Levi Heidrick
-          </span>
-        </router-link>
-        <v-container fluid class="py-0 mx-0" id="toolbarContainer">
-          <v-layout row wrap align-center>
-            <v-spacer></v-spacer>
-            <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.prevent="drawer = !drawer"></v-toolbar-side-icon>
-            <!--<v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>-->
-            <!--<v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>-->
-            <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat dark>Contact</v-btn>-->
-            <router-link v-if="$vuetify.breakpoint.mdAndUp" class="nav--link" to="/contact">contact</router-link>
-            <router-link v-if="$vuetify.breakpoint.mdAndUp" class="nav--link" to="/about">about</router-link>
-            <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/' }" @click.prevent="goTo('#section-skills')" dark flat>Skills</v-btn>-->
-            <router-link v-if="$vuetify.breakpoint.mdAndUp" class="nav--link" to="/projects">projects</router-link>
-          <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :href="resume.url" dark flat target="_blank">Resume.pdf</v-btn>-->
-          </v-layout>
+    <v-toolbar
+      v-if="!$route.path.includes('admin')"
+      :absolute="$vuetify.breakpoint.smAndDown"
+      class="px-0 main-hover"
+      app
+      flat
+      fixed
+      clipped-left
+      color="#0b0c10"
+      height="52"
+    >
+      <router-link 
+        class="header__logo-wrap main-hover d-flex" 
+        to="/">
+        <span class="header__logo-wrap--text">
+          LH
+        </span>
+        <span 
+          :class="{'d-block': $vuetify.breakpoint.smAndUp}" 
+          class="header__logo-wrap--name">
+          Levi Heidrick
+        </span>
+      </router-link>
+      <v-container 
+        id="toolbarContainer" 
+        fluid 
+        class="py-0 mx-0">
+        <v-layout 
+          row 
+          wrap 
+          align-center>
+          <v-spacer/>
+          <v-toolbar-side-icon 
+            v-if="$vuetify.breakpoint.smAndDown" 
+            @click.prevent="drawer = !drawer"/>
+          <!--<v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>-->
+          <!--<v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>-->
+          <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat dark>Contact</v-btn>-->
+          <router-link 
+            v-if="$vuetify.breakpoint.mdAndUp" 
+            class="nav--link" 
+            to="/contact">contact</router-link>
+          <router-link 
+            v-if="$vuetify.breakpoint.mdAndUp" 
+            class="nav--link" 
+            to="/about">about</router-link>
+          <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/' }" @click.prevent="goTo('#section-skills')" dark flat>Skills</v-btn>-->
+          <router-link 
+            v-if="$vuetify.breakpoint.mdAndUp" 
+            class="nav--link" 
+            to="/projects">projects</router-link>
+            <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :href="resume.url" dark flat target="_blank">Resume.pdf</v-btn>-->
+        </v-layout>
 
-        </v-container>
-      </v-toolbar>
+      </v-container>
+    </v-toolbar>
     <v-content>
       <page-transition>
         <router-view />
@@ -86,7 +119,7 @@
     <v-footer
       app
       height="auto"
-      color="#000102"
+      color="#0b0c10"
       absolute
       class="footer__border-top"
     >
@@ -97,10 +130,14 @@
         align-center
         class="pa-2"
       >
-        <v-flex xs12 text-xs-center>
+        <v-flex 
+          xs12 
+          text-xs-center>
           <span>&copy; 2019 Levi Heidrick</span>
         </v-flex>
-        <v-flex xs12 text-xs-center>
+        <v-flex 
+          xs12 
+          text-xs-center>
           <div class="caption">
             <span>04/20/2019</span>
             <span>v0.9.5</span>
@@ -115,63 +152,63 @@
 </template>
 
 <script>
-import SkillsSection from "../src/components/home/skills-section.vue"
-import Breadcrumbs from "../src/components/global/breadcrumbs.vue";
-import Experience from "../src/components/experience/experience.vue";
-import PageTransition from "../src/components/page-transition/PageTransition.vue";
-import Loading from "../src/components/global/loading.vue";
-import { mapGetters } from "vuex";
+  import SkillsSection from "../src/components/home/skills-section.vue"
+  import Breadcrumbs from "../src/components/global/breadcrumbs.vue";
+  import Experience from "../src/components/experience/experience.vue";
+  import PageTransition from "../src/components/page-transition/PageTransition.vue";
+  import Loading from "../src/components/global/loading.vue";
+  import { mapGetters } from "vuex";
 
 
-export default {
-  name: 'App',
-  components: { SkillsSection, Loading, Breadcrumbs, Experience, PageTransition },
-  async created() {
-    await this.$store.dispatch('auth/checkAuth');
-    this.$store.dispatch('resume/fetchResume').then(() => {});
-  },
+  export default {
+    name: 'App',
+    components: { SkillsSection, Loading, Breadcrumbs, Experience, PageTransition },
 
-  data () {
-    return {
-      drawer: false,
-      show: false,
-      navItems: [
-        { text: 'Projects', icon: '', url: '/projects'},
-        { text: 'Skills', icon: '', selector: '#section-skills'},
-        { text: 'About', icon: 'fa fa-question', url: '/about'},
-        { text: 'Contact', icon: 'info', url: '/contact'},
-      ],
+    data () {
+      return {
+        drawer: false,
+        show: false,
+        navItems: [
+          { text: 'Projects', icon: '', url: '/projects'},
+          { text: 'Skills', icon: '', selector: '#section-skills'},
+          { text: 'About', icon: 'fa fa-question', url: '/about'},
+          { text: 'Contact', icon: 'info', url: '/contact'},
+        ],
 
-      resumeItem: {
-        text: 'Resume.pdf',
-        icon: 'cloud_download',
-        url: false
+        resumeItem: {
+          text: 'Resume.pdf',
+          icon: 'cloud_download',
+          url: false
+        }
+      }
+    },
+    async created() {
+      await this.$store.dispatch('auth/checkAuth');
+      this.$store.dispatch('resume/fetchResume').then(() => {});
+    },
+
+    computed: {
+
+      ...mapGetters('auth/',[
+        'hasHighestCredentials'
+      ]),
+
+      ...mapGetters('resume/', ['resume']),
+
+      auth() {
+        return this.$store.getters['auth/auth'];
+      },
+
+    },
+    methods: {
+      goTo(selector) {
+        this.$vuetify.goTo(selector);
+      },
+      logout() {
+        this.$store.dispatch('auth/logout');
       }
     }
-  },
-
-  computed: {
-
-    ...mapGetters('auth/',[
-      'hasHighestCredentials'
-    ]),
-
-    ...mapGetters('resume/', ['resume']),
-
-    auth() {
-      return this.$store.getters['auth/auth'];
-    },
-
-  },
-  methods: {
-    goTo(selector) {
-      this.$vuetify.goTo(selector);
-    },
-    logout() {
-      this.$store.dispatch('auth/logout');
-    }
   }
-}
 </script>
 
 <style lang="stylus">
@@ -256,7 +293,7 @@ export default {
   .footer {
     &__border {
       &-top {
-        border-top-color #354D6D
+        border-top-color #0b0c10;
       }
     }
   }

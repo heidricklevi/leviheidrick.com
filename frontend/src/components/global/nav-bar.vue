@@ -7,7 +7,10 @@
     app
   >
     <v-list>
-      <v-list-tile v-for="item in navItems" :key="item.text" :to="item.url">
+      <v-list-tile 
+        v-for="item in navItems" 
+        :key="item.text" 
+        :to="item.url">
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-tile-action>
@@ -22,20 +25,20 @@
 </template>
 
 <script>
-    export default {
-        name: "nav-bar",
-        data() {
-          return {
-            drawer: false,
-            navItems: [
-              { text: 'Projects', icon: '', url: '/projects'},
-              { text: 'Skills', icon: '', url: '/skills'},
-              // { text: 'About', icon: '', url: '/skills'},
-              { text: 'Resume', icon: 'cloud_download', url: this.$store.getters.resume? this.$store.getters.resume.url: ''  }
-            ]
-          }
-        }
+  export default {
+    name: "NavBar",
+    data() {
+      return {
+        drawer: false,
+        navItems: [
+          { text: 'Projects', icon: '', url: '/projects'},
+          { text: 'Skills', icon: '', url: '/skills'},
+          // { text: 'About', icon: '', url: '/skills'},
+          { text: 'Resume', icon: 'cloud_download', url: this.$store.getters.resume? this.$store.getters.resume.url: ''  }
+        ]
+      }
     }
+  }
 </script>
 
 <style scoped>

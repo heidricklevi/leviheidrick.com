@@ -12,44 +12,61 @@
 
     >
 
-        <div
-          class="elevation-10"
-          :class="{'pa-4': $vuetify.breakpoint.mdAndUp}"
+      <div
+        :class="{'pa-4': $vuetify.breakpoint.mdAndUp}"
+        class="elevation-10"
+      >
+        <v-layout 
+          row 
+          wrap 
+          class="py-3">
+          <v-flex 
+            xs12 
+            text-xs-center 
+            text-md-left>
+            <h3 class="header-tech"><v-icon color="orange lighten-2">fas fa-terminal</v-icon>
+              Contact
+            </h3>
+          </v-flex>
+        </v-layout>
+        <v-layout
+          container
+          row
+          wrap
+          align-center
+          justify-center
         >
-          <v-layout row wrap class="py-3">
-            <v-flex xs12 text-xs-center text-md-left>
-              <h3 class="header-tech"><v-icon color="orange lighten-2">fas fa-terminal</v-icon>
-                Contact
-              </h3>
-            </v-flex>
-          </v-layout>
-          <v-layout
-            container
-            row
-            wrap
-            align-center
-            justify-center
-          >
-            <v-flex xs12 class="py-2 text-xs-center">
-              <h5 class="playfair-font display-2">Need to get in touch?</h5>
-              <span class="caption font-italic grey--text text--lighten-2"> Reach out below or shoot me an email at levi@leviheidrick.com</span>
+          <v-flex 
+            xs12 
+            class="py-2 text-xs-center">
+            <h5 class="playfair-font display-2">Need to get in touch?</h5>
+            <span class="caption font-italic grey--text text--lighten-2"> Reach out below or shoot me an email at levi@leviheidrick.com</span>
 
-            </v-flex>
-            <v-flex xs12 justify-center layout row wrap>
-            <v-form ref="contactForm" @submit.prevent="onContactFormSubmit" v-model="valid" lazy-validation>
+          </v-flex>
+          <v-flex 
+            xs12 
+            justify-center 
+            layout 
+            row 
+            wrap>
+            <v-form 
+              ref="contactForm" 
+              v-model="valid" 
+              lazy-validation 
+              @submit.prevent="onContactFormSubmit">
               <v-flex
                 xs12
                 md8
                 class="my-2"
               >
                 <v-text-field
-                  required
                   :rules="[rules.required, rules.length(100)]"
+                  v-model="name"
+                  required
                   append-icon="person"
                   outline
                   clearable
-                  v-model="name"
-                  label="Name"></v-text-field>
+                  label="Name"/>
               </v-flex>
               <v-flex
                 xs12
@@ -57,15 +74,15 @@
                 class="my-2"
               >
                 <v-text-field
+                  :rules="[rules.required, rules.length(100), rules.email]"
+                  v-model="email"
                   required
                   dark
-                  :rules="[rules.required, rules.length(100), rules.email]"
                   append-icon="mail"
                   outline
                   clearable
-                  v-model="email"
                   label="Email"
-                ></v-text-field>
+                />
               </v-flex>
               <v-flex
                 xs12
@@ -73,14 +90,14 @@
                 class="my-2"
               >
                 <v-textarea
+                  :rules="[rules.required, rules.length(2000)]"
+                  v-model="content"
                   required
                   counter="2000"
-                  :rules="[rules.required, rules.length(2000)]"
                   append-icon="edit"
                   outline
                   auto-grow
-                  v-model="content"
-                  label="Message"></v-textarea>
+                  label="Message"/>
               </v-flex>
               <v-flex
                 xs12
@@ -89,14 +106,14 @@
                 <vue-recaptcha
                   theme="dark"
                   required
-                  @expired="recaptchaExpired"
-                  @verify="recaptchaVerified"
                   sitekey="6LfO73IUAAAAALmRXi6dpEBIPDPu1HBtY-9ItT_c"
                   class="g-recaptcha"
-                >
-
-                </vue-recaptcha>
-                <div class="v-messages theme--dark error--text" v-if="!gResponse && contactFormSubmitted">
+                  @expired="recaptchaExpired"
+                  @verify="recaptchaVerified"
+                />
+                <div 
+                  v-if="!gResponse && contactFormSubmitted" 
+                  class="v-messages theme--dark error--text">
                   <div class="v-messages__wrapper">
                     <div class="v-messages__message">This field is required</div>
                   </div>
@@ -109,14 +126,14 @@
               >
                 <v-btn
                   :class="{'v-btn--top': $vuetify.breakpoint.mdAndUp,
-                            'my-3': $vuetify.breakpoint.smAndDown,
-                            'v-btn--block': $vuetify.breakpoint.smAndDown
-                          }"
+                           'my-3': $vuetify.breakpoint.smAndDown,
+                           'v-btn--block': $vuetify.breakpoint.smAndDown
+                  }"
+                  :disabled="!valid"
                   class="blue--text"
                   type="submit"
                   outline
                   large
-                  :disabled="!valid"
 
                 >
                   Send
@@ -124,13 +141,13 @@
                 </v-btn>
               </v-flex>
             </v-form>
-              </v-flex>
-          </v-layout>
-        </div>
+          </v-flex>
+        </v-layout>
+      </div>
       <v-snackbar
         v-model="snackbar"
-        top
         :color="snackColor"
+        top
       >
         {{ snackMessage }}
       </v-snackbar>
@@ -140,75 +157,75 @@
 </template>
 
 <script>
-    import VueRecaptcha from 'vue-recaptcha';
-    import { mapGetters } from 'vuex';
+  import VueRecaptcha from 'vue-recaptcha';
+  import { mapGetters } from 'vuex';
 
-    export default {
-      name: "contact",
-      components: { VueRecaptcha },
-      data() {
-        return {
-          valid: false,
-          nameRules: [v => !!v || 'This field is required', v => v.length <= 100 || "Requires length less than 100"],
-          contentRules: [v => !!v || 'This field is required', v => v.length <= 100 || "Requires length less than 100"],
+  export default {
+    name: "Contact",
+    components: { VueRecaptcha },
+    data() {
+      return {
+        valid: false,
+        nameRules: [v => !!v || 'This field is required', v => v.length <= 100 || "Requires length less than 100"],
+        contentRules: [v => !!v || 'This field is required', v => v.length <= 100 || "Requires length less than 100"],
 
-          rules: {
-            required: v => !!v || 'This field is required',
-            length: len => v => (v || '').length <= len || `Field requires fewer than ${len} chars.`,
-            email: v => /.+@.+/.test(v) || 'E-mail must be valid',
-          },
+        rules: {
+          required: v => !!v || 'This field is required',
+          length: len => v => (v || '').length <= len || `Field requires fewer than ${len} chars.`,
+          email: v => /.+@.+/.test(v) || 'E-mail must be valid',
+        },
 
-          name: '',
-          email: '',
-          content: '',
-          gResponse: false,
+        name: '',
+        email: '',
+        content: '',
+        gResponse: false,
 
-          contactFormSubmitted: false,
+        contactFormSubmitted: false,
 
-          snackbar: false,
-          snackMessage: '',
-          snackColor: 'success',
+        snackbar: false,
+        snackMessage: '',
+        snackColor: 'success',
 
+      }
+    },
+
+    computed: {
+      ...mapGetters('contact/', [
+        'responseStatus'
+      ])
+    },
+
+    methods: {
+      onContactFormSubmit() {
+        this.contactFormSubmitted = true;
+        if (this.$refs.contactForm.validate() && this.gResponse) {
+          // valid
+
+          const payload = {
+            fromEmail: this.email,
+            senderName: this.name,
+            message: this.content,
+            gResponse: this.gResponse
+          };
+
+          this.$store.dispatch('contact/sendEmail', payload).then(() => {
+            this.snackbar = true;
+            this.snackMessage = this.responseStatus.message;
+            this.snackColor = this.responseStatus.success? 'success': 'error';
+          });
         }
       },
 
-      computed: {
-        ...mapGetters('contact/', [
-          'responseStatus'
-        ])
+      recaptchaVerified(response) {
+        this.gResponse = response;
       },
 
-      methods: {
-        onContactFormSubmit() {
-          this.contactFormSubmitted = true;
-          if (this.$refs.contactForm.validate() && this.gResponse) {
-            // valid
+      recaptchaExpired() {
+        this.gResponse = false;
+      }
+    },
 
-            const payload = {
-              fromEmail: this.email,
-              senderName: this.name,
-              message: this.content,
-              gResponse: this.gResponse
-            };
-
-            this.$store.dispatch('contact/sendEmail', payload).then(() => {
-              this.snackbar = true;
-              this.snackMessage = this.responseStatus.message;
-              this.snackColor = this.responseStatus.success? 'success': 'error';
-            });
-          }
-        },
-
-        recaptchaVerified(response) {
-          this.gResponse = response;
-        },
-
-        recaptchaExpired() {
-          this.gResponse = false;
-        }
-      },
-
-    }
+  }
 </script>
 
 <style scoped>

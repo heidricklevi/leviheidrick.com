@@ -59,13 +59,13 @@ const actions = {
     commit('responseStatusUpdate', false);
 
     return axios.get(`/api/projects/${encodeURIComponent(title)}`).then((response) => {
-            commit('projectUpdate', response.data);
-            commit('loading/loadingUpdate', null, { root: true });
-          }).catch((err) => {
-            commit('loading/loadingUpdate', null, { root: true });
-            console.log(err.response.data.error);
-            commit('responseStatusUpdate', err.response.data)
-          });
+      commit('projectUpdate', response.data);
+      commit('loading/loadingUpdate', null, { root: true });
+    }).catch((err) => {
+      commit('loading/loadingUpdate', null, { root: true });
+      console.log(err.response.data.error);
+      commit('responseStatusUpdate', err.response.data)
+    });
   },
 
   deleteProjectById({getters, commit}, id) {

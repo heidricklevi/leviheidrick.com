@@ -17,21 +17,6 @@
           wrap 
           justify-center>
           <v-flex 
-            id="headingWrapper" 
-            ref="headingWrapper" 
-            xs12 
-            align-center 
-            class="project-detail__heading-wrapper">
-            <div 
-              v-if="project" 
-              class="project-detail__heading my-4 mx-2"
-            >
-              <h3>
-                {{ project.title }}
-              </h3>
-            </div>
-          </v-flex>
-          <v-flex 
             v-if="project" 
             id="contentWrapper" 
             ref="contentWrapper" 
@@ -39,9 +24,68 @@
             text-sm-left 
             md8 
             class="mb-5 project-detail__content-wrapper">
-            <div class="project-detail__content">
-              {{ project.content }}
-            </div>
+            <v-card 
+              elevation="24"
+              class="pa-4" 
+              color="#0b0c12">
+              <v-flex 
+                id="headingWrapper" 
+                ref="headingWrapper" 
+                xs12 
+                align-center 
+                class="project-detail__heading-wrapper">
+                <div 
+                  v-if="project" 
+                  class="project-detail__heading my-4"
+                >
+                  <h3>
+                    {{ project.title }}
+                  </h3>
+                </div>
+              </v-flex>
+              <v-card-text 
+                class="project-detail__content">
+                <content-render :content="project.content" />
+              </v-card-text>
+            </v-card>
+            <v-card 
+              elevation="24"
+              class="pa-4 my-3 project-detail__content--stacks-list--wrapper" 
+              color="#0b0c14">
+              <v-card-text >
+                <v-layout 
+                  justify-center 
+                  align-center
+                  wrap
+                >
+                  <v-flex
+                    align-center
+                    align-self-center
+                    text-xs-center 
+                    md6 
+                    xs12>
+                    <h3 class="header-tech"><v-icon color="orange lighten-2">fas fa-terminal</v-icon>
+                      Tech
+                    </h3>
+                  </v-flex>
+                  <v-flex 
+                    align-self-center
+                    align-center
+                    text-xs-center
+                    xs12 
+                    md6>
+                    <ul class="project-detail__content project-detail__content--stacks-list">
+                      <li 
+                        v-for="item in stack"
+                        :key="item" 
+                        class="text--lighten-1 grey--text">
+                        #{{ item }}
+                      </li>
+                    </ul>
+                  </v-flex>
+                </v-layout>
+              </v-card-text>
+            </v-card>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -99,21 +143,7 @@
                           :src="file.fileUrl"
                           height="400px"
                           cover
-                        >
-                          <!-- <div style="position: absolute; top: 0; right: 0">
-                            <div class="icon-container">
-                              <v-icon 
-                                bottom 
-                                light>
-                                remove_red_eye
-                              </v-icon>
-                            </div>
-                          </div>
-                          <div
-                            class="d-flex transition-fast-in-fast-out black lighten-4 v-card--reveal"
-                            style="height: 100%;"
-                          /> -->
-                        </v-img>
+                        />
                       </v-card>
                     </v-flex>
                   </v-layout>
@@ -129,19 +159,31 @@
 
 <script>
   import Viewer from 'v-viewer/src/component.vue';
+  import ContentRender from '../helper/content-render.vue';
   import { mapActions, mapGetters } from 'vuex';
   export default {
     name: "ProjectDetail",
-    components: { Viewer, },
+    components: { Viewer, ContentRender },
     props: ['dialog'],
     beforeRouteEnter(to, from, next) {
       next(self => {
         self.fetchProjectByTitle(self.$route.params.name).then(() => {});
       })
     },
+    beforeRouteUpdate: function(to, from, next) {
+      this.fetchProjectByTitle(to.params.name).then(() => {});
+      next();
+    },
     data() {
       return {
-
+        stack: [
+          'VueJS',
+          'Vuetify',
+          'Digital Ocean',
+          'Django',
+          'Python',
+          'MailGun'
+        ]
       }
     },
     computed: {
@@ -183,39 +225,13 @@
 </script>
 
 <style scoped lang="scss">
-  $r: 4em;
 
-  // .v-card--reveal {
-  //   align-items: center;
-  //   bottom: 0;
-  //   justify-content: center;
-  //   opacity: .5;
-  //   position: absolute;
-  //   width: 100%;
-  // }
-  //   .icon-container {
-  //     position: relative;
-  //     max-width: 15em;
-  //     min-height: 10em;
-
-  //     &:before {
-  //       position: absolute;
-  //       padding: $r;
-  //       background: #95a;
-  //       opacity: 1;
-  //       content: '';
-  //       border-radius: 50%;
-  //       margin: -$r;
-  //       z-index: -1;
-  //     }
-  //   }
   svg {
     position: absolute;
     bottom: 0;
     width: 100vw;
     height: 20vh;
     left: 0
-    /* set height to pixels if you want angle to change with screen width */
   }
   .project-detail {
     display: flex;
@@ -228,11 +244,27 @@
         text-transform: uppercase;
         letter-spacing: 2px;
       }
+
+      &-wrapper {
+        padding: 16px;
+      }
     }
     &__content {
       font-size: 1.5rem;
       font-family: 'Lato', sans-serif;
+      color: #ebebeb;
 
+      &--stacks-list {
+        padding: 0;
+        margin: 1rem;
+        list-style-type: none;
+        font-style: italic;
+
+        &--wrapper {
+          padding: 2rem;
+          border: 1px solid white;
+        }
+      }
     }
   }
   .viewer {

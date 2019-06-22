@@ -224,7 +224,7 @@
   }
   .projects {
     height: 100%;
-    background-color: rgb(0, 1, 2);
+    background-color: #0b0c10;;
 
     & .nav--link {
       font-size: 1.2rem
