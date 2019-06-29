@@ -1,11 +1,16 @@
 package com.ljheidrick.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mysql.fabric.xmlrpc.base.Array;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +45,10 @@ public class Projects {
         @OneToMany
         @JoinColumn(name = "files_id")
         private List<Files> files;
+
+        @Nullable
+        @ElementCollection
+        private List<String> techStack = new ArrayList<String>();
 
         public Projects() {
 
@@ -113,5 +122,13 @@ public class Projects {
 
         public void setUser(User user) {
             this.user = user;
+        }
+
+        public Optional<List<String>> getTechStack () {
+            return Optional.ofNullable(techStack);
+        }
+
+        public void setTechStatck (List<String> techStack) {
+            this.techStack = techStack;
         }
 }

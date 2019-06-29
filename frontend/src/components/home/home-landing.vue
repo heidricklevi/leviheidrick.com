@@ -16,48 +16,33 @@
         >
           <div>
 
-              <h1 class="playfair-font
+            <h1 
+              :class="{ 'display-3': $vuetify.breakpoint.smAndUp, 'display-2': $vuetify.breakpoint.xsOnly }"
+              class="playfair-font
                          playfair-font-bold
                          grey--text text--lighten-2
                          extra-letter-spacing-intro
                          py-2
                          d-inline-block
                          text-uppercase"
-                  :class="{ 'display-3': $vuetify.breakpoint.smAndUp, 'display-2': $vuetify.breakpoint.xsOnly }"
-              >
+            >
 
-                software Developer.
-              </h1>
-            </div>
-            <div class="py-3">
-              <v-btn
-                :to="{ path: '/contact' }"
-                dark
-                flat
-                large
-                outline
-                color="grey"
-              >
-                Get in touch
-              </v-btn>
-            </div>
+              software Developer.
+            </h1>
+          </div>
+          <div class="py-3">
+            <v-btn
+              :to="{ path: '/contact' }"
+              dark
+              flat
+              large
+              outline
+              color="grey"
+            >
+              Get in touch
+            </v-btn>
+          </div>
         </v-flex>
-        <!--<div >-->
-          <!--<v-btn-->
-            <!--@click="$vuetify.goTo('#experience-container', {-->
-              <!--offset: -59-->
-            <!--})"-->
-            <!--outline-->
-            <!--fab-->
-            <!--dark-->
-            <!--large-->
-            <!--right-->
-            <!--color="#ffb74d"-->
-
-          <!--&gt;-->
-            <!--<v-icon ref="fab&#45;&#45;arrow" dark class="animated bounce">arrow_downward</v-icon>-->
-          <!--</v-btn>-->
-        <!--</div>-->
       </v-layout>
 
     </v-container>
@@ -65,23 +50,23 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
-    export default {
-        name: "home-intro",
-        data() {
-          return {
+  import {mapGetters} from 'vuex'
+  export default {
+    name: "HomeIntro",
+    data() {
+      return {
 
-          }
-        },
-      computed: {
-        ...mapGetters('resume/', ['resume'])
       }
+    },
+    computed: {
+      ...mapGetters('resume/', ['resume'])
     }
+  }
 </script>
 
 <style lang="stylus" scoped>
   .landing--wrap {
-    background-color: rgb(0, 1, 2);
+    background-color: #0b0c10;
     height: 100% !important;
   }
   .home__intro {

@@ -102,55 +102,6 @@
         <PageTransition>
           <router-view name="projectDetails"/>
         </PageTransition>
-        <!--<template v-for="project in projects">-->
-        <!--<v-flex :key="project.id" xs12 sm6 md4 lg3 class="ml-2 mt-2">-->
-        <!--<v-card-->
-        <!--raised-->
-        <!--ripple-->
-        <!--dark-->
-        <!--&gt;-->
-        <!--<div-->
-        <!--&gt;-->
-        <!--<v-container fluid fill-height>-->
-        <!--<v-layout fill-height>-->
-        <!--<v-flex xs12 align-center text-xs-center>-->
-        <!--<a :href="project.url" class="light-blue&#45;&#45;text text&#45;&#45;darken-2">-->
-        <!--<h3 class="display-1 font-weight-medium" >{{project.title}}</h3>-->
-        <!--</a>-->
-        <!--<v-flex v-if="hasHighestCredentials" text-xs-right xs12 class="force-top-right">-->
-        <!--<v-btn to="/admin/projects" small icon flat color="primary"><v-icon small color="error">remove_red_eye</v-icon></v-btn>-->
-        <!--</v-flex>-->
-        <!--</v-flex>-->
-        <!--</v-layout>-->
-        <!--</v-container>-->
-        <!--<template-->
-        <!--v-for="(img, index) in project.files">-->
-        <!--<v-img-->
-        <!--:key="index"-->
-        <!--v-if="img.isBacksplash"-->
-        <!--:src="img.fileUrl"-->
-        <!--aspect-ratio="2.33"-->
-        <!--&gt;</v-img>-->
-        <!--</template>-->
-        <!--</div>-->
-        <!--<v-divider></v-divider>-->
-        <!--<v-card-actions>-->
-        <!--<h5>-->
-        <!--View Details-->
-        <!--</h5>-->
-        <!--<v-spacer></v-spacer>-->
-        <!--<v-btn icon-->
-        <!--dark-->
-        <!--primary-->
-        <!--@click.prevent="viewDetails(project)"-->
-        <!--:to="{name: 'project-details', params: { name: project.title }}"-->
-        <!--&gt;-->
-        <!--<v-icon class="white&#45;&#45;text">arrow_right</v-icon>-->
-        <!--</v-btn>-->
-        <!--</v-card-actions>-->
-        <!--</v-card>-->
-        <!--</v-flex>-->
-        <!--</template>-->
         <v-btn 
           v-if="$vuetify.breakpoint.smAndDown && $route.fullPath !== '/projects'" 
           style="z-index: 10" 

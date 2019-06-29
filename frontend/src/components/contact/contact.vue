@@ -235,7 +235,7 @@
     flex-wrap: wrap;
   }
   .contact__container {
-    background-color: rgb(0, 1, 2);
+    background-color: #0b0c10;
   }
   .g-recaptcha {
     transform:scale(0.77);

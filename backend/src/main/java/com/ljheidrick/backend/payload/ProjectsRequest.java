@@ -9,6 +9,7 @@ public class ProjectsRequest {
     private String title;
     private String content;
     private List<Files> files;
+    private List<String> techStack;
 
     public String getUrl() {
         return url;
@@ -40,5 +41,13 @@ public class ProjectsRequest {
 
     public void setFiles(List<Files> files) {
         this.files = files;
+    }
+
+    public void setTechStack(List<String> techStack) {
+        this.techStack = techStack;
+    }
+
+    public List<String> getTechStack() {
+        return techStack;
     }
 }

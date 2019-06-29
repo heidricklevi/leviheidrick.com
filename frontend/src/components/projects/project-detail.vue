@@ -20,19 +20,18 @@
             v-if="project" 
             id="contentWrapper" 
             ref="contentWrapper" 
-            xs11 
+            xs12
             text-sm-left 
             md8 
             class="mb-5 project-detail__content-wrapper">
             <v-card 
               elevation="24"
-              class="pa-4" 
+              class="pa-2" 
               color="#0b0c12">
               <v-flex 
                 id="headingWrapper" 
                 ref="headingWrapper" 
-                xs12 
-                align-center 
+                xs12  
                 class="project-detail__heading-wrapper">
                 <div 
                   v-if="project" 
@@ -44,11 +43,14 @@
                 </div>
               </v-flex>
               <v-card-text 
-                class="project-detail__content">
-                <content-render :content="project.content" />
+                class="project-detail__content pa-0">
+                <content-render 
+                  :content="project.content" 
+                  class="content-render" />
               </v-card-text>
             </v-card>
             <v-card 
+              v-if="project.techStack && project.techStack.length > 0"
               elevation="24"
               class="pa-4 my-3 project-detail__content--stacks-list--wrapper" 
               color="#0b0c14">
@@ -75,8 +77,9 @@
                     xs12 
                     md6>
                     <ul class="project-detail__content project-detail__content--stacks-list">
-                      <li 
-                        v-for="item in stack"
+                      <li
+                        
+                        v-for="item in project.techStack"
                         :key="item" 
                         class="text--lighten-1 grey--text">
                         #{{ item }}
@@ -90,6 +93,7 @@
         </v-layout>
       </v-flex>
       <v-flex 
+        v-if="project.files && Array.isArray(project.files) && project.files.length > 0"
         xs12 
         style="background-color: white">
         <v-layout 
@@ -174,18 +178,6 @@
       this.fetchProjectByTitle(to.params.name).then(() => {});
       next();
     },
-    data() {
-      return {
-        stack: [
-          'VueJS',
-          'Vuetify',
-          'Digital Ocean',
-          'Django',
-          'Python',
-          'MailGun'
-        ]
-      }
-    },
     computed: {
       ...mapGetters('projects/', [
         'responseStatus',
@@ -224,8 +216,23 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 
+  .content-render {
+    &__list {
+      list-style-type: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 16px;
+      padding: 0;
+      margin-bottom: 2rem;
+
+      li {
+        display: flex;
+        align-items: center;
+        margin: 0.5rem 0 0 1rem;
+      }
+    }
+  }
   svg {
     position: absolute;
     bottom: 0;
@@ -243,10 +250,6 @@
         font-weight: lighter;
         text-transform: uppercase;
         letter-spacing: 2px;
-      }
-
-      &-wrapper {
-        padding: 16px;
       }
     }
     &__content {

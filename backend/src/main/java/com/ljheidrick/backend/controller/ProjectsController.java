@@ -81,6 +81,7 @@ public class ProjectsController {
         projects.setTitle(project.getTitle());
         projects.setContent(project.getContent());
         projects.setUrl(project.getUrl());
+        projects.setTechStatck(project.getTechStack());
         projectsRepository.save(projects);
         return projectsRepository.findAll();
     }
