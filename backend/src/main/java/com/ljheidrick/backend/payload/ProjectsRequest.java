@@ -10,6 +10,7 @@ public class ProjectsRequest {
     private String content;
     private List<Files> files;
     private List<String> techStack;
+    private String githubLink;
 
     public String getUrl() {
         return url;
@@ -49,5 +50,13 @@ public class ProjectsRequest {
 
     public List<String> getTechStack() {
         return techStack;
+    }
+
+    public String getGithubLink() {
+        return githubLink;
+    }
+
+    public void setGithubLink(String githubLink) {
+        this.githubLink = githubLink;
     }
 }

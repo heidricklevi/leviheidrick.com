@@ -50,6 +50,8 @@
         <td class="text-xs-left admin__projects__td--content overflow-hidden">{{ props.item.content }}</td>
         <td class="text-xs-left overflow-hidden">{{ props.item.files }}</td>
         <td class="text-xs-left overflow-hidden">{{ props.item.techStack }}</td>
+        <td class="text-xs-left overflow-hidden">{{ props.item.githubLink }}</td>
+
         <td>
 
           <v-menu 
@@ -150,6 +152,8 @@
           { text: 'Content', value: 'content' },
           { text: 'File URLs', value: 'File Urls'},
           { text: 'Tech Stack', value: 'Tech Stack'},
+          { text: 'Github Link', value: 'Github Link'},
+
           { text: 'Actions', value: 'Actions'}
         ],
 

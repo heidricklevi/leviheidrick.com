@@ -25,8 +25,8 @@
             md8 
             class="mb-5 project-detail__content-wrapper">
             <v-card 
-              elevation="24"
-              class="pa-2" 
+              elevation="6"
+              class="pa-4" 
               color="#0b0c12">
               <v-flex 
                 id="headingWrapper" 
@@ -48,10 +48,29 @@
                   :content="project.content" 
                   class="content-render" />
               </v-card-text>
+              <v-flex 
+                xs12 
+                text-xs-right
+                class="px-3 py-2">
+                <v-btn
+                  v-if="project.githubLink"
+                  :href="project.githubLink"
+                  class="mx-3"
+                  target="_blank"
+                  icon 
+                  right><v-icon large>fab fa-github</v-icon></v-btn>
+                <v-btn
+                  v-if="project.url"
+                  :href="project.url"
+                  class="ml-3"
+                  target="_blank"
+                  icon 
+                  right><v-icon large>fas fa-external-link-alt</v-icon></v-btn>
+              </v-flex>
             </v-card>
             <v-card 
               v-if="project.techStack && project.techStack.length > 0"
-              elevation="24"
+              elevation="6"
               class="pa-4 my-3 project-detail__content--stacks-list--wrapper" 
               color="#0b0c14">
               <v-card-text >
@@ -78,7 +97,6 @@
                     md6>
                     <ul class="project-detail__content project-detail__content--stacks-list">
                       <li
-                        
                         v-for="item in project.techStack"
                         :key="item" 
                         class="text--lighten-1 grey--text">
@@ -207,8 +225,8 @@
         const content = document.getElementById('contentWrapper');
         const heading = document.getElementById('headingWrapper');
         const svg = document.getElementById('contentSeparator');
-        const shape = svg.getBoundingClientRect();
-        if (content && heading && projectContainer) {
+        const shape = svg ? svg.getBoundingClientRect() : false;
+        if (content && heading && projectContainer && shape) {
           projectContainer.style.minHeight = `${content.offsetHeight + heading.offsetHeight + shape.height}px`;
         }
       }

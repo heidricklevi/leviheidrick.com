@@ -55,7 +55,11 @@
             label="Add Tech Stacks to this list or remove"
             multiple
           /></v-flex>
-
+          <v-flex xs12><v-text-field
+            v-model="copyPropProject.githubLink"
+            label="Project Github Link"
+            dark
+          /></v-flex>
         </v-layout>
       </v-container>
     </v-card>
@@ -77,7 +81,7 @@
     },
     computed: {
       copyPropProject() {
-        return this.project || { title: '', url: '', content: '', techStack: [] };
+        return this.project || { title: '', url: '', content: '', techStack: [], githubLink: '' };
       }
     },
     mounted() {
