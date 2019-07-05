@@ -1,7 +1,5 @@
 <template>
-  <v-content>
-
-  </v-content>
+  <v-content/>
 </template>
 
 <script>
@@ -14,19 +12,19 @@
       Experience,
       Breadcrumbs
     },
-    created() {
-      this.$store.dispatch('auth/checkAuth');
+    data () {
+      return {
+        drawer: false,
+
+      }
     },
     computed: {
       auth() {
         return this.$store.getters['auth/auth'];
       }
     },
-    data () {
-      return {
-        drawer: false,
-
-      }
+    created() {
+      this.$store.dispatch('auth/checkAuth');
     },
 
     methods: {

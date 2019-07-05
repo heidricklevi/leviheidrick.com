@@ -1,61 +1,65 @@
 <template>
   <v-layout justify-center>
-    <v-flex xs12 xl8>
-       <v-card
-          raised
-          class="experience__card terminal__nav"
-        >
+    <v-flex 
+      xs12 
+      xl8>
+      <v-card
+        raised
+        class="experience__card terminal__nav"
+      >
 
-            <div class="terminal__nav__buttons terminal__nav__buttons--close"></div>
-            <div class="terminal__nav__buttons terminal__nav__buttons--minimize"></div>
-            <div class="terminal__nav__buttons terminal__nav__buttons--zoom"></div>
+        <div class="terminal__nav__buttons terminal__nav__buttons--close"/>
+        <div class="terminal__nav__buttons terminal__nav__buttons--minimize"/>
+        <div class="terminal__nav__buttons terminal__nav__buttons--zoom"/>
 
-            <v-card-text class="terminal__main">
+        <v-card-text class="terminal__main">
 
-              <p class="line1 line-title blue-grey--text font-weight-bold">[~/work] $ ./position-details.sh</p>
-              <p class="line2">
-                <span class="line2 my-1"><v-icon small>fas fa-briefcase</v-icon> | {{ positionDetails.company }}</span>
-                <br>
-                <span class="line2 my-1"><v-icon small>location_city</v-icon> | {{ positionDetails.companyLocation }}</span>
-                <br>
-                <span class="line2 my-1"><v-icon small>person</v-icon> | {{ positionDetails.title }}</span>
-                <br>
-                <span class="line2 my-1"><v-icon small>timelapse</v-icon> | {{ positionDetails.timespan }}</span>
-              </p>
-              <p class="line3 white--text font-weight-bold mt-5">
-                <i>Key roles and responsibilities</i>
-              </p>
-              <ul class="line3">
-                <template v-for="role in positionDetails.positionRoles">
-                  <li class="line3 blue-grey--text text--lighten-2 pb-1">{{ role }}</li>
-                </template>
-              </ul>
-              <p class="line4">><span class="cursor4">_</span></p>
+          <p class="line1 line-title blue-grey--text font-weight-bold">[~/work] $ ./position-details.sh</p>
+          <p class="line2">
+            <span 
+              v-if="positionDetails.company" 
+              class="line2 my-1"><v-icon small>fas fa-briefcase</v-icon> | {{ positionDetails.company }}</span>
+            <br>
+            <span 
+              v-if="positionDetails.companyLocation" 
+              class="line2 my-1"><v-icon small>location_city</v-icon> | {{ positionDetails.companyLocation }}</span>
+            <br>
+            <span 
+              v-if="positionDetails.title" 
+              class="line2 my-1"><v-icon small>person</v-icon> | {{ positionDetails.title }}</span>
+            <br>
+            <span 
+              v-if="positionDetails.timespan" 
+              class="line2 my-1"><v-icon small>timelapse</v-icon> | {{ positionDetails.timespan }}</span>
+          </p>
+          <p class="line3 white--text font-weight-bold mt-5">
+            <i>Key roles and responsibilities</i>
+          </p>
+          <ul class="line3">
+            <template v-for="role in positionDetails.positionRoles">
+              <li class="line3 blue-grey--text text--lighten-2 pb-1">{{ role }}</li>
+            </template>
+          </ul>
+          <p class="line4">><span class="cursor4">_</span></p>
 
-            </v-card-text>
-        </v-card>
+        </v-card-text>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-    export default {
-      name: "experience-terminal",
-      props: [
-        'optionalProps',
-        'isClicked',
-      ],
-      mounted () {
-        if (this.isClicked) {
-          this.$vuetify.goTo('.line1');
-        }
-      },
-      computed: {
-        positionDetails () {
-          return this.optionalProps;
-        }
-      },
-    }
+  export default {
+    name: "ExperienceTerminal",
+    props: [
+      'optionalProps'
+    ],
+    computed: {
+      positionDetails () {
+        return this.optionalProps;
+      }
+    },
+  }
 </script>
 
 <style lang="stylus" scoped>

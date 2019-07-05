@@ -117,6 +117,7 @@ export default new Router({
       name: 'projects',
       component: Projects,
       meta: {
+        transitionName: 'slide',
         breadcrumb: [
           {
             text: "Home",
@@ -130,34 +131,38 @@ export default new Router({
             disabled: true,
           }
         ]
-      }
-    },
-
-    {
-      name: 'project-details',
-      path: '/projects/:name',
-      component: ProjectDetail,
-      meta: {
-        breadcrumb: [
-          {
-            text: "Home",
-            url: "/",
-            disabled: false,
+      },
+      children: [
+        {
+          name: 'project-details',
+          path: ':name',
+          components: {
+            projectDetails: ProjectDetail,
           },
+          meta: {
+            transitionName: 'slide',
+            breadcrumb: [
+              {
+                text: "Home",
+                url: "/",
+                disabled: false,
+              },
 
-          {
-            text: "Projects",
-            url: "/projects",
-            disabled: false,
-          },
+              {
+                text: "Projects",
+                url: "/projects",
+                disabled: false,
+              },
 
-          {
-            text: "Details",
-            url: "/projects/details",
-            disabled: true,
+              {
+                text: "Details",
+                url: "/projects/details",
+                disabled: true,
+              }
+            ]
           }
-        ]
-      }
+        },
+      ]
     },
 
     {
@@ -185,6 +190,7 @@ export default new Router({
       name: 'about',
       component: About,
       meta: {
+        transitionName: 'slide',
         breadcrumb: [
           {
             text: "Home",
@@ -206,6 +212,7 @@ export default new Router({
       name: 'contact',
       component: Contact,
       meta: {
+        transitionName: 'slide',
         breadcrumb: [
           {
             text: "Home",

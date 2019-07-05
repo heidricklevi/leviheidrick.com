@@ -1,9 +1,10 @@
 <template>
   <div>
-    <v-btn v-if="hasHighestCredentials"
-           @click.prevent="createDialogClick"
-           icon
-           dark
+    <v-btn 
+      v-if="hasHighestCredentials"
+      icon
+      dark
+      @click.prevent="createDialogClick"
     >
       <v-icon>add</v-icon>
       Create
@@ -20,7 +21,9 @@
       dark
     >
 
-      <template slot="headerCell" slot-scope="props">
+      <template 
+        slot="headerCell" 
+        slot-scope="props">
         <v-tooltip bottom>
           <span slot="activator">
             {{ props.header.text }}
@@ -31,24 +34,29 @@
         </v-tooltip>
       </template>
       <template
-        style="max-height: 200px;"
         slot="items"
         slot-scope="props"
+        style="max-height: 200px;"
       >
         <td>
           <v-checkbox
             v-model="props.selected"
             primary
             hide-details
-          ></v-checkbox>
+          />
         </td>
         <td>{{ props.item.title }}</td>
         <td class="text-xs-left">{{ props.item.url }}</td>
         <td class="text-xs-left admin__projects__td--content overflow-hidden">{{ props.item.content }}</td>
         <td class="text-xs-left overflow-hidden">{{ props.item.files }}</td>
+        <td class="text-xs-left overflow-hidden">{{ props.item.techStack }}</td>
+        <td class="text-xs-left overflow-hidden">{{ props.item.githubLink }}</td>
+
         <td>
 
-          <v-menu bottom left>
+          <v-menu 
+            bottom 
+            left>
             <v-btn
               slot="activator"
               dark
@@ -63,16 +71,20 @@
                   <v-list-tile-title>Edit</v-list-tile-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
-                  <v-icon small class="blue-grey--text">edit</v-icon>
+                  <v-icon 
+                    small 
+                    class="blue-grey--text">edit</v-icon>
                 </v-list-tile-action>
               </v-list-tile>
-              <v-divider></v-divider>
+              <v-divider/>
               <v-list-tile @click="deleteProject(props.item)">
                 <v-list-tile-content>
                   <v-list-tile-title>Delete</v-list-tile-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
-                  <v-icon small color="error">remove</v-icon>
+                  <v-icon 
+                    small 
+                    color="error">remove</v-icon>
                 </v-list-tile-action>
               </v-list-tile>
             </v-list>
@@ -80,9 +92,15 @@
         </td>
 
       </template>
-      </v-data-table>
-    <create-project @on-save-project="saveProject" @on-dialog-click="createDialogClick" :dialog="createDialog"></create-project>
-    <edit-project @on-dialog-click="editDialogClick" :project="project" :edit-dialog="editDialog"></edit-project>
+    </v-data-table>
+    <create-project 
+      :dialog="createDialog" 
+      @on-save-project="saveProject" 
+      @on-dialog-click="createDialogClick"/>
+    <edit-project 
+      :project="project" 
+      :edit-dialog="editDialog" 
+      @on-dialog-click="editDialogClick"/>
     <v-dialog
       v-model="alertDelete"
       width="500"
@@ -92,12 +110,20 @@
         class="text-xs-center"
       >
         <v-card-title>
-          <h5 class="headline">Are you sure you want to delete this project <span class="blue-grey--text">{{projectToDelete.title}}</span></h5>
+          <h5 class="headline">Are you sure you want to delete this project <span class="blue-grey--text">{{ projectToDelete.title }}</span></h5>
         </v-card-title>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn flat outline color="error" @click.prevent="deleteProject(projectToDelete)">Yes</v-btn>
-          <v-btn flat outline color="warning" @click.prevent="alertDelete = false">No</v-btn>
+          <v-spacer/>
+          <v-btn 
+            flat 
+            outline 
+            color="error" 
+            @click.prevent="deleteProject(projectToDelete)">Yes</v-btn>
+          <v-btn 
+            flat 
+            outline 
+            color="warning" 
+            @click.prevent="alertDelete = false">No</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -109,11 +135,8 @@
   import CreateProject from '../projects/create-project.vue';
 
   export default {
-    name: 'admin-projects',
+    name: 'AdminProjects',
     components: { EditProject, CreateProject },
-    mounted() {
-      this.$store.dispatch('projects/fetchProjects');
-    },
     data () {
       return {
         search: '',
@@ -128,6 +151,9 @@
           { text: 'URL', value: 'url' },
           { text: 'Content', value: 'content' },
           { text: 'File URLs', value: 'File Urls'},
+          { text: 'Tech Stack', value: 'Tech Stack'},
+          { text: 'Github Link', value: 'Github Link'},
+
           { text: 'Actions', value: 'Actions'}
         ],
 
@@ -143,10 +169,13 @@
         alertDelete: false,
       }
     },
+    mounted() {
+      this.$store.dispatch('projects/fetchProjects');
+    },
     computed: {
       ...mapGetters('projects/', [
-          'projects'
-        ]),
+        'projects'
+      ]),
 
       ...mapGetters('auth/', [
         'hasHighestCredentials'

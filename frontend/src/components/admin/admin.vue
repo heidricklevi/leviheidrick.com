@@ -3,7 +3,7 @@
     <admin-nav-drawer @admin-nav-item-click="navItemClick" />
     <v-content>
       <v-container fluid>
-        <router-view></router-view>
+        <router-view/>
       </v-container>
     </v-content>
   </div>
@@ -15,7 +15,7 @@
 
 
   export default {
-    name: "admin",
+    name: "Admin",
     components: {
       AdminNavDrawer,
     },
