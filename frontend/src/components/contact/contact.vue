@@ -3,7 +3,8 @@
     class="contact__container"
     fluid
     fill-height
-  >
+    justify-center
+    align-center >
     <v-layout
       row
       wrap
@@ -39,8 +40,8 @@
           <v-flex 
             xs12 
             class="py-2 text-xs-center">
-            <h5 class="playfair-font display-2">Need to get in touch?</h5>
-            <span class="caption font-italic grey--text text--lighten-2"> Reach out below or shoot me an email at levi@leviheidrick.com</span>
+            <h5 class="playfair-font headline extra-letter-spacing">levi@leviheidrick.com</h5>
+            <span class="caption font-italic grey--text text--lighten-2"> OR </span>
 
           </v-flex>
           <v-flex 
@@ -236,6 +237,7 @@
   }
   .contact__container {
     background-color: #0b0c10;
+    height: 100%!important;
   }
   .g-recaptcha {
     transform:scale(0.77);

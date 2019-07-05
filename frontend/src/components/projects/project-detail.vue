@@ -26,7 +26,7 @@
             class="mb-5 project-detail__content-wrapper">
             <v-card 
               elevation="6"
-              class="pa-4" 
+              class="pl-4 pr-4 pt-4 pb-2" 
               color="#0b0c12">
               <v-flex 
                 id="headingWrapper" 
@@ -51,18 +51,18 @@
               <v-flex 
                 xs12 
                 text-xs-right
-                class="px-3 py-2">
+                class="mt-4 pb-0">
                 <v-btn
                   v-if="project.githubLink"
                   :href="project.githubLink"
-                  class="mx-3"
+                  class="mx-3 mb-0"
                   target="_blank"
                   icon 
                   right><v-icon large>fab fa-github</v-icon></v-btn>
                 <v-btn
                   v-if="project.url"
                   :href="project.url"
-                  class="ml-3"
+                  class="ml-3 mb-0"
                   target="_blank"
                   icon 
                   right><v-icon large>fas fa-external-link-alt</v-icon></v-btn>
@@ -228,7 +228,7 @@
         const shape = svg ? svg.getBoundingClientRect() : false;
         if (content && heading && projectContainer && shape) {
           projectContainer.style.minHeight = `${content.offsetHeight + heading.offsetHeight + shape.height}px`;
-        }
+        } else if (projectContainer) projectContainer.style.minHeight = 'auto';
       }
     },
   }

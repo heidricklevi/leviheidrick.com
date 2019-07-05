@@ -88,9 +88,16 @@
           <v-toolbar-side-icon 
             v-if="$vuetify.breakpoint.smAndDown" 
             @click.prevent="drawer = !drawer"/>
-          <!--<v-btn v-if="auth.isAuthenticated" @click.prevent="logout" flat color="error" dark>Logout</v-btn>-->
-          <!--<v-btn v-if="hasHighestCredentials" :to="{ path: '/admin/' }" color="warning">admin</v-btn>-->
-          <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/contact' }" flat dark>Contact</v-btn>-->
+          <v-btn 
+            v-if="auth.isAuthenticated" 
+            flat 
+            color="error" 
+            dark 
+            @click.prevent="logout">Logout</v-btn>
+          <v-btn 
+            v-if="hasHighestCredentials" 
+            :to="{ path: '/admin/' }" 
+            color="warning">admin</v-btn>
           <router-link 
             v-if="$vuetify.breakpoint.mdAndUp" 
             class="nav--link" 
@@ -99,7 +106,6 @@
             v-if="$vuetify.breakpoint.mdAndUp" 
             class="nav--link" 
             to="/about">about</router-link>
-          <!--<v-btn v-if="$vuetify.breakpoint.mdAndUp" :to="{ path: '/' }" @click.prevent="goTo('#section-skills')" dark flat>Skills</v-btn>-->
           <router-link 
             v-if="$vuetify.breakpoint.mdAndUp" 
             class="nav--link" 
@@ -113,15 +119,13 @@
       <page-transition>
         <router-view />
       </page-transition>
-      <!--<experience v-if="$route.fullPath === '/about'" />-->
-      <!--<skills-section v-if="$route.fullPath === '/about'" />-->
     </v-content>
     <v-footer
       app
       height="auto"
       color="#0b0c10"
       absolute
-      class="footer__border-top"
+      class="footer__border-top pt-4"
     >
       <v-layout
         row
@@ -133,19 +137,36 @@
         <v-flex 
           xs12 
           text-xs-center>
-          <span>&copy; 2019 Levi Heidrick</span>
+          <v-btn
+            v-if="footerLinks.linkedInLink"
+            :href="footerLinks.linkedInLink"
+            class="ma-2"
+            target="_blank"
+            icon 
+          ><v-icon>fab fa-linkedin-in</v-icon></v-btn>
+          <v-btn
+            v-if="footerLinks.githubLink"
+            :href="footerLinks.githubLink"
+            class="ma-2"
+            target="_blank"
+            icon 
+          ><v-icon>fab fa-github</v-icon></v-btn>
+          <v-btn
+            v-if="footerLinks.emailLink"
+            :href="footerLinks.emailLink"
+            class="ma-2"
+            icon 
+          ><v-icon>fas fa-envelope</v-icon></v-btn>
         </v-flex>
         <v-flex 
           xs12 
           text-xs-center>
-          <div class="caption">
-            <span>04/20/2019</span>
-            <span>v0.9.5</span>
-            <span class="font-italic orange--text text--lighten-2">
-              Full Launch Coming Soon
-            </span>
+          <span class="font-italic grey--text text--lighten-2">&copy; 2019 Levi Heidrick</span>
+          <div>
+            <span class="font-italic grey--text text--lighten-2 caption">v1.0.0</span>
           </div>
         </v-flex>
+        
       </v-layout>
     </v-footer>
   </v-app>
@@ -179,6 +200,11 @@
           text: 'Resume.pdf',
           icon: 'cloud_download',
           url: false
+        },
+        footerLinks: {
+          githubLink: 'https://github.com/heidricklevi',
+          linkedInLink: 'https://www.linkedin.com/in/leviheidrick/',
+          emailLink: 'mailto:levi@leviheidrick.com',
         }
       }
     },
@@ -295,6 +321,9 @@
       &-top {
         border-top-color #0b0c10;
       }
+    }
+    &__copy {
+      border-right 1px solid white;  
     }
   }
 
