@@ -23,18 +23,26 @@
         wrap 
         class="py-4">
         <v-flex 
-          v-for="skill in skillsList" 
-          :key="skill.text" 
+          v-for="skill in items" 
+          :key="skill.name" 
           class="text-xs-center" 
           xs4 
           md2 
           xlg1>
-          <v-chip ripple>
-            <v-avatar v-if="skill.imageURL">
-              <img :src="skill.imageURL">
+          <a 
+            :href="skill.url"
+            class="tech-skills__link pa-4" 
+            target="_blank">
+            <v-avatar 
+              v-if="skill.imageUrl" 
+              size="80"
+              tile>
+              <img :src="skill.imageUrl">
             </v-avatar>
-            {{ skill.text }}
-          </v-chip>
+            <div class="tech-skills__link-text">
+              {{ skill.name }}
+            </div>
+          </a>
         </v-flex>
       </v-layout>
     </v-container>
@@ -44,6 +52,12 @@
 <script>
   export default {
     name: "SkillsSection",
+    props: {
+      items: {
+        type: Array,
+        required: true,
+      }
+    },
     data() {
       return {
         skillsList: [
@@ -116,6 +130,21 @@
 </script>
 
 <style scoped lang="stylus">
+  .tech-skills {
+    &__link {
+      display block;
+      text-decoration none
+      color inherit
+
+      &:hover {
+        transform scale(1.2);  
+      }
+
+      &-text {
+        padding-top 0.5rem;  
+      }  
+    }
+  }
   .header-tech {
     font-family: 'Lato', sans-serif;
     font-size 2rem

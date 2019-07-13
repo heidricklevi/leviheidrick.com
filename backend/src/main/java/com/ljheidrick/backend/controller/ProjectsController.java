@@ -42,6 +42,7 @@ public class ProjectsController {
 
 
     @PostMapping("/projects/submit")
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
     public ResponseEntity<?> createProject(@CurrentUser UserPrincipal userPrincipal, @Valid @RequestBody ProjectsRequest project) {
         Date date = new Date();
         String username = userPrincipal.getUsername();
