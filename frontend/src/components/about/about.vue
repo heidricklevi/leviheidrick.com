@@ -78,7 +78,7 @@
 
       </v-flex>
       <v-flex xs12>
-        <skills-section />
+        <skills-section :items="techSkills"/>
       </v-flex>
     </v-layout>
 
@@ -88,6 +88,8 @@
 <script>
   import SkillsSection from "../home/skills-section.vue"
   import Experience from "../experience/experience.vue";
+  import { mapActions, mapGetters } from 'vuex';
+
   export default {
     name: "About",
     components: {
@@ -139,6 +141,19 @@
           },
         ]
       }
+    },
+    computed: {
+      ...mapGetters('techSkills/', [
+        'techSkills',
+      ])
+    },
+    mounted() {
+      this.fetchTechSkills();
+    },
+    methods: {
+      ...mapActions('techSkills/', [
+        'fetchTechSkills',
+      ])
     },
 
   }
