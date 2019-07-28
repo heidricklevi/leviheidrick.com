@@ -21,7 +21,7 @@ const mutations = {
 };
 
 const actions = {
-  fetchTechSkills({getters, commit}) {
+  fetchTechSkills({commit}) {
     commit('loading/loadingUpdate', null, { root: true });
     commit('responseStatusUpdate', false);
 
@@ -47,7 +47,7 @@ const actions = {
     });
   },
 
-  deleteProjectById({getters, commit}, id) {
+  deleteProjectById({commit}, id) {
     commit('loading/loadingUpdate', null, { root: true });
     commit('responseStatusUpdate', false);
 
@@ -56,12 +56,13 @@ const actions = {
       commit('loading/loadingUpdate', null, { root: true });
     }).catch((err) => {
       commit('loading/loadingUpdate', null, { root: true });
+      // eslint-disable-next-line no-console
       console.log(err.response.data.error);
       commit('responseStatusUpdate', err.response.data)
     });
   },
 
-  updateTechSkillsById({getters, commit}, techSkill) {
+  updateTechSkillsById({commit}, techSkill) {
     commit('loading/loadingUpdate', null, { root: true });
     commit('responseStatusUpdate', false);
 
@@ -73,7 +74,6 @@ const actions = {
       commit('responseStatusUpdate', err.response.data)
     });
   }
-
 };
 
 
