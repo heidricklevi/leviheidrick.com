@@ -11,6 +11,7 @@ public class AboutRequest {
   private String content;
   @NotBlank
   private String mainTitle;
+  private Boolean isActive = false;
 
   public String getImageUrl() {
     return imageUrl;
@@ -45,10 +46,19 @@ public class AboutRequest {
   }
 
   public AboutRequest(@NotBlank String imageUrl, @NotBlank String positionTitle, @NotBlank String content,
-      @NotBlank String mainTitle) {
+      @NotBlank String mainTitle, Boolean isActive) {
     this.imageUrl = imageUrl;
     this.positionTitle = positionTitle;
     this.content = content;
     this.mainTitle = mainTitle;
+    this.isActive = isActive;
+  }
+
+  public Boolean getIsActive() {
+    return isActive;
+  }
+
+  public void setIsActive(Boolean isActive) {
+    this.isActive = isActive;
   }
 }

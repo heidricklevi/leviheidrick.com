@@ -9,6 +9,7 @@ import admin from './modules/admin';
 import resume from './modules/resume';
 import contact from './modules/contact';
 import techSkills from './modules/techSkills';
+import about from './modules/about';
 
 
 Vue.use(Vuex);
@@ -24,6 +25,7 @@ export default new Vuex.Store({
     resume,
     contact,
     techSkills,
+    about,
   },
   strict: debug,
 })

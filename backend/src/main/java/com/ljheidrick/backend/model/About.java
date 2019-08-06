@@ -26,6 +26,8 @@ public class About {
     @NotBlank
     private String mainTitle;
 
+    private Boolean isActive = false;
+
     @NotBlank
     @Lob
     private String content;
@@ -43,11 +45,12 @@ public class About {
 
     }
 
-    public About (String positionTitle, String imageUrl, String content, String mainTitle) {
+    public About (String positionTitle, String imageUrl, String content, String mainTitle, Boolean isActive) {
         this.positionTitle = positionTitle;
         this.imageUrl = imageUrl;
         this.content = content;
         this.mainTitle = mainTitle;
+        this.isActive = isActive;
     }
 
     public String getPositionTitle() {
@@ -96,5 +99,13 @@ public class About {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public Boolean getIsActive() {
+    return isActive;
+  }
+
+  public void setIsActive(Boolean isActive) {
+    this.isActive = isActive;
   }
 }

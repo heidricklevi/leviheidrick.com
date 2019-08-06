@@ -40,9 +40,8 @@
         items: [
           { icon: 'attachment', text: 'Resume', url: '/admin/resume' },
           { icon: 'folder', text: 'Projects', url: '/admin/projects' },
-          { icon: 'history', text: 'History' },
-          { icon: 'featured_play_list', text: 'Playlists' },
-          { icon: 'watch_later', text: 'Watch Later' }
+          { icon: 'about', text: 'About', url: '/admin/about' },
+
         ],
       }
     },
