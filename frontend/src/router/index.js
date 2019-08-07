@@ -11,6 +11,8 @@ import AdminProjects from '../components/admin/admin-projects'
 import AdminResume from '../components/admin/admin-resume';
 import About from '../components/about/about';
 import Contact from '../components/contact/contact';
+import AdminAbout from '../components/admin/admin-about';
+
 
 /* eslint-disable */
 
@@ -81,6 +83,29 @@ export default new Router({
         {
           path: 'resume',
           component: AdminResume,
+          meta: {
+            breadcrumb: [
+              {
+                text: "Home",
+                url: "/",
+                disabled: false,
+              },
+              {
+                text: "Admin",
+                url: "/admin",
+                disabled: false,
+              },
+              {
+                text: "Resume",
+                url: "/admin",
+                disabled: true,
+              }
+            ]
+          }
+        },
+        {
+          path: 'about',
+          component: AdminAbout,
           meta: {
             breadcrumb: [
               {
