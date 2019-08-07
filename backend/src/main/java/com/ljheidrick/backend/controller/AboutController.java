@@ -46,7 +46,7 @@ public class AboutController {
     ResponseEntity<?> createAbout(@CurrentUser UserPrincipal userPrincipal, @Valid @RequestBody AboutRequest aboutRequest) {
       String username = userPrincipal.getUsername();
       User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User"));
-      About about = new About (aboutRequest.getPositionTitle(), aboutRequest.getImageUrl(), aboutRequest.getContent(), aboutRequest.getMainTitle());
+      About about = new About (aboutRequest.getPositionTitle(), aboutRequest.getImageUrl(), aboutRequest.getContent(), aboutRequest.getMainTitle(), aboutRequest.getIsActive());
       about.setUser(user);
       aboutRepository.save(about);
       return ResponseEntity.ok().body(new ApiResponse(true, "Created Project"));
@@ -62,6 +62,7 @@ public class AboutController {
       about.setImageUrl(aboutRequest.getImageUrl());
       about.setMainTitle(aboutRequest.getMainTitle());
       about.setPositionTitle(aboutRequest.getPositionTitle());
+      about.setIsActive(aboutRequest.getIsActive());
       aboutRepository.save(about);
 
       return ResponseEntity.ok().body(new ApiResponse(true, "Updated Project"));

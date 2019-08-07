@@ -49,8 +49,12 @@
         <td class="text-xs-left">{{ props.item.imageUrl }}</td>
         <td class="text-xs-left admin__projects__td--content overflow-hidden">{{ props.item.content }}</td>
         <td class="text-xs-left overflow-hidden">{{ props.item.positionTitle }}</td>
-        <!-- <td class="text-xs-left overflow-hidden">{{ props.item.techStack }}</td>
-        <td class="text-xs-left overflow-hidden">{{ props.item.githubLink }}</td> -->
+        <td class="text-xs-left overflow-hidden">
+          <v-switch 
+            v-model="props.item.isActive" 
+            disabled />
+        </td>
+        <!-- <td class="text-xs-left overflow-hidden">{{ props.item.githubLink }}</td> -->
 
         <td>
 
@@ -152,7 +156,7 @@
           { text: 'Image Url', value: 'url' },
           { text: 'Content', value: 'content' },
           { text: 'Position Title', value: 'Position Title'},
-          // { text: 'Tech Stack', value: 'Tech Stack'},
+          { text: 'Is Active', value: 'Active'},
           // { text: 'Github Link', value: 'Github Link'},
 
           { text: 'Actions', value: 'Actions'}

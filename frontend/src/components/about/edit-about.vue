@@ -16,7 +16,7 @@
           @click.native="$emit('on-dialog-click')">
           <v-icon>close</v-icon>
         </v-btn>
-        <v-toolbar-title>Edit a Project</v-toolbar-title>
+        <v-toolbar-title>Edit About</v-toolbar-title>
         <v-spacer/>
         <v-toolbar-items>
           <v-btn 
@@ -54,6 +54,11 @@
             label="positionTitle"
             dark
           /></v-flex>
+          <v-flex xs12><v-switch
+            v-model="copyPropAbout.isActive"
+            label="positionTitle"
+            dark
+          /></v-flex>
         </v-layout>
       </v-container>
     </v-card>
@@ -70,16 +75,14 @@
     ],
     computed: {
       copyPropAbout() {
-        return this.aboutDetails || { mainTitle: '', imageUrl: '', content: '', positionTitle: ''};
+        return this.aboutDetails || { mainTitle: '', imageUrl: '', content: '', positionTitle: '', isActive: false};
       }
     },
 
     methods: {
       onProjectSave() {
         const updatedProject = Object.assign({}, this.copyPropAbout);
-        this.$store.dispatch('about/updateAboutById', updatedProject).then(() => {
-
-        })
+        this.$store.dispatch('about/updateAboutById', updatedProject);
       }
     }
   }
