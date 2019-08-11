@@ -78,8 +78,6 @@
             @click="drawer = !drawer">
             <v-icon >close</v-icon>
           </v-btn>
-
-
         </v-toolbar>
         <v-divider/>
         <v-list class="mt-4 text-xs-center">
@@ -99,9 +97,11 @@
       <v-layout 
         row 
         wrap>
-        <PageTransition>
-          <router-view name="projectDetails"/>
-        </PageTransition>
+        <page-transition>
+          <router-view 
+            :key="$route.params.name" 
+            name="projectDetails"/>
+        </page-transition>
         <v-btn 
           v-if="$vuetify.breakpoint.smAndDown && $route.fullPath !== '/projects'" 
           style="z-index: 10" 
@@ -160,7 +160,9 @@
         this.drawer = false;
         this.$router.push({
           path: `/projects/${encodeURIComponent(project.title)}`,
-          params: { name: encodeURIComponent(project.title) }
+          params: { 
+            name: encodeURIComponent(project.title) 
+          }
         });
       }
     },
