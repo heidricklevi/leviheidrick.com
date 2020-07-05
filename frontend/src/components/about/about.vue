@@ -4,6 +4,7 @@
     fill-height
     pa-0
     class="about--wrap"
+
   >
     <v-layout
       row
@@ -11,6 +12,7 @@
       justify-center
     >
       <v-flex
+        v-if="aboutDetails"
         xs12
         align-self-center
         text-xs-center
@@ -24,12 +26,14 @@
           class="elevation-15"
         >
           <v-img
-            src="/static/levi-heidrick1.png"
+            v-if="aboutDetails.imageUrl"
+            :src="aboutDetails.imageUrl"
           />
         </v-avatar>
       </v-flex>
 
       <v-flex
+        v-if="aboutDetails"
         :justify-start="$vuetify.breakpoint.mdAndUp"
         :justify-center="$vuetify.breakpoint.smAndDown"
         xs12
@@ -39,9 +43,12 @@
       >
         <div class="text-xs-center text-md-center">
           <h5
+            v-if="aboutDetails.mainTitle"
             class="playfair-font text-uppercase blue-grey--text text--lighten-3 display-3"
-          > Levi Heidrick</h5>
-          <p class="text-xs-center title playfair-font font-italic blue-grey--text text--lighten-1">Full-Stack Web Developer</p>
+          > {{ aboutDetails.mainTitle }}</h5>
+          <p 
+            v-if="aboutDetails.positionTitle" 
+            class="text-xs-center title playfair-font font-italic blue-grey--text text--lighten-1">{{ aboutDetails.positionTitle }}</p>
         </div>
       </v-flex>
       <v-flex
@@ -49,7 +56,8 @@
       >
         <v-divider dark/>
       </v-flex>
-      <v-flex 
+      <v-flex
+        v-if="aboutDetails"
         xs11 
         md8 
         offset-md1 
@@ -57,20 +65,10 @@
         my-5 
         offset-lg0>
         <div class="about__desc grey--text text--lighten-1 py-3">
-          <p>Hey there, I am <span style="border-bottom: 2px solid orange">Levi</span>. I am a full stack web developer here in the Kansas City Metro.
-          I recently graduated from the University of Kansas' Engineering School with a Bachelors of Science in Information Technology (2018).</p>
-
-          <p>
-            I have a passion for writing software on the web. I love building web applications encompassing all parts of the tech stack.
-            Working with new tech and continuing to learn different ways to solve problems is something I enjoy.
-            For me, writing software to solve problems is most rewarding and drives my motivation.
-          </p>
-          <p>
-            I also enjoy spending time with my amazing wife, our dog and two cats.
-          </p>
-          <p>
-            <router-link to="/contact">Reach out</router-link> if you want to talk tech, have a project in mind, or just want to chat.
-          </p>
+          <content-render 
+            v-if="aboutDetails && aboutDetails.content" 
+            :content="aboutDetails.content"
+          />
         </div>
       </v-flex>
       <v-flex xs12>
@@ -88,6 +86,7 @@
 <script>
   import SkillsSection from "../home/skills-section.vue"
   import Experience from "../experience/experience.vue";
+  import ContentRender from '../helper/content-render.vue';
   import { mapActions, mapGetters } from 'vuex';
 
   export default {
@@ -95,65 +94,28 @@
     components: {
       SkillsSection,
       Experience,
-    },
-    data () {
-      return {
-        tools: [
-          {
-            color: 'blue',
-            textColor: 'white',
-            text: 'VueJS'
-          },
-          {
-            color: 'indigo',
-            textColor: 'white',
-            text: 'NodeJS'
-          },
-          {
-            color: 'orange',
-            textColor: 'white',
-            text: 'JavaScript'
-          },
-          {
-            color: 'indigo',
-            textColor: 'white',
-            text: 'Python'
-          },
-          {
-            color: 'blue',
-            textColor: 'white',
-            text: 'Django'
-          },
-          {
-            color: 'orange',
-            textColor: 'white',
-            text: 'Java'
-          },
-          {
-            color: 'blue',
-            textColor: 'white',
-            text: 'Spring'
-          },
-          {
-            color: 'indigo',
-            textColor: 'white',
-            text: 'Jenkins'
-          },
-        ]
-      }
+      ContentRender,
     },
     computed: {
       ...mapGetters('techSkills/', [
         'techSkills',
-      ])
+      ]),
+      aboutDetails() {
+        return this.$store.getters['about/aboutActive'];
+      }
     },
     mounted() {
       this.fetchTechSkills();
+      this.fetchAboutDetails();
     },
     methods: {
       ...mapActions('techSkills/', [
         'fetchTechSkills',
+      ]),
+      ...mapActions('about/', [
+        'fetchAboutDetails',
       ])
+
     },
 
   }
